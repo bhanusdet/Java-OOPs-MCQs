@@ -1,6 +1,6 @@
 # Java OOPs MCQs – Interview Prep
 
-This repository contains **50 carefully selected tricky OOPs MCQs in Java** with answers and explanations.  
+This repository contains ** carefully selected tricky OOPs MCQs in Java** with answers and explanations.  
 
 🔹 Covers:
 - Inheritance
