@@ -1,30 +1,6 @@
 # 🚀 Java OOPs MCQs - 50 Tricky Questions
 
-Welcome to the ultimate collection of Java Object-Oriented Programming MCQs! This comprehensive set of 50 carefully crafted questions will test your understanding of core OOP concepts and prepare you for technical interviews.
-
-## 📋 Table of Contents
-
-### 🔹 Core OOP Concepts (Questions 1-15)
-- Pillars of OOP
-- Inheritance & Polymorphism
-- Access Modifiers
-- Abstract Classes & Interfaces
-
-### 🔹 Advanced OOP Topics (Questions 16-30)
-- Design Patterns
-- Method Overloading/Overriding
-- Static vs Instance
-- Encapsulation
-
-### 🔹 Tricky Scenarios (Questions 31-50)
-- Anonymous Classes
-- Inner Classes
-- Interface Default Methods
-- Complex Inheritance
-
----
-
-## 📚 Basic OOP Concepts
+Welcome to the ultimate collection of Java Object-Oriented Programming MCQs! This comprehensive set of carefully crafted questions will test your understanding of core OOP concepts and prepare you for technical interviews.
 
 ## 1. Which of the following is NOT a pillar of Object-Oriented Programming?
 a) Encapsulation  
@@ -288,8 +264,6 @@ d) 0
 **Explanation:** The inner class's x variable shadows the outer class's x variable within the inner class scope.
 
 ---
-
-## 🔧 Advanced OOP Topics
 
 ## 16. Which design pattern ensures only one instance of a class exists?
 a) Factory  
@@ -568,8 +542,6 @@ d) private
 **Explanation:** Final classes cannot be extended (e.g., String, Integer classes are final).
 
 ---
-
-## 🎯 Tricky Interview Scenarios
 
 ## 31. What is the output?
 ```java
