@@ -908,6 +908,329 @@ d) Accessing private members
 
 ---
 
+## What is the output of this code?
+```java
+class Parent {
+    static String name = "Parent";
+    static {
+        name = getName();
+    }
+    static String getName() {
+        return "ParentStatic";
+    }
+}
+class Child extends Parent {
+    static String name = "Child";
+    static {
+        name = getName();
+    }
+    static String getName() {
+        return "ChildStatic";
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(Parent.name + " " + Child.name);
+    }
+}
+```
+a) Parent Child  
+b) ParentStatic ChildStatic  
+c) ChildStatic ChildStatic  
+d) ParentStatic ParentStatic  
+
+**Answer: c) ChildStatic ChildStatic**  
+**Explanation:** During Child loading, Parent's static block executes, but it calls getName(), which is resolved dynamically to Child.getName(). Hence both become "ChildStatic". This tests class loading + static initialization + method hiding.
+
+---
+
+## What is the output of this code?
+```java
+class A {
+    int value = 10;
+    A() {
+        System.out.println("A constructor, value = " + value);
+        print();
+    }
+    void print() {
+        System.out.println("A print, value = " + value);
+    }
+}
+class B extends A {
+    int value = 20;
+    B() {
+        System.out.println("B constructor, value = " + value);
+    }
+    void print() {
+        System.out.println("B print, value = " + value);
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        new B();
+    }
+}
+```
+a) A constructor, value = 10  
+   A print, value = 10  
+   B constructor, value = 20  
+
+b) A constructor, value = 10  
+   B print, value = 0  
+   B constructor, value = 20  
+
+c) A constructor, value = 10  
+   B print, value = 20  
+   B constructor, value = 20  
+
+d) Compilation error  
+
+**Answer: b)**  
+**Explanation:** During A's constructor, B.print() is invoked (dynamic dispatch). At this point, B.value is not initialized yet, so it prints 0. Later, B's constructor assigns 20. Classic constructor chaining + polymorphism + initialization order trap.
+
+---
+
+## What is the output of this code?
+```java
+class Base {
+    String msg = "Base";
+    Base() {
+        show();
+    }
+    void show() {
+        System.out.println(msg);
+    }
+}
+class Derived extends Base {
+    String msg = "Derived";
+    Derived() {
+        show();
+    }
+    void show() {
+        System.out.println(msg);
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        new Derived();
+    }
+}
+```
+a) Base  
+   Derived  
+
+b) null  
+   Derived  
+
+c) Derived  
+   Derived  
+
+d) Base  
+   Base  
+
+**Answer: b) null, Derived**  
+**Explanation:** When Base constructor calls show(), it invokes Derived.show(). But Derived.msg is not yet initialized (defaults to null). Later, after initialization, second call prints "Derived". Tests field initialization order vs. polymorphism.
+
+---
+
+## What is the output of this code?
+```java
+class A {
+    static void display() { System.out.println("A"); }
+}
+class B extends A {
+    static void display() { System.out.println("B"); }
+}
+public class Test {
+    public static void main(String[] args) {
+        A obj = new B();
+        obj.display();
+    }
+}
+```
+a) A  
+b) B  
+c) Compilation error  
+d) Runtime error  
+
+**Answer: a) A**  
+**Explanation:** static methods are hidden, not overridden. Resolution happens at compile-time using reference type (A). A common method hiding vs. overriding interview trick.
+
+---
+
+## What is the output of this code?
+```java
+class Outer {
+    private static String secret = "Hidden";
+    static class Inner {
+        void reveal() {
+            System.out.println(secret);
+        }
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        new Outer.Inner().reveal();
+    }
+}
+```
+a) Compilation error  
+b) null  
+c) Hidden  
+d) Runtime error  
+**Answer: c) Hidden**  
+**Explanation:** A static nested class can access private static members of the outer class. This tests nested class access rules.
+
+---
+
+## What is the output of this code?
+```java
+class A {
+    final void foo() { System.out.println("A.foo"); }
+}
+class B extends A {
+    void foo(int x) { System.out.println("B.foo"); }
+}
+public class Test {
+    public static void main(String[] args) {
+        new B().foo();
+    }
+}
+```
+a) A.foo  
+b) B.foo  
+c) Compilation error  
+d) Runtime error  
+
+**Answer: a) A.foo**  
+**Explanation:** foo() in A is final and cannot be overridden. B only overloads it with foo(int). Hence call resolves to A.foo(). Tests overloading vs overriding with final methods.
+
+---
+
+## What is the output of this code?
+```java
+interface I1 {
+    default void show() { System.out.println("I1"); }
+}
+interface I2 {
+    default void show() { System.out.println("I2"); }
+}
+class Test implements I1, I2 {
+    public void show() {
+        I1.super.show();
+    }
+    public static void main(String[] args) {
+        new Test().show();
+    }
+}
+```
+a) I1  
+b) I2  
+c) Compilation error  
+d) Both I1 and I2  
+
+**Answer: a) I1**  
+**Explanation:** Multiple inheritance conflict is resolved explicitly. Here, I1.super.show() is chosen. This is default methods diamond problem in Java 8.
+
+---
+
+## What is the output of this code?
+```java
+class A {
+    int x = 10;
+}
+class B extends A {
+    int x = 20;
+}
+public class Test {
+    public static void main(String[] args) {
+        A obj = new B();
+        System.out.println(obj.x);
+    }
+}
+```
+a) 10  
+b) 20  
+c) Compilation error  
+d) Runtime error  
+
+**Answer: a) 10**  
+**Explanation:** Fields are not polymorphic. Resolution happens at compile-time by reference type (A). Tests field hiding vs method overriding.
+
+---
+
+## What is the output of this code?
+```java
+class A {
+    static { System.out.println("A static"); }
+    { System.out.println("A instance"); }
+}
+class B extends A {
+    static { System.out.println("B static"); }
+    { System.out.println("B instance"); }
+}
+public class Test {
+    public static void main(String[] args) {
+        new B();
+        new B();
+    }
+}
+```
+a) A static  
+   B static  
+   A instance  
+   B instance  
+   A instance  
+   B instance  
+
+b) A static  
+   A instance  
+   B static  
+   B instance  
+   A instance  
+   B instance  
+
+c) A static  
+   B static  
+   A instance  
+   B instance  
+
+d) Compilation error  
+
+**Answer: a)**  
+**Explanation:** Static blocks run once per class load, instance blocks run every time an object is created. Classic class loading vs instance initialization.
+
+---
+
+## What is the output of this code?
+```java
+class Test {
+    public static void main(String[] args) {
+        String s1 = new String("Java");
+        String s2 = "Java";
+        String s3 = s1.intern();
+        System.out.println(s1 == s2);
+        System.out.println(s2 == s3);
+    }
+}
+```
+a) true  
+   true  
+
+b) false  
+   true  
+
+c) true  
+   false  
+
+d) false  
+   false  
+
+**Answer: b) false, true**  
+**Explanation:** s1 points to heap object, s2 points to string pool. After intern(), s3 points to pool, same as s2. This checks string interning mechanism.
+
+---
+
 ## 1. What is the output of this code?
 ```java
 class Parent {
