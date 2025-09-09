@@ -1,4 +1,4 @@
-# 🚀 Java OOPs MCQs - 50 Tricky Questions
+# 🚀 Java OOPs MCQs - Tricky Questions
 
 Welcome to the ultimate collection of Java Object-Oriented Programming MCQs! This comprehensive set of carefully crafted questions will test your understanding of core OOP concepts and prepare you for technical interviews.
 
