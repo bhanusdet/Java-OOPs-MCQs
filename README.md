@@ -1,10 +1,13 @@
 # Java OOPs MCQs – Interview Prep
 
-This repository contains ** carefully selected tricky OOPs MCQs in Java** with answers and explanations.  
+This repository contains **comprehensive collections of tricky Java MCQs** with detailed answers and explanations.  
 
-🔹 Covers:
+## 📚 Available MCQ Collections
+
+### 1. **OOPs-MCQs.md** - Object-Oriented Programming
+🔹 **50 carefully selected tricky OOPs MCQs** covering:
 - Inheritance
-- Polymorphism
+- Polymorphism  
 - Encapsulation
 - Abstraction
 - Overloading & Overriding
@@ -14,6 +17,15 @@ This repository contains ** carefully selected tricky OOPs MCQs in Java** with a
 - Interfaces & defaults
 - Static vs instance behavior
 
+### 2. **Java-Exception-Handling-MCQs.md** - Exception Handling
+🔹 **Comprehensive exception handling MCQs** covering:
+- Try-catch-finally blocks
+- Checked vs unchecked exceptions
+- Custom exceptions
+- Exception propagation
+- Resource management
+- Best practices
+
 ## 🚀 How to Use
 1. Clone the repo:
    ```bash
@@ -21,7 +33,9 @@ This repository contains ** carefully selected tricky OOPs MCQs in Java** with a
    cd Java-OOPs-MCQs
    ```
 
-2. Open `OOPs-MCQs.md` and start practicing!
+2. Choose your topic and start practicing:
+   - `OOPs-MCQs.md` for Object-Oriented Programming concepts
+   - `Java-Exception-Handling-MCQs.md` for Exception Handling concepts
 
 ## 📚 Question Structure
 Each MCQ includes:
@@ -31,19 +45,36 @@ Each MCQ includes:
 - Key concepts covered
 
 ## 🎯 Perfect For
-- Technical interviews
-- Java certification prep
-- OOP concept reinforcement
-- Quick revision sessions
+- **Technical Interviews**: Practice with real interview-style questions
+- **Java Certification Prep**: Oracle certification and other Java exams
+- **Concept Reinforcement**: Solidify your understanding of core Java concepts
+- **Quick Revision Sessions**: Efficient last-minute preparation
+- **Teaching & Training**: Educators can use these for assessments
 
 ## 🤝 Contributing
 
 We welcome contributions! Here's how you can help:
 
 1. **Add New Questions**: Submit well-researched MCQs with detailed explanations
-2. **Improve Existing Questions**: Enhance clarity or add better explanations
+2. **Improve Existing Questions**: Enhance clarity or add better explanations  
 3. **Fix Errors**: Report and fix any incorrect answers or explanations
-4. **Suggest Topics**: Propose new OOP topics to cover
+4. **Suggest Topics**: Propose new Java topics to cover
+5. **Review & Feedback**: Help review existing questions for accuracy
+
+## 📞 Connect & Support
+
+If you find this repository helpful:
+- ⭐ **Star this repository** to show your support
+- 🍴 **Fork it** for your own practice sessions
+- 📢 **Share it** with fellow Java developers
+- 🐛 **Report issues** or suggest improvements
+- 💬 **Join discussions** in the issues section
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 **Happy Learning! 🎉**
+
+*Master Java concepts one question at a time.*
