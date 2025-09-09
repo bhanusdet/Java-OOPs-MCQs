@@ -5,7 +5,7 @@ This repository contains **comprehensive collections of tricky Java MCQs** with 
 ## 📚 Available MCQ Collections
 
 ### 1. **OOPs-MCQs.md** - Object-Oriented Programming
-🔹 **50 carefully selected tricky OOPs MCQs** covering:
+🔹 ** carefully selected tricky OOPs MCQs** covering:
 - Inheritance
 - Polymorphism  
 - Encapsulation
