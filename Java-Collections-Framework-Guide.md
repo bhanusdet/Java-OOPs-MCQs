@@ -885,3 +885,568 @@ for (int i = 0; i < 1000; i++) {
     String test = tests.get(i); // O(1) operation - fast!
 }
 ```
+
+## Interview Questions & Answers
+
+### Q1: Explain the difference between ArrayList and LinkedList with examples.
+
+**Answer:**
+ArrayList uses a resizable array internally, while LinkedList uses a doubly-linked list structure.
+
+**ArrayList:**
+- Fast random access O(1)
+- Slow insertion/deletion in middle O(n)
+- Better for frequent get operations
+- Lower memory overhead
+
+**LinkedList:**
+- Slow random access O(n)
+- Fast insertion/deletion at known positions O(1)
+- Better for frequent add/remove operations
+- Higher memory overhead (node pointers)
+
+**Example Use Cases:**
+```java
+// ArrayList - Good for test data storage with frequent access
+List<User> testUsers = new ArrayList<>();
+User randomUser = testUsers.get(5); // O(1) - Fast
+
+// LinkedList - Good for test step execution with frequent modifications
+LinkedList<TestStep> steps = new LinkedList<>();
+steps.addFirst(new SetupStep()); // O(1) - Fast
+steps.addLast(new CleanupStep()); // O(1) - Fast
+```
+
+### Q2: When would you use HashSet vs TreeSet?
+
+**Answer:**
+**HashSet:**
+- When you need fastest possible lookups O(1)
+- Order doesn't matter
+- Just need to eliminate duplicates
+
+**TreeSet:**
+- When you need elements in sorted order
+- Need range operations (subset, headset, tailset)
+- Want to find min/max elements quickly
+
+```java
+// HashSet - Fast duplicate removal
+Set<String> testIds = new HashSet<>();
+boolean exists = testIds.contains("test123"); // O(1) - Very fast
+
+// TreeSet - Sorted test execution by priority
+TreeSet<TestCase> tests = new TreeSet<>(Comparator.comparing(TestCase::getPriority));
+TestCase highestPriority = tests.first(); // O(log n) - Get min element
+```
+
+### Q3: Explain HashMap internal working.
+
+**Answer:**
+HashMap uses an array of buckets (linked lists/trees) with hash codes to distribute elements.
+
+**Process:**
+1. Calculate hash code of key using hashCode()
+2. Apply hash function to determine bucket index
+3. If bucket is empty, add new entry
+4. If bucket has entries, check for existing key using equals()
+5. If key exists, update value; otherwise add new entry
+
+**Collision Handling:**
+- Java 8+: Linked list converts to balanced tree when > 8 elements
+- Load factor 0.75 triggers resize (capacity doubled)
+
+```java
+// Internal structure (simplified)
+class HashMap<K,V> {
+    Node<K,V>[] table; // Array of buckets
+
+    static class Node<K,V> {
+        final int hash;
+        final K key;
+        V value;
+        Node<K,V> next; // For chaining
+    }
+
+    public V put(K key, V value) {
+        int hash = hash(key);
+        int index = hash & (table.length - 1); // Find bucket
+        // Add to bucket...
+    }
+}
+```
+
+### Q4: How do you handle ConcurrentModificationException?
+
+**Answer:**
+This exception occurs when a collection is modified while being iterated.
+
+**Solutions:**
+
+1. **Use Iterator.remove():**
+```java
+List<String> tests = new ArrayList<>();
+Iterator<String> iterator = tests.iterator();
+while (iterator.hasNext()) {
+    String test = iterator.next();
+    if (shouldRemove(test)) {
+        iterator.remove(); // Safe removal
+    }
+}
+```
+
+2. **Use ConcurrentHashMap for thread-safe operations:**
+```java
+ConcurrentHashMap<String, TestResult> results = new ConcurrentHashMap<>();
+// Safe to modify while iterating from different threads
+```
+
+3. **Use removeIf() for bulk conditional removal:**
+```java
+tests.removeIf(test -> test.getStatus() == Status.FAILED);
+```
+
+### Q5: What is the difference between HashMap and ConcurrentHashMap?
+
+**Answer:**
+
+| Feature | HashMap | ConcurrentHashMap |
+|---------|---------|-------------------|
+| **Thread Safety** | Not thread-safe | Thread-safe |
+| **Performance** | Faster (no sync overhead) | Slightly slower |
+| **Null Values** | Allows null key/values | No nulls allowed |
+| **Locking** | No locking | Segmented locking |
+| **Iteration** | Fast but not thread-safe | Safe during concurrent modification |
+
+**Usage Example:**
+```java
+// HashMap - Single-threaded test execution
+Map<String, TestResult> singleThreadResults = new HashMap<>();
+
+// ConcurrentHashMap - Parallel test execution
+Map<String, TestResult> parallelResults = new ConcurrentHashMap<>();
+
+// Multiple threads can safely update parallelResults
+ExecutorService executor = Executors.newFixedThreadPool(4);
+for (TestCase test : testSuite) {
+    executor.submit(() -> {
+        TestResult result = executeTest(test);
+        parallelResults.put(test.getId(), result); // Thread-safe
+    });
+}
+```
+
+### Q6: How do you sort a List of custom objects?
+
+**Answer:**
+There are several ways to sort custom objects:
+
+**1. Implement Comparable interface:**
+```java
+public class TestCase implements Comparable<TestCase> {
+    private String name;
+    private int priority;
+
+    @Override
+    public int compareTo(TestCase other) {
+        return Integer.compare(this.priority, other.priority);
+    }
+}
+
+List<TestCase> tests = new ArrayList<>();
+Collections.sort(tests); // Natural ordering by priority
+```
+
+**2. Use Comparator (preferred for flexibility):**
+```java
+List<TestCase> tests = new ArrayList<>();
+
+// Sort by priority (ascending)
+tests.sort(Comparator.comparing(TestCase::getPriority));
+
+// Sort by priority (descending)
+tests.sort(Comparator.comparing(TestCase::getPriority).reversed());
+
+// Multi-level sorting
+tests.sort(Comparator.comparing(TestCase::getPriority)
+                     .thenComparing(TestCase::getName));
+
+// Custom sorting logic
+tests.sort((t1, t2) -> {
+    if (t1.getPriority() != t2.getPriority()) {
+        return Integer.compare(t1.getPriority(), t2.getPriority());
+    }
+    return t1.getName().compareTo(t2.getName());
+});
+```
+
+### Q7: What is the difference between Iterator and ListIterator?
+
+**Answer:**
+
+| Feature | Iterator | ListIterator |
+|---------|----------|--------------|
+| **Direction** | Forward only | Both forward and backward |
+| **Collections** | All collections | Lists only |
+| **Modification** | remove() only | add(), remove(), set() |
+| **Index operations** | No | Yes (nextIndex(), previousIndex()) |
+
+**Example:**
+```java
+List<String> tests = new ArrayList<>();
+
+// Iterator - forward only
+Iterator<String> iter = tests.iterator();
+while (iter.hasNext()) {
+    String test = iter.next();
+    if (shouldRemove(test)) {
+        iter.remove(); // Only removal allowed
+    }
+}
+
+// ListIterator - bidirectional with more operations
+ListIterator<String> listIter = tests.listIterator();
+while (listIter.hasNext()) {
+    String test = listIter.next();
+    if (needsUpdate(test)) {
+        listIter.set("Updated: " + test); // Can modify
+    }
+    if (needsNewTest(test)) {
+        listIter.add("New test"); // Can add
+    }
+}
+
+// Backward iteration
+while (listIter.hasPrevious()) {
+    String test = listIter.previous();
+    System.out.println("Previous test: " + test);
+}
+```
+
+## Practical Test Automation Examples
+
+### Example 1: Test Data Management Framework
+
+```java
+public class TestDataFramework {
+    private List<User> users;
+    private Map<String, List<String>> testDataSets;
+    private Set<String> usedEmails;
+    private Queue<TestEnvironment> availableEnvironments;
+
+    public TestDataFramework() {
+        users = new ArrayList<>();
+        testDataSets = new HashMap<>();
+        usedEmails = new HashSet<>();
+        availableEnvironments = new LinkedList<>();
+
+        initializeTestData();
+    }
+
+    private void initializeTestData() {
+        // Load different user types
+        users.add(new User("admin@test.com", "admin123", "ADMIN"));
+        users.add(new User("user@test.com", "user123", "USER"));
+        users.add(new User("premium@test.com", "premium123", "PREMIUM"));
+
+        // Load test data sets
+        testDataSets.put("login", Arrays.asList("validUser", "invalidUser", "blockedUser"));
+        testDataSets.put("payment", Arrays.asList("visa", "mastercard", "paypal"));
+        testDataSets.put("products", Arrays.asList("electronics", "books", "clothing"));
+
+        // Load available test environments
+        availableEnvironments.offer(new TestEnvironment("env1", "https://env1.test.com"));
+        availableEnvironments.offer(new TestEnvironment("env2", "https://env2.test.com"));
+    }
+
+    public User getUserByRole(String role) {
+        return users.stream()
+                   .filter(user -> user.getRole().equalsIgnoreCase(role))
+                   .findFirst()
+                   .orElse(users.get(0)); // Default to first user
+    }
+
+    public String getUniqueEmail() {
+        String baseEmail = "testuser";
+        String domain = "@automation.test";
+        int counter = 1;
+
+        String email;
+        do {
+            email = baseEmail + counter + domain;
+            counter++;
+        } while (usedEmails.contains(email));
+
+        usedEmails.add(email);
+        return email;
+    }
+
+    public List<String> getTestDataSet(String category) {
+        return new ArrayList<>(testDataSets.getOrDefault(category, Collections.emptyList()));
+    }
+
+    public TestEnvironment getAvailableEnvironment() {
+        return availableEnvironments.poll(); // Remove and return first available
+    }
+
+    public void releaseEnvironment(TestEnvironment environment) {
+        availableEnvironments.offer(environment); // Make available again
+    }
+}
+```
+
+### Example 2: Test Result Aggregation System
+
+```java
+public class TestResultAggregator {
+    private Map<String, TestResult> allResults;
+    private Map<TestStatus, List<TestResult>> resultsByStatus;
+    private TreeMap<Date, List<TestResult>> resultsByTime;
+    private Set<String> failedTestNames;
+
+    public TestResultAggregator() {
+        allResults = new ConcurrentHashMap<>(); // Thread-safe for parallel execution
+        resultsByStatus = new HashMap<>();
+        resultsByTime = new TreeMap<>();
+        failedTestNames = new HashSet<>();
+
+        // Initialize status categories
+        for (TestStatus status : TestStatus.values()) {
+            resultsByStatus.put(status, new ArrayList<>());
+        }
+    }
+
+    public void addTestResult(TestResult result) {
+        String testId = result.getTestId();
+        Date timestamp = result.getTimestamp();
+        TestStatus status = result.getStatus();
+
+        // Store in main results map
+        allResults.put(testId, result);
+
+        // Categorize by status
+        resultsByStatus.get(status).add(result);
+
+        // Group by time (for timeline analysis)
+        resultsByTime.computeIfAbsent(timestamp, k -> new ArrayList<>()).add(result);
+
+        // Track failed tests
+        if (status == TestStatus.FAILED) {
+            failedTestNames.add(testId);
+        }
+    }
+
+    public TestSummary generateSummary() {
+        int total = allResults.size();
+        int passed = resultsByStatus.get(TestStatus.PASSED).size();
+        int failed = resultsByStatus.get(TestStatus.FAILED).size();
+        int skipped = resultsByStatus.get(TestStatus.SKIPPED).size();
+
+        double passRate = total > 0 ? (double) passed / total * 100 : 0;
+
+        return new TestSummary(total, passed, failed, skipped, passRate);
+    }
+
+    public List<TestResult> getFailedTests() {
+        return new ArrayList<>(resultsByStatus.get(TestStatus.FAILED));
+    }
+
+    public List<TestResult> getTestsInTimeRange(Date startTime, Date endTime) {
+        return resultsByTime.subMap(startTime, true, endTime, true)
+                           .values()
+                           .stream()
+                           .flatMap(List::stream)
+                           .collect(Collectors.toList());
+    }
+
+    public Map<String, Integer> getStatusCounts() {
+        Map<String, Integer> counts = new HashMap<>();
+        resultsByStatus.forEach((status, results) -> 
+            counts.put(status.name(), results.size()));
+        return counts;
+    }
+
+    public boolean hasFailures() {
+        return !failedTestNames.isEmpty();
+    }
+
+    public Set<String> getFailedTestNames() {
+        return new HashSet<>(failedTestNames); // Defensive copy
+    }
+}
+```
+
+### Example 3: Browser Configuration Manager
+
+```java
+public class BrowserConfigManager {
+    private Map<String, Map<String, Object>> browserConfigs;
+    private LinkedHashMap<String, String> executionOrder; // Maintains order
+    private Set<String> supportedBrowsers;
+
+    public BrowserConfigManager() {
+        browserConfigs = new HashMap<>();
+        executionOrder = new LinkedHashMap<>();
+        supportedBrowsers = new HashSet<>();
+
+        initializeBrowserConfigs();
+    }
+
+    private void initializeBrowserConfigs() {
+        // Chrome configuration
+        Map<String, Object> chromeConfig = new HashMap<>();
+        chromeConfig.put("arguments", Arrays.asList("--no-sandbox", "--disable-gpu", "--headless"));
+        chromeConfig.put("windowSize", "1920x1080");
+        chromeConfig.put("timeouts", Map.of("implicit", 10, "pageLoad", 30));
+        browserConfigs.put("chrome", chromeConfig);
+
+        // Firefox configuration
+        Map<String, Object> firefoxConfig = new HashMap<>();
+        firefoxConfig.put("arguments", Arrays.asList("-headless", "--width=1920", "--height=1080"));
+        firefoxConfig.put("preferences", Map.of("dom.disable_beforeunload", true));
+        browserConfigs.put("firefox", firefoxConfig);
+
+        // Edge configuration
+        Map<String, Object> edgeConfig = new HashMap<>();
+        edgeConfig.put("arguments", Arrays.asList("--headless", "--disable-extensions"));
+        browserConfigs.put("edge", edgeConfig);
+
+        // Set supported browsers
+        supportedBrowsers.addAll(browserConfigs.keySet());
+
+        // Set default execution order
+        executionOrder.put("chrome", "Chrome Browser");
+        executionOrder.put("firefox", "Firefox Browser");
+        executionOrder.put("edge", "Edge Browser");
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> getBrowserArguments(String browser) {
+        Map<String, Object> config = browserConfigs.get(browser.toLowerCase());
+        if (config != null && config.containsKey("arguments")) {
+            return (List<String>) config.get("arguments");
+        }
+        return new ArrayList<>();
+    }
+
+    public boolean isBrowserSupported(String browser) {
+        return supportedBrowsers.contains(browser.toLowerCase());
+    }
+
+    public Set<String> getSupportedBrowsers() {
+        return new HashSet<>(supportedBrowsers); // Defensive copy
+    }
+
+    public LinkedHashMap<String, String> getBrowserExecutionOrder() {
+        return new LinkedHashMap<>(executionOrder); // Maintains insertion order
+    }
+
+    public void addCustomBrowser(String name, Map<String, Object> config) {
+        browserConfigs.put(name.toLowerCase(), new HashMap<>(config));
+        supportedBrowsers.add(name.toLowerCase());
+        executionOrder.put(name.toLowerCase(), name);
+    }
+
+    public Map<String, Object> getBrowserConfig(String browser) {
+        return browserConfigs.getOrDefault(browser.toLowerCase(), new HashMap<>());
+    }
+}
+```
+
+### Example 4: Page Object Factory with Collections
+
+```java
+public class PageObjectFactory {
+    private Map<Class<?>, Object> pageInstances;
+    private Set<Class<?>> initializedPages;
+    private List<PageObject> pageHierarchy;
+    private WebDriver driver;
+
+    public PageObjectFactory(WebDriver driver) {
+        this.driver = driver;
+        this.pageInstances = new ConcurrentHashMap<>();
+        this.initializedPages = ConcurrentHashMap.newKeySet();
+        this.pageHierarchy = new ArrayList<>();
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends PageObject> T getPage(Class<T> pageClass) {
+        return (T) pageInstances.computeIfAbsent(pageClass, clazz -> {
+            try {
+                T pageInstance = (T) clazz.getDeclaredConstructor(WebDriver.class)
+                                         .newInstance(driver);
+                initializedPages.add(clazz);
+                pageHierarchy.add(pageInstance);
+                return pageInstance;
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to create page instance: " + clazz.getName(), e);
+            }
+        });
+    }
+
+    public boolean isPageInitialized(Class<?> pageClass) {
+        return initializedPages.contains(pageClass);
+    }
+
+    public void clearPageCache() {
+        pageInstances.clear();
+        initializedPages.clear();
+        pageHierarchy.clear();
+    }
+
+    public List<PageObject> getPageHierarchy() {
+        return new ArrayList<>(pageHierarchy); // Defensive copy
+    }
+
+    public Set<Class<?>> getInitializedPageTypes() {
+        return new HashSet<>(initializedPages); // Defensive copy
+    }
+}
+```
+
+## Memory Management Tips
+
+### 1. Clear Collections When Done
+```java
+// Clear large collections to help GC
+testResults.clear();
+testData.clear();
+
+// Set references to null for large objects
+massiveTestDataList = null;
+```
+
+### 2. Use Weak References for Caches
+```java
+import java.lang.ref.WeakReference;
+
+public class PageObjectCache {
+    private Map<String, WeakReference<PageObject>> cache = new HashMap<>();
+
+    public PageObject getPage(String key) {
+        WeakReference<PageObject> ref = cache.get(key);
+        if (ref != null) {
+            PageObject page = ref.get();
+            if (page != null) {
+                return page; // Still in memory
+            } else {
+                cache.remove(key); // Was garbage collected
+            }
+        }
+        // Create new page object...
+        return null;
+    }
+}
+```
+
+### 3. Optimize Collection Sizes
+```java
+// Pre-size collections if you know approximate size
+List<TestCase> tests = new ArrayList<>(expectedTestCount);
+Map<String, String> config = new HashMap<>(configSize);
+
+// Trim ArrayList capacity when done adding
+ArrayList<String> results = new ArrayList<>();
+// ... add elements
+results.trimToSize(); // Reduce memory footprint
+```
