@@ -108,6 +108,9 @@
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             border-top: 5px solid var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .collection-card:hover {
@@ -146,6 +149,7 @@
         .collection-features {
             list-style: none;
             margin-bottom: 25px;
+            flex-grow: 1;
         }
 
         .collection-features li {
@@ -166,13 +170,15 @@
             display: inline-block;
             background: var(--secondary-color);
             color: white;
-            padding: 12px 25px;
+            padding: 15px 25px;
             text-decoration: none;
             border-radius: 25px;
             font-weight: 500;
             transition: background-color 0.3s ease;
             width: 100%;
             text-align: center;
+            margin-top: auto;
+            font-size: 1rem;
         }
 
         .collection-button:hover {
