@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Java Array Programs - SDET Interview Collection</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #e0e6ed;
+            --code-bg: #f4f4f4;
+            --solution-bg: #e8f5e8;
+            --explanation-bg: #fff3cd;
+            --program-bg: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Index View Styles */
+        .index-view {
+            display: block;
+        }
+
+        .search-container {
+            padding: 20px 30px;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .toc {
+            background: var(--program-bg);
+            padding: 30px;
+        }
+
+        .toc h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .toc-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .toc-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background: #e3f2fd;
+        }
+
+        .program-number {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .program-title {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .program-complexity {
+            font-size: 0.9rem;
+            color: #666;
+            background: var(--program-bg);
+            padding: 4px 12px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        /* Program View Styles */
+        .program-view {
+            display: none;
+            background: white;
+            min-height: 80vh;
+        }
+
+        .program-nav {
+            background: var(--program-bg);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #2980b9;
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .program-navigation {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #currentProgramTitle {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .program-content-wrapper {
+            padding: 30px;
+        }
+
+        .problem-statement {
+            background: var(--explanation-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .problem-statement h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .approach {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .approach h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            margin: -20px -20px 15px -20px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+            overflow-x: auto;
+            color: #333;
+        }
+
+        .key-points {
+            background: var(--solution-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .key-points h3 {
+            color: var(--success-color);
+            margin-bottom: 15px;
+        }
+
+        .key-points ul {
+            margin-left: 20px;
+        }
+
+        .key-points li {
+            margin-bottom: 8px;
+        }
+
+        .tips-section {
+            background: var(--program-bg);
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .tips-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .tip-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .footer h2 {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .program-nav {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .program-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .program-content-wrapper {
+                padding: 20px;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Java Array Programs</h1>
+            <p>SDET Interview Collection - 20 Essential Programming Problems</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">20</span>
+                    <span class="stat-label">Programs</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Interview Ready</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Optimized</span>
+                    <span class="stat-label">Solutions</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Index View -->
+        <div class="index-view" id="indexView">
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="🔍 Search programs... (e.g., 'two sum', 'array rotation', 'binary search')" id="searchBox">
+            </div>
+
+            <div class="toc">
+                <h2>📋 Program Index</h2>
+                <div class="toc-grid" id="tocGrid">
+                    <div class="toc-item" onclick="showProgram(1)">
+                        <div class="program-number">1.</div>
+                        <div class="program-title">Find Maximum and Minimum</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(2)">
+                        <div class="program-number">2.</div>
+                        <div class="program-title">Reverse Array</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(3)">
+                        <div class="program-number">3.</div>
+                        <div class="program-title">Find Duplicates</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(4)">
+                        <div class="program-number">4.</div>
+                        <div class="program-title">Remove Duplicates from Sorted Array</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(5)">
+                        <div class="program-number">5.</div>
+                        <div class="program-title">Find Missing Number</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(6)">
+                        <div class="program-number">6.</div>
+                        <div class="program-title">Two Sum Problem</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(7)">
+                        <div class="program-number">7.</div>
+                        <div class="program-title">Merge Sorted Arrays</div>
+                        <div class="program-complexity">Time: O(m + n) | Space: O(m + n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(8)">
+                        <div class="program-number">8.</div>
+                        <div class="program-title">Move Zeros to End</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(9)">
+                        <div class="program-number">9.</div>
+                        <div class="program-title">Array Intersection</div>
+                        <div class="program-complexity">Time: O(m + n) | Space: O(min(m, n))</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(10)">
+                        <div class="program-number">10.</div>
+                        <div class="program-title">Array Union</div>
+                        <div class="program-complexity">Time: O(m + n) | Space: O(m + n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(11)">
+                        <div class="program-number">11.</div>
+                        <div class="program-title">Rotate Array</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(12)">
+                        <div class="program-number">12.</div>
+                        <div class="program-title">Find Peak Element</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(13)">
+                        <div class="program-number">13.</div>
+                        <div class="program-title">Subarray with Given Sum</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(14)">
+                        <div class="program-number">14.</div>
+                        <div class="program-title">Majority Element</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(15)">
+                        <div class="program-number">15.</div>
+                        <div class="program-title">Maximum Subarray Sum</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(16)">
+                        <div class="program-number">16.</div>
+                        <div class="program-title">Search in Rotated Array</div>
+                        <div class="program-complexity">Time: O(log n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(17)">
+                        <div class="program-number">17.</div>
+                        <div class="program-title">First Non-Repeating Element</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(18)">
+                        <div class="program-number">18.</div>
+                        <div class="program-title">Sort Colors (0s, 1s, 2s)</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(19)">
+                        <div class="program-number">19.</div>
+                        <div class="program-title">Kth Largest Element</div>
+                        <div class="program-complexity">Time: O(n log k) | Space: O(k)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(20)">
+                        <div class="program-number">20.</div>
+                        <div class="program-title">Check if Array is Sorted</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Program View -->
+        <div class="program-view" id="programView">
+            <div class="program-nav">
+                <button class="nav-btn" onclick="showIndex()">← Back to Index</button>
+                <div class="program-navigation">
+                    <button class="nav-btn" onclick="navigateProgram(-1)" id="prevBtn">Previous</button>
+                    <span id="currentProgramTitle">Program 1</span>
+                    <button class="nav-btn" onclick="navigateProgram(1)" id="nextBtn">Next</button>
+                </div>
+            </div>
+            <div class="program-content-wrapper" id="programContentWrapper">
+                <!-- Program content will be loaded dynamically -->
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2>🎯 SDET Interview Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>🕒 Time & Space Complexity</h3>
+                    <ul>
+                        <li>Always discuss complexity before coding</li>
+                        <li>Consider multiple approaches and trade-offs</li>
+                        <li>Optimize for the most critical constraint</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>🚨 Edge Cases</h3>
+                    <ul>
+                        <li>Null arrays</li>
+                        <li>Empty arrays</li>
+                        <li>Single element arrays</li>
+                        <li>All elements same</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>🔄 Common Patterns</h3>
+                    <ul>
+                        <li><strong>Two Pointers:</strong> For sorted arrays, palindromes</li>
+                        <li><strong>Sliding Window:</strong> For subarrays, strings</li>
+                        <li><strong>HashMap:</strong> For frequency counting, lookups</li>
+                        <li><strong>Binary Search:</strong> For sorted/rotated arrays</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>💻 Code Quality</h3>
+                    <ul>
+                        <li>Handle edge cases gracefully</li>
+                        <li>Use meaningful variable names</li>
+                        <li>Add comments for complex logic</li>
+                        <li>Test with sample inputs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h2>💡 Master Array Programming!</h2>
+            <p>Practice these 20 essential programs to ace your SDET interviews</p>
+        </div>
+    </div>
+
+    <script>
+        let currentProgram = 1;
+        const totalPrograms = 20;
+
+        // Complete program data for all 20 programs
+        const programData = {
+            1: {
+                title: "Find Maximum and Minimum Element",
+                problem: "Find the maximum and minimum elements in an array with a single traversal.",
+                approach: "Initialize max and min with the first element, then traverse the array once comparing each element with current max and min values.",
+                code: `public static void findMaxMin(int[] arr) {
+    if (arr == null || arr.length == 0) {
+        System.out.println("Array is empty");
+        return;
+    }
+
+    int max = arr[0];
+    int min = arr[0];
+
+    for (int i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    System.out.println("Maximum: " + max + ", Minimum: " + min);
+}`,
+                points: ["Initialize both max and min with first element", "Single loop minimizes comparisons", "Handle edge cases (null/empty array)", "Time complexity: O(n), Space complexity: O(1)"]
+            },
+            2: {
+                title: "Reverse Array In-Place",
+                problem: "Reverse an array in-place without using extra space.",
+                approach: "Use two pointers from both ends, swap elements and move towards center until pointers meet.",
+                code: `public static void reverseArray(int[] arr) {
+    if (arr == null || arr.length <= 1) return;
+
+    int start = 0;
+    int end = arr.length - 1;
+
+    while (start < end) {
+        // Swap elements
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+
+        start++;
+        end--;
+    }
+}`,
+                points: ["In-place reversal using two pointers", "No extra space required", "Handles edge cases gracefully", "Classic two-pointer technique"]
+            },
+            3: {
+                title: "Find Duplicate Elements",
+                problem: "Find all duplicate elements in an array.",
+                approach: "Use HashMap to count frequencies of each element, then identify elements with frequency > 1.",
+                code: `public static void findDuplicates(int[] arr) {
+    if (arr == null || arr.length <= 1) return;
+
+    Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+    // Count frequency of each element
+    for (int i = 0; i < arr.length; i++) {
+        frequencyMap.put(arr[i], frequencyMap.getOrDefault(arr[i], 0) + 1);
+    }
+
+    // Print duplicates
+    System.out.print("Duplicates: ");
+    boolean found = false;
+    for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+        if (entry.getValue() > 1) {
+            System.out.print(entry.getKey() + " ");
+            found = true;
+        }
+    }
+    if (!found) System.out.print("None");
+    System.out.println();
+}`,
+                points: ["HashMap for O(1) lookup and counting", "Single pass to count, second pass to identify duplicates", "Clean output formatting", "Efficient frequency counting pattern"]
+            },
+            4: {
+                title: "Remove Duplicates from Sorted Array",
+                problem: "Remove duplicates from a sorted array in-place and return the new length.",
+                approach: "Use two pointers: write pointer for unique elements position and read pointer to traverse array.",
+                code: `public static int removeDuplicatesSorted(int[] arr) {
+    if (arr == null || arr.length == 0) return 0;
+    if (arr.length == 1) return 1;
+
+    int writeIndex = 1; // Position to write next unique element
+
+    for (int readIndex = 1; readIndex < arr.length; readIndex++) {
+        if (arr[readIndex] != arr[readIndex - 1]) {
+            arr[writeIndex] = arr[readIndex];
+            writeIndex++;
+        }
+    }
+    return writeIndex;
+}`,
+                points: ["Leverages sorted property for O(n) solution", "In-place modification with two pointers", "Returns new array length", "Write pointer tracks unique elements"]
+            },
+            5: {
+                title: "Find Missing Number",
+                problem: "Find the missing number in an array containing numbers from 1 to n.",
+                approach: "Method 1: Use sum formula. Method 2: Use XOR properties (a ^ a = 0).",
+                code: `// Method 1: Sum Formula
+public static int findMissingNumber(int[] arr, int n) {
+    long expectedSum = (long) n * (n + 1) / 2;
+    long actualSum = 0;
+
+    for (int i = 0; i < arr.length; i++) {
+        actualSum += arr[i];
+    }
+
+    return (int)(expectedSum - actualSum);
+}
+
+// Method 2: XOR
+public static int findMissingNumberXOR(int[] arr, int n) {
+    int xor1 = 0; // XOR of all array elements
+    int xor2 = 0; // XOR of numbers from 1 to n
+
+    for (int i = 0; i < arr.length; i++) {
+        xor1 ^= arr[i];
+    }
+
+    for (int i = 1; i <= n; i++) {
+        xor2 ^= i;
+    }
+
+    return xor1 ^ xor2;
+}`,
+                points: ["Sum method: Handle integer overflow with long", "XOR method: Uses property that a ^ a = 0", "Both are O(n) time, O(1) space", "XOR method avoids overflow issues"]
+            },
+            6: {
+                title: "Two Sum Problem",
+                problem: "Find two numbers in an array that add up to a target sum. Return their indices.",
+                approach: "Use HashMap to store elements and their indices, then look for complement of each element.",
+                code: `public static int[] twoSum(int[] nums, int target) {
+    if (nums == null || nums.length < 2) return new int[]{-1, -1};
+
+    Map<Integer, Integer> map = new HashMap<>();
+
+    for (int i = 0; i < nums.length; i++) {
+        int complement = target - nums[i];
+
+        if (map.containsKey(complement)) {
+            return new int[]{map.get(complement), i};
+        }
+
+        map.put(nums[i], i);
+    }
+
+    return new int[]{-1, -1}; // No solution found
+}`,
+                points: ["Single pass with HashMap lookup", "Store value-index pairs for result", "Return indices, not values", "O(1) average lookup time in HashMap"]
+            },
+            7: {
+                title: "Merge Two Sorted Arrays",
+                problem: "Merge two sorted arrays into one sorted array.",
+                approach: "Use two-pointer merge technique comparing elements from both arrays.",
+                code: `public static int[] mergeSortedArrays(int[] arr1, int[] arr2) {
+    if (arr1 == null) return arr2;
+    if (arr2 == null) return arr1;
+
+    int[] result = new int[arr1.length + arr2.length];
+    int i = 0, j = 0, k = 0;
+
+    // Merge elements while both arrays have remaining elements
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] <= arr2[j]) {
+            result[k] = arr1[i];
+            i++;
+        } else {
+            result[k] = arr2[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy remaining elements
+    while (i < arr1.length) {
+        result[k++] = arr1[i++];
+    }
+    while (j < arr2.length) {
+        result[k++] = arr2[j++];
+    }
+
+    return result;
+}`,
+                points: ["Compare elements from both arrays", "Handle remaining elements after one array is exhausted", "Maintains sorted order", "Classic merge sort technique"]
+            },
+            8: {
+                title: "Move Zeros to End",
+                problem: "Move all zeros to end while maintaining order of non-zero elements.",
+                approach: "Use write pointer to place non-zero elements, then fill remaining with zeros.",
+                code: `public static void moveZerosToEnd(int[] arr) {
+    if (arr == null || arr.length <= 1) return;
+
+    int writeIndex = 0; // Position to place next non-zero element
+
+    // Move all non-zero elements to front
+    for (int readIndex = 0; readIndex < arr.length; readIndex++) {
+        if (arr[readIndex] != 0) {
+            arr[writeIndex] = arr[readIndex];
+            writeIndex++;
+        }
+    }
+
+    // Fill remaining positions with zeros
+    while (writeIndex < arr.length) {
+        arr[writeIndex] = 0;
+        writeIndex++;
+    }
+}`,
+                points: ["Two-pass algorithm: move non-zeros, then fill zeros", "Maintains relative order of non-zero elements", "In-place modification", "Write pointer tracks position"]
+            },
+            9: {
+                title: "Array Intersection",
+                problem: "Find common elements between two arrays.",
+                approach: "Use HashSet for O(1) lookup to find common elements.",
+                code: `public static void findIntersection(int[] arr1, int[] arr2) {
+    if (arr1 == null || arr2 == null) return;
+
+    Set<Integer> set1 = new HashSet<>();
+    Set<Integer> intersection = new HashSet<>();
+
+    // Add all elements of first array to set
+    for (int i = 0; i < arr1.length; i++) {
+        set1.add(arr1[i]);
+    }
+
+    // Check each element of second array
+    for (int i = 0; i < arr2.length; i++) {
+        if (set1.contains(arr2[i])) {
+            intersection.add(arr2[i]);
+        }
+    }
+
+    System.out.print("Intersection: ");
+    for (Integer num : intersection) {
+        System.out.print(num + " ");
+    }
+    System.out.println();
+}`,
+                points: ["Use HashSet to avoid duplicates in result", "Two passes: build set, then find intersection", "Handle null arrays gracefully", "O(1) average lookup time"]
+            },
+            10: {
+                title: "Array Union",
+                problem: "Find all unique elements from both arrays.",
+                approach: "Use HashSet to collect all unique elements from both arrays.",
+                code: `public static void findUnion(int[] arr1, int[] arr2) {
+    if (arr1 == null && arr2 == null) return;
+
+    Set<Integer> union = new HashSet<>();
+
+    if (arr1 != null) {
+        for (int i = 0; i < arr1.length; i++) {
+            union.add(arr1[i]);
+        }
+    }
+
+    if (arr2 != null) {
+        for (int i = 0; i < arr2.length; i++) {
+            union.add(arr2[i]);
+        }
+    }
+
+    System.out.print("Union: ");
+    for (Integer num : union) {
+        System.out.print(num + " ");
+    }
+    System.out.println();
+}`,
+                points: ["HashSet automatically handles duplicates", "Handle null arrays individually", "Union includes all unique elements", "Simple and efficient approach"]
+            },
+            11: {
+                title: "Rotate Array",
+                problem: "Rotate array by k positions to the right.",
+                approach: "Use three-step reversal technique for in-place rotation.",
+                code: `public static void rotateArray(int[] arr, int k) {
+    if (arr == null || arr.length <= 1) return;
+
+    int n = arr.length;
+    k = k % n; // Handle k > n case
+
+    if (k == 0) return;
+
+    // Step 1: Reverse entire array
+    reverseArrayRange(arr, 0, n - 1);
+    // Step 2: Reverse first k elements
+    reverseArrayRange(arr, 0, k - 1);
+    // Step 3: Reverse remaining elements
+    reverseArrayRange(arr, k, n - 1);
+}
+
+private static void reverseArrayRange(int[] arr, int start, int end) {
+    while (start < end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}`,
+                points: ["Three reversals achieve rotation in O(n) time", "Handle k > n with modulo operation", "In-place rotation without extra space", "Elegant reversal technique"]
+            },
+            12: {
+                title: "Find Peak Element",
+                problem: "Find an element that is greater than its neighbors.",
+                approach: "Check edge elements separately, then scan middle elements.",
+                code: `public static int findPeakElement(int[] arr) {
+    if (arr == null || arr.length == 0) return -1;
+
+    int n = arr.length;
+
+    // Single element is always peak
+    if (n == 1) return 0;
+
+    // Check first element
+    if (arr[0] >= arr[1]) return 0;
+
+    // Check last element
+    if (arr[n - 1] >= arr[n - 2]) return n - 1;
+
+    // Check middle elements
+    for (int i = 1; i < n - 1; i++) {
+        if (arr[i] >= arr[i - 1] && arr[i] >= arr[i + 1]) {
+            return i;
+        }
+    }
+
+    return -1; // No peak found
+}`,
+                points: ["Handle edge elements separately", "Peak must be >= both neighbors", "Return index of peak element", "Linear scan approach"]
+            },
+            13: {
+                title: "Subarray with Given Sum",
+                problem: "Find subarray with given sum (positive numbers).",
+                approach: "Use sliding window technique to find contiguous subarray.",
+                code: `public static boolean findSubarrayWithSum(int[] arr, int targetSum) {
+    if (arr == null || arr.length == 0) return false;
+
+    int currentSum = 0;
+    int start = 0;
+
+    for (int end = 0; end < arr.length; end++) {
+        currentSum += arr[end];
+
+        // Shrink window from left if sum becomes greater
+        while (currentSum > targetSum && start < end) {
+            currentSum -= arr[start];
+            start++;
+        }
+
+        if (currentSum == targetSum) {
+            System.out.println("Subarray found from index " + start + " to " + end);
+            return true;
+        }
+    }
+
+    return false;
+}`,
+                points: ["Sliding window for positive numbers", "Expand right, shrink left as needed", "O(n) solution using two pointers", "Handles variable-size windows"]
+            },
+            14: {
+                title: "Majority Element",
+                problem: "Find element that appears more than n/2 times.",
+                approach: "Use Boyer-Moore Voting Algorithm with two phases.",
+                code: `public static int findMajorityElement(int[] arr) {
+    if (arr == null || arr.length == 0) return -1;
+
+    // Phase 1: Find candidate
+    int candidate = arr[0];
+    int count = 1;
+
+    for (int i = 1; i < arr.length; i++) {
+        if (arr[i] == candidate) {
+            count++;
+        } else {
+            count--;
+            if (count == 0) {
+                candidate = arr[i];
+                count = 1;
+            }
+        }
+    }
+
+    // Phase 2: Verify candidate is majority
+    count = 0;
+    for (int i = 0; i < arr.length; i++) {
+        if (arr[i] == candidate) {
+            count++;
+        }
+    }
+
+    return count > arr.length / 2 ? candidate : -1;
+}`,
+                points: ["Two-phase algorithm: find candidate, verify", "Voting algorithm eliminates non-majority elements", "O(1) space complexity", "Clever elimination technique"]
+            },
+            15: {
+                title: "Maximum Subarray Sum (Kadane's Algorithm)",
+                problem: "Find the maximum sum of any contiguous subarray within an array.",
+                approach: "Use Kadane's algorithm: at each position, decide whether to extend existing subarray or start a new one.",
+                code: `public static int maxSubarraySum(int[] arr) {
+    if (arr == null || arr.length == 0) return 0;
+
+    int maxSoFar = arr[0];
+    int maxEndingHere = arr[0];
+
+    for (int i = 1; i < arr.length; i++) {
+        // Either extend existing subarray or start new one
+        maxEndingHere = Math.max(arr[i], maxEndingHere + arr[i]);
+
+        // Update global maximum
+        maxSoFar = Math.max(maxSoFar, maxEndingHere);
+    }
+
+    return maxSoFar;
+}`,
+                points: ["Classic Kadane's algorithm", "At each position: extend or start new", "Handles all negative arrays correctly", "Optimal O(n) solution"]
+            },
+            16: {
+                title: "Search in Rotated Sorted Array",
+                problem: "Search target in rotated sorted array.",
+                approach: "Use modified binary search by identifying which half is properly sorted.",
+                code: `public static int searchInRotatedArray(int[] arr, int target) {
+    if (arr == null || arr.length == 0) return -1;
+
+    int left = 0;
+    int right = arr.length - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) return mid;
+
+        // Check which half is sorted
+        if (arr[left] <= arr[mid]) { // Left half is sorted
+            if (target >= arr[left] && target < arr[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        } else { // Right half is sorted
+            if (target > arr[mid] && target <= arr[right]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+
+    return -1;
+}`,
+                points: ["Identify which half is properly sorted", "Use sorted half to determine search direction", "Maintains O(log n) complexity", "Classic binary search variant"]
+            },
+            17: {
+                title: "First Non-Repeating Element",
+                problem: "Find first element that appears exactly once.",
+                approach: "Use HashMap for frequency counting, then find first unique element.",
+                code: `public static int findFirstNonRepeating(int[] arr) {
+    if (arr == null || arr.length == 0) return -1;
+
+    Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+    // Count frequencies
+    for (int i = 0; i < arr.length; i++) {
+        frequencyMap.put(arr[i], frequencyMap.getOrDefault(arr[i], 0) + 1);
+    }
+
+    // Find first non-repeating element
+    for (int i = 0; i < arr.length; i++) {
+        if (frequencyMap.get(arr[i]) == 1) {
+            return arr[i];
+        }
+    }
+
+    return -1;
+}`,
+                points: ["Two passes: count frequencies, find first unique", "HashMap for O(1) frequency lookup", "Preserves original order", "Frequency counting pattern"]
+            },
+            18: {
+                title: "Sort Colors (Dutch National Flag)",
+                problem: "Sort an array containing only 0s, 1s, and 2s in a single pass.",
+                approach: "Use Dutch National Flag algorithm with three pointers to partition array into three regions.",
+                code: `public static void sortColors(int[] arr) {
+    if (arr == null || arr.length <= 1) return;
+
+    int low = 0;    // Boundary for 0s
+    int mid = 0;    // Current element
+    int high = arr.length - 1; // Boundary for 2s
+
+    while (mid <= high) {
+        if (arr[mid] == 0) {
+            // Swap with low boundary
+            int temp = arr[low];
+            arr[low] = arr[mid];
+            arr[mid] = temp;
+            low++;
+            mid++;
+        } else if (arr[mid] == 1) {
+            mid++; // Just move forward
+        } else { // arr[mid] == 2
+            // Swap with high boundary
+            int temp = arr[mid];
+            arr[mid] = arr[high];
+            arr[high] = temp;
+            high--;
+            // Don't increment mid as we need to check swapped element
+        }
+    }
+}`,
+                points: ["Three regions: [0...low-1], [low...high], [high+1...n-1]", "Single pass with three pointers", "In-place sorting in O(n) time", "Classic partitioning algorithm"]
+            },
+            19: {
+                title: "Kth Largest Element",
+                problem: "Find kth largest element in unsorted array.",
+                approach: "Use min heap of size k to maintain k largest elements.",
+                code: `public static int findKthLargest(int[] arr, int k) {
+    if (arr == null || arr.length == 0 || k <= 0 || k > arr.length) return -1;
+
+    // Create min heap using PriorityQueue
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+    for (int i = 0; i < arr.length; i++) {
+        minHeap.offer(arr[i]);
+
+        // Keep only k elements in heap
+        if (minHeap.size() > k) {
+            minHeap.poll();
+        }
+    }
+
+    return minHeap.peek();
+}`,
+                points: ["Min heap maintains k largest elements", "Root of min heap is kth largest", "Space-efficient for large arrays", "Better than sorting entire array"]
+            },
+            20: {
+                title: "Check if Array is Sorted",
+                problem: "Check if array is sorted in ascending order.",
+                approach: "Single pass comparison of adjacent elements.",
+                code: `public static boolean isSorted(int[] arr) {
+    if (arr == null || arr.length <= 1) return true;
+
+    for (int i = 1; i < arr.length; i++) {
+        if (arr[i] < arr[i - 1]) {
+            return false;
+        }
+    }
+
+    return true;
+}`,
+                points: ["Single pass checking adjacent elements", "Early termination on first violation", "Handles edge cases (null, single element)", "Simple and efficient check"]
+            }
+        };
+
+        function showProgram(programNum) {
+            currentProgram = programNum;
+            document.getElementById('indexView').style.display = 'none';
+            document.getElementById('programView').style.display = 'block';
+            
+            const data = programData[programNum];
+            if (!data) return;
+            
+            document.getElementById('currentProgramTitle').textContent = `Program ${programNum}: ${data.title}`;
+            
+            const content = `
+                <div class="problem-statement">
+                    <h3>🎯 Problem</h3>
+                    <p>${data.problem}</p>
+                </div>
+                <div class="approach">
+                    <h3>💡 Approach</h3>
+                    <p>${data.approach}</p>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">Java Solution</div>
+                    <div class="code">${data.code}</div>
+                </div>
+                <div class="key-points">
+                    <h3>🔑 Key Points</h3>
+                    <ul>
+                        ${data.points.map(point => `<li>${point}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('programContentWrapper').innerHTML = content;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = programNum === 1;
+            document.getElementById('nextBtn').disabled = programNum === totalPrograms;
+            
+            // Scroll to top of program view
+            document.getElementById('programView').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showIndex() {
+            document.getElementById('indexView').style.display = 'block';
+            document.getElementById('programView').style.display = 'none';
+            
+            // Scroll to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateProgram(direction) {
+            const newProgram = currentProgram + direction;
+            if (newProgram >= 1 && newProgram <= totalPrograms) {
+                currentProgram = newProgram;
+                showProgram(currentProgram);
+            }
+        }
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            tocItems.forEach(item => {
+                const title = item.querySelector('.program-title').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || searchTerm === '') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showIndex();
+        });
+    </script>
+</body>
+</html>

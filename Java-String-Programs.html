@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Java String Programs - SDET Interview Collection</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --success-color: #27ae60;
+            --warning-color: #e67e22;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #e0e6ed;
+            --code-bg: #f4f4f4;
+            --solution-bg: #e8f5e8;
+            --explanation-bg: #fff3cd;
+            --program-bg: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Index View Styles */
+        .index-view {
+            display: block;
+        }
+
+        .search-container {
+            padding: 20px 30px;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .toc {
+            background: var(--program-bg);
+            padding: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .toc h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .toc-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .toc-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .program-number {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .program-title {
+            color: var(--text-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .program-complexity {
+            font-size: 0.85rem;
+            color: #666;
+            opacity: 0.8;
+        }
+
+        .toc-item-hidden {
+            display: none;
+        }
+
+        .index-controls {
+            text-align: center;
+            padding: 20px;
+            background: var(--program-bg);
+        }
+
+        .view-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .view-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Program View Styles */
+        .program-view {
+            display: none;
+        }
+
+        .program-header {
+            background: var(--program-bg);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #c0392b;
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .program-navigation {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #currentProgramTitle {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .program-content-wrapper {
+            padding: 30px;
+        }
+
+        .problem-statement {
+            background: var(--explanation-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .problem-statement h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .approach {
+            background: #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .approach h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            margin: -20px -20px 15px -20px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+            overflow-x: auto;
+            color: #333;
+        }
+
+        .key-points {
+            background: var(--solution-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .key-points h3 {
+            color: var(--success-color);
+            margin-bottom: 15px;
+        }
+
+        .key-points ul {
+            margin-left: 20px;
+        }
+
+        .key-points li {
+            margin-bottom: 8px;
+        }
+
+        .tips-section {
+            background: var(--program-bg);
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .tips-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .tip-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .footer h2 {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .program-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .program-content-wrapper {
+                padding: 20px;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .manual-badge {
+            background: var(--success-color);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Java String Programs</h1>
+            <p>SDET Interview Collection - 20 Essential String Programming Problems</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">20</span>
+                    <span class="stat-label">String Problems</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Manual</span>
+                    <span class="stat-label">Implementation</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Interview Ready</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Index View -->
+        <div id="indexView" class="index-view">
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="🔍 Search string problems... (e.g., 'palindrome', 'anagram', 'reverse')" id="searchBox">
+            </div>
+
+            <div class="toc">
+                <h2>📋 String Problems Index</h2>
+                <div class="toc-grid" id="tocGrid">
+                    <div class="toc-item" onclick="showProgram(1)">
+                        <div class="program-number">1.</div>
+                        <div class="program-title">Reverse a String <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(2)">
+                        <div class="program-number">2.</div>
+                        <div class="program-title">Check Palindrome <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(3)">
+                        <div class="program-number">3.</div>
+                        <div class="program-title">First Non-Repeating Character <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(4)">
+                        <div class="program-number">4.</div>
+                        <div class="program-title">Character Frequency Count <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(5)">
+                        <div class="program-number">5.</div>
+                        <div class="program-title">Check Anagrams <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(6)">
+                        <div class="program-number">6.</div>
+                        <div class="program-title">Print All Permutations</div>
+                        <div class="program-complexity">Time: O(n!) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(7)">
+                        <div class="program-number">7.</div>
+                        <div class="program-title">All Unique Characters</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(8)">
+                        <div class="program-number">8.</div>
+                        <div class="program-title">Remove Duplicates <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(9)">
+                        <div class="program-number">9.</div>
+                        <div class="program-title">Longest Palindromic Substring</div>
+                        <div class="program-complexity">Time: O(n²) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(10)">
+                        <div class="program-number">10.</div>
+                        <div class="program-title">Substring Search (KMP/Naive)</div>
+                        <div class="program-complexity">Time: O(m+n) | Space: O(m)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(11)">
+                        <div class="program-number">11.</div>
+                        <div class="program-title">Longest Common Prefix</div>
+                        <div class="program-complexity">Time: O(S) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(12)">
+                        <div class="program-number">12.</div>
+                        <div class="program-title">Rotation Check <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(13)">
+                        <div class="program-number">13.</div>
+                        <div class="program-title">Reverse Words in Sentence</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(14)">
+                        <div class="program-number">14.</div>
+                        <div class="program-title">Vowel & Consonant Count</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(15)">
+                        <div class="program-number">15.</div>
+                        <div class="program-title">Duplicate Words in String</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(16)">
+                        <div class="program-number">16.</div>
+                        <div class="program-title">Maximum Occurring Character</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(17)">
+                        <div class="program-number">17.</div>
+                        <div class="program-title">Check String Contains Digits Only <span class="manual-badge">MANUAL</span></div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(18)">
+                        <div class="program-number">18.</div>
+                        <div class="program-title">Implement atoi()</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(19)">
+                        <div class="program-number">19.</div>
+                        <div class="program-title">Generate All Substrings</div>
+                        <div class="program-complexity">Time: O(n²) | Space: O(1)</div>
+                    </div>
+                    <div class="toc-item" onclick="showProgram(20)">
+                        <div class="program-number">20.</div>
+                        <div class="program-title">Balanced Parentheses</div>
+                        <div class="program-complexity">Time: O(n) | Space: O(n)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="index-controls">
+                <button class="view-btn" onclick="showProgram(1)">🚀 Start Learning</button>
+                <button class="view-btn" onclick="showProgram(Math.floor(Math.random() * 20) + 1)">🎲 Random Problem</button>
+            </div>
+        </div>
+
+        <!-- Program View -->
+        <div id="programView" class="program-view">
+            <div class="program-header">
+                <button class="nav-btn" onclick="showIndex()">📋 Back to Index</button>
+                <div class="program-navigation">
+                    <button class="nav-btn" onclick="navigateProgram(-1)" id="prevBtn">Previous</button>
+                    <span id="currentProgramTitle">Program 1</span>
+                    <button class="nav-btn" onclick="navigateProgram(1)" id="nextBtn">Next</button>
+                </div>
+            </div>
+            <div class="program-content-wrapper" id="programContent">
+                <!-- Program content will be loaded here -->
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2>🎯 SDET String Interview Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>🕒 Time & Space Complexity</h3>
+                    <ul>
+                        <li>Always discuss complexity before coding</li>
+                        <li>Consider multiple approaches and trade-offs</li>
+                        <li>String operations can be expensive - use StringBuilder</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>🚨 Edge Cases</h3>
+                    <ul>
+                        <li>Null strings</li>
+                        <li>Empty strings</li>
+                        <li>Single character strings</li>
+                        <li>Case sensitivity requirements</li>
+                        <li>Unicode vs ASCII characters</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>🔄 Common Patterns</h3>
+                    <ul>
+                        <li><strong>Two Pointers:</strong> For palindromes, reversals</li>
+                        <li><strong>HashMap/Frequency:</strong> For character counting, anagrams</li>
+                        <li><strong>Stack:</strong> For balanced parentheses, expression evaluation</li>
+                        <li><strong>Sliding Window:</strong> For substrings with conditions</li>
+                        <li><strong>Backtracking:</strong> For permutations, combinations</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h3>💻 String Best Practices</h3>
+                    <ul>
+                        <li>Use StringBuilder for multiple concatenations</li>
+                        <li>Consider case sensitivity in comparisons</li>
+                        <li>Handle whitespace appropriately</li>
+                        <li>Validate input for null/empty cases</li>
+                        <li>Understand ASCII vs Unicode requirements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h2>💡 Master String Programming!</h2>
+            <p>Practice these 20 essential string problems to ace your SDET interviews</p>
+        </div>
+    </div>
+
+    <script>
+        let currentProgram = 1;
+        const totalPrograms = 20;
+
+        const programs = {
+            1: {
+                title: "Reverse a String (Manual Implementation)",
+                problem: "Reverse a string using manual implementation (no built-in functions like StringBuilder.reverse()).",
+                companies: "Amazon, Cognizant, PayPal",
+                approach: "Character array manipulation with two pointers or loop-based approach.",
+                complexity: "Time: O(n) | Space: O(n) | Pattern: Two Pointers",
+                code: `// Method 1: Two Pointers (Most Efficient)
+public static String reverseString(String str) {
+    if (str == null || str.length() <= 1) {
+        return str;
+    }
+    
+    char[] chars = str.toCharArray();
+    int left = 0, right = chars.length - 1;
+    
+    while (left < right) {
+        // Swap characters manually
+        char temp = chars[left];
+        chars[left] = chars[right];
+        chars[right] = temp;
+        left++;
+        right--;
+    }
+    
+    return new String(chars);
+}
+
+// Method 2: Recursive Approach
+public static String reverseStringRecursive(String str) {
+    if (str == null || str.length() <= 1) {
+        return str;
+    }
+    
+    return reverseStringRecursive(str.substring(1)) + str.charAt(0);
+}`,
+                keyPoints: [
+                    "Two pointers approach is most efficient O(n) time, O(n) space",
+                    "Loop concatenation is O(n²) due to string immutability",
+                    "Recursive solution demonstrates understanding of recursion",
+                    "Manual character manipulation shows core programming skills"
+                ]
+            },
+            2: {
+                title: "Check Palindrome (Manual Implementation)",
+                problem: "Check if a string reads the same forwards and backwards (manual implementation).",
+                companies: "Flipkart, Infosys, Walmart",
+                approach: "Two-pointer technique with manual case conversion.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Two Pointers",
+                code: `// Method 1: Basic Palindrome Check
+public static boolean isPalindrome(String str) {
+    if (str == null) return false;
+    if (str.length() <= 1) return true;
+    
+    int left = 0, right = str.length() - 1;
+    
+    while (left < right) {
+        if (str.charAt(left) != str.charAt(right)) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+// Method 2: Case-Insensitive with Manual Conversion
+public static boolean isPalindromeCaseInsensitive(String str) {
+    if (str == null) return false;
+    if (str.length() <= 1) return true;
+    
+    int left = 0, right = str.length() - 1;
+    
+    while (left < right) {
+        char leftChar = str.charAt(left);
+        char rightChar = str.charAt(right);
+        
+        // Manual case conversion
+        if (leftChar >= 'A' && leftChar <= 'Z') {
+            leftChar = (char)(leftChar + 32);
+        }
+        if (rightChar >= 'A' && rightChar <= 'Z') {
+            rightChar = (char)(rightChar + 32);
+        }
+        
+        if (leftChar != rightChar) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}`,
+                keyPoints: [
+                    "Two pointers avoid extra space and are most efficient",
+                    "Manual case conversion using ASCII values (A-Z: 65-90, a-z: 97-122)",
+                    "Skip non-alphanumeric characters by advancing pointers",
+                    "Demonstrate understanding of character manipulation"
+                ]
+            },
+            3: {
+                title: "First Non-Repeating Character (Manual Implementation)",
+                problem: "Find the first character that appears exactly once (manual implementation).",
+                companies: "Microsoft, Google, Facebook",
+                approach: "Single pass with frequency counting using array.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Frequency Count",
+                code: `// Method 1: Array-based Frequency Count
+public static char firstNonRepeatingChar(String str) {
+    if (str == null || str.isEmpty()) {
+        return '\\0';
+    }
+    
+    int[] charCount = new int[256]; // ASCII characters
+    
+    // Count frequency of each character
+    for (int i = 0; i < str.length(); i++) {
+        charCount[str.charAt(i)]++;
+    }
+    
+    // Find first character with count 1
+    for (int i = 0; i < str.length(); i++) {
+        if (charCount[str.charAt(i)] == 1) {
+            return str.charAt(i);
+        }
+    }
+    
+    return '\\0'; // No non-repeating character found
+}
+
+// Method 2: Brute Force (Manual Check)
+public static char firstNonRepeatingCharBruteForce(String str) {
+    if (str == null || str.isEmpty()) {
+        return '\\0';
+    }
+    
+    for (int i = 0; i < str.length(); i++) {
+        char currentChar = str.charAt(i);
+        boolean isRepeated = false;
+        
+        // Check if this character appears elsewhere
+        for (int j = 0; j < str.length(); j++) {
+            if (i != j && str.charAt(j) == currentChar) {
+                isRepeated = true;
+                break;
+            }
+        }
+        
+        if (!isRepeated) {
+            return currentChar;
+        }
+    }
+    
+    return '\\0';
+}`,
+                keyPoints: [
+                    "Array-based frequency counting is efficient for ASCII",
+                    "Two-pass solution: one for counting, one for finding",
+                    "Return special character ('\\0') when no solution exists",
+                    "Brute force demonstrates nested loop logic"
+                ]
+            },
+            4: {
+                title: "Character Frequency Count (Manual Implementation)",
+                problem: "Count frequency of each character in a string (manual implementation).",
+                companies: "TCS, Wipro, Accenture",
+                approach: "Array-based counting or manual map implementation.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Hash Table",
+                code: `// Method 1: Array-based Frequency Count
+public static void printCharacterFrequency(String str) {
+    if (str == null || str.isEmpty()) {
+        System.out.println("Empty or null string");
+        return;
+    }
+    
+    int[] charCount = new int[256]; // ASCII characters
+    
+    // Count frequencies
+    for (int i = 0; i < str.length(); i++) {
+        charCount[str.charAt(i)]++;
+    }
+    
+    // Print frequencies
+    System.out.println("Character frequencies:");
+    for (int i = 0; i < 256; i++) {
+        if (charCount[i] > 0) {
+            System.out.println((char)i + ": " + charCount[i]);
+        }
+    }
+}
+
+// Method 2: Manual Map Implementation
+public static void printFrequencyManualMap(String str) {
+    if (str == null || str.isEmpty()) return;
+    
+    char[] characters = new char[str.length()];
+    int[] frequencies = new int[str.length()];
+    int uniqueCount = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char currentChar = str.charAt(i);
+        int index = findCharIndex(characters, uniqueCount, currentChar);
+        
+        if (index == -1) {
+            // Character not found, add it
+            characters[uniqueCount] = currentChar;
+            frequencies[uniqueCount] = 1;
+            uniqueCount++;
+        } else {
+            // Character found, increment frequency
+            frequencies[index]++;
+        }
+    }
+    
+    // Print results
+    for (int i = 0; i < uniqueCount; i++) {
+        System.out.println(characters[i] + ": " + frequencies[i]);
+    }
+}
+
+private static int findCharIndex(char[] chars, int size, char target) {
+    for (int i = 0; i < size; i++) {
+        if (chars[i] == target) {
+            return i;
+        }
+    }
+    return -1;
+}`,
+                keyPoints: [
+                    "Array approach is O(1) space for ASCII characters",
+                    "Manual map implementation shows data structure understanding",
+                    "Demonstrates different ways to solve frequency counting",
+                    "Shows how to find maximum/minimum frequency characters"
+                ]
+            },
+            5: {
+                title: "Check Anagrams (Manual Implementation)",
+                problem: "Check if two strings are anagrams (manual implementation, no built-in sort).",
+                companies: "Amazon, PayPal, Google",
+                approach: "Manual sorting or frequency counting using arrays.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Frequency Count",
+                code: `// Method 1: Frequency Count using Arrays
+public static boolean areAnagrams(String str1, String str2) {
+    if (str1 == null || str2 == null) return false;
+    if (str1.length() != str2.length()) return false;
+    
+    // Convert to lowercase manually
+    str1 = convertToLowercase(str1);
+    str2 = convertToLowercase(str2);
+    
+    int[] charCount = new int[256]; // ASCII characters
+    
+    // Count characters in first string
+    for (int i = 0; i < str1.length(); i++) {
+        charCount[str1.charAt(i)]++;
+    }
+    
+    // Subtract characters from second string
+    for (int i = 0; i < str2.length(); i++) {
+        charCount[str2.charAt(i)]--;
+    }
+    
+    // If all counts are zero, strings are anagrams
+    for (int i = 0; i < 256; i++) {
+        if (charCount[i] != 0) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Method 2: Manual Sorting
+public static boolean areAnagramsManualSort(String str1, String str2) {
+    if (str1 == null || str2 == null) return false;
+    if (str1.length() != str2.length()) return false;
+    
+    char[] chars1 = str1.toLowerCase().toCharArray();
+    char[] chars2 = str2.toLowerCase().toCharArray();
+    
+    // Manual bubble sort
+    bubbleSort(chars1);
+    bubbleSort(chars2);
+    
+    // Compare sorted arrays
+    for (int i = 0; i < chars1.length; i++) {
+        if (chars1[i] != chars2[i]) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+private static void bubbleSort(char[] arr) {
+    int n = arr.length;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                char temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+private static String convertToLowercase(String str) {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        if (c >= 'A' && c <= 'Z') {
+            sb.append((char)(c + 32));
+        } else {
+            sb.append(c);
+        }
+    }
+    return sb.toString();
+}`,
+                keyPoints: [
+                    "Frequency counting is most efficient O(n) solution",
+                    "Manual sorting demonstrates sorting algorithm knowledge",
+                    "Character removal approach shows alternative thinking",
+                    "Manual case conversion avoids built-in functions"
+                ]
+            },
+            6: {
+                title: "Print All Permutations",
+                problem: "Generate all permutations of a string using backtracking.",
+                companies: "Microsoft, Adobe, Oracle",
+                approach: "Backtracking with swap and restore technique.",
+                complexity: "Time: O(n!) | Space: O(n) | Pattern: Backtracking",
+                code: `// Method 1: Backtracking with Swapping
+public static List<String> getPermutations(String str) {
+    List<String> result = new ArrayList<>();
+    if (str == null) return result;
+    
+    char[] chars = str.toCharArray();
+    generatePermutations(chars, 0, result);
+    return result;
+}
+
+private static void generatePermutations(char[] chars, int index, List<String> result) {
+    if (index == chars.length) {
+        result.add(new String(chars));
+        return;
+    }
+    
+    for (int i = index; i < chars.length; i++) {
+        // Swap
+        swap(chars, index, i);
+        
+        // Recurse
+        generatePermutations(chars, index + 1, result);
+        
+        // Backtrack (restore)
+        swap(chars, index, i);
+    }
+}
+
+private static void swap(char[] chars, int i, int j) {
+    char temp = chars[i];
+    chars[i] = chars[j];
+    chars[j] = temp;
+}
+
+// Method 2: Using StringBuilder for Building
+public static List<String> getPermutationsStringBuilder(String str) {
+    List<String> result = new ArrayList<>();
+    if (str == null || str.isEmpty()) {
+        result.add("");
+        return result;
+    }
+    
+    generatePermutationsStringBuilder("", str, result);
+    return result;
+}
+
+private static void generatePermutationsStringBuilder(String prefix, String remaining, List<String> result) {
+    if (remaining.isEmpty()) {
+        result.add(prefix);
+        return;
+    }
+    
+    for (int i = 0; i < remaining.length(); i++) {
+        char current = remaining.charAt(i);
+        String newPrefix = prefix + current;
+        String newRemaining = remaining.substring(0, i) + remaining.substring(i + 1);
+        generatePermutationsStringBuilder(newPrefix, newRemaining, result);
+    }
+}`,
+                keyPoints: [
+                    "Backtracking with swap and restore",
+                    "Base case when all positions filled",
+                    "Handle duplicates with additional logic",
+                    "Memory intensive for large strings"
+                ]
+            },
+            7: {
+                title: "All Unique Characters",
+                problem: "Check if a string has all unique characters (no duplicates).",
+                companies: "Facebook, Twitter, LinkedIn",
+                approach: "Boolean array or early termination with nested loops.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Hash Set",
+                code: `// Method 1: Boolean Array (ASCII)
+public static boolean hasAllUniqueChars(String str) {
+    if (str == null) return true;
+    if (str.length() > 256) return false; // ASCII has only 256 characters
+    
+    boolean[] charSet = new boolean[256];
+    
+    for (int i = 0; i < str.length(); i++) {
+        int charCode = str.charAt(i);
+        if (charSet[charCode]) {
+            return false; // Character already seen
+        }
+        charSet[charCode] = true;
+    }
+    
+    return true;
+}
+
+// Method 2: Brute Force (No Extra Space)
+public static boolean hasAllUniqueCharsBruteForce(String str) {
+    if (str == null) return true;
+    
+    for (int i = 0; i < str.length(); i++) {
+        for (int j = i + 1; j < str.length(); j++) {
+            if (str.charAt(i) == str.charAt(j)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+// Method 3: Early Termination with Manual Set
+public static boolean hasAllUniqueCharsManualSet(String str) {
+    if (str == null) return true;
+    
+    char[] seen = new char[str.length()];
+    int seenCount = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char current = str.charAt(i);
+        
+        // Check if already seen
+        for (int j = 0; j < seenCount; j++) {
+            if (seen[j] == current) {
+                return false;
+            }
+        }
+        
+        // Add to seen characters
+        seen[seenCount++] = current;
+    }
+    
+    return true;
+}`,
+                keyPoints: [
+                    "Early termination for efficiency",
+                    "ASCII assumption for array approach",
+                    "HashSet for Unicode characters",
+                    "Consider string length vs character set size"
+                ]
+            },
+            8: {
+                title: "Remove Duplicates (Manual Implementation)",
+                problem: "Remove duplicate characters from a string (manual implementation).",
+                companies: "Amazon, Microsoft, Apple",
+                approach: "Boolean array tracking or manual character building.",
+                complexity: "Time: O(n) | Space: O(n) | Pattern: Hash Set",
+                code: `// Method 1: Boolean Array (Most Efficient)
+public static String removeDuplicates(String str) {
+    if (str == null || str.length() <= 1) return str;
+    
+    boolean[] seen = new boolean[256]; // ASCII characters
+    StringBuilder result = new StringBuilder();
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        if (!seen[c]) {
+            seen[c] = true;
+            result.append(c);
+        }
+    }
+    
+    return result.toString();
+}
+
+// Method 2: Character Array Building
+public static String removeDuplicatesCharArray(String str) {
+    if (str == null || str.length() <= 1) return str;
+    
+    char[] result = new char[str.length()];
+    boolean[] seen = new boolean[256];
+    int writeIndex = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        if (!seen[c]) {
+            seen[c] = true;
+            result[writeIndex++] = c;
+        }
+    }
+    
+    return new String(result, 0, writeIndex);
+}
+
+// Method 3: Brute Force (No Extra Space for Seen)
+public static String removeDuplicatesBruteForce(String str) {
+    if (str == null || str.length() <= 1) return str;
+    
+    StringBuilder result = new StringBuilder();
+    
+    for (int i = 0; i < str.length(); i++) {
+        char current = str.charAt(i);
+        boolean found = false;
+        
+        // Check if already in result
+        for (int j = 0; j < result.length(); j++) {
+            if (result.charAt(j) == current) {
+                found = true;
+                break;
+            }
+        }
+        
+        if (!found) {
+            result.append(current);
+        }
+    }
+    
+    return result.toString();
+}`,
+                keyPoints: [
+                    "Boolean array approach is most efficient for ASCII",
+                    "Character array building avoids string concatenation overhead",
+                    "Brute force shows nested loop logic",
+                    "Manual set implementation shows data structure understanding"
+                ]
+            },
+            9: {
+                title: "Longest Palindromic Substring",
+                problem: "Find the longest palindromic substring in a given string.",
+                companies: "Google, Amazon, Facebook",
+                approach: "Expand around center for each possible center position.",
+                complexity: "Time: O(n²) | Space: O(1) | Pattern: Expand Around Center",
+                code: `// Method: Expand Around Center
+public static String longestPalindrome(String str) {
+    if (str == null || str.length() <= 1) return str;
+    
+    int start = 0, maxLength = 1;
+    
+    for (int i = 0; i < str.length(); i++) {
+        // Check for odd length palindromes (center at i)
+        int len1 = expandAroundCenter(str, i, i);
+        
+        // Check for even length palindromes (center between i and i+1)
+        int len2 = expandAroundCenter(str, i, i + 1);
+        
+        int currentMax = Math.max(len1, len2);
+        
+        if (currentMax > maxLength) {
+            maxLength = currentMax;
+            start = i - (currentMax - 1) / 2;
+        }
+    }
+    
+    return str.substring(start, start + maxLength);
+}
+
+private static int expandAroundCenter(String str, int left, int right) {
+    while (left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)) {
+        left--;
+        right++;
+    }
+    return right - left - 1;
+}
+
+// Method 2: Brute Force (Check All Substrings)
+public static String longestPalindromeBruteForce(String str) {
+    if (str == null || str.length() <= 1) return str;
+    
+    String longest = "";
+    
+    for (int i = 0; i < str.length(); i++) {
+        for (int j = i; j < str.length(); j++) {
+            String substring = str.substring(i, j + 1);
+            if (isPalindrome(substring) && substring.length() > longest.length()) {
+                longest = substring;
+            }
+        }
+    }
+    
+    return longest;
+}`,
+                keyPoints: [
+                    "Expand around center for each position",
+                    "Handle both odd and even length palindromes",
+                    "Track start position and maximum length",
+                    "More efficient than brute force O(n³)"
+                ]
+            },
+            10: {
+                title: "Substring Search (KMP/Naive)",
+                problem: "Find if a pattern exists in text using manual implementation.",
+                companies: "Google, Microsoft, Adobe",
+                approach: "Naive search or KMP algorithm for efficient pattern matching.",
+                complexity: "Time: O(m+n) | Space: O(m) | Pattern: String Matching",
+                code: `// Method 1: Naive Pattern Search
+public static int naiveSearch(String text, String pattern) {
+    if (text == null || pattern == null) return -1;
+    if (pattern.length() == 0) return 0;
+    if (text.length() < pattern.length()) return -1;
+    
+    for (int i = 0; i <= text.length() - pattern.length(); i++) {
+        int j;
+        for (j = 0; j < pattern.length(); j++) {
+            if (text.charAt(i + j) != pattern.charAt(j)) {
+                break;
+            }
+        }
+        if (j == pattern.length()) {
+            return i; // Pattern found at index i
+        }
+    }
+    return -1; // Pattern not found
+}
+
+// Method 2: KMP Algorithm
+public static int kmpSearch(String text, String pattern) {
+    if (text == null || pattern == null) return -1;
+    if (pattern.length() == 0) return 0;
+    
+    int[] lps = computeLPSArray(pattern);
+    int i = 0; // index for text
+    int j = 0; // index for pattern
+    
+    while (i < text.length()) {
+        if (text.charAt(i) == pattern.charAt(j)) {
+            i++;
+            j++;
+        }
+        
+        if (j == pattern.length()) {
+            return i - j; // Pattern found
+        } else if (i < text.length() && text.charAt(i) != pattern.charAt(j)) {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                i++;
+            }
+        }
+    }
+    return -1; // Pattern not found
+}
+
+private static int[] computeLPSArray(String pattern) {
+    int[] lps = new int[pattern.length()];
+    int len = 0;
+    int i = 1;
+    
+    while (i < pattern.length()) {
+        if (pattern.charAt(i) == pattern.charAt(len)) {
+            len++;
+            lps[i] = len;
+            i++;
+        } else {
+            if (len != 0) {
+                len = lps[len - 1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+    return lps;
+}`,
+                keyPoints: [
+                    "Naive approach is simple but inefficient",
+                    "KMP avoids redundant comparisons",
+                    "LPS array is key to KMP efficiency",
+                    "Built-in indexOf() uses optimized algorithms"
+                ]
+            },
+            11: {
+                title: "Longest Common Prefix",
+                problem: "Find the longest common prefix string amongst an array of strings.",
+                companies: "Amazon, Microsoft, Apple",
+                approach: "Horizontal scanning or vertical scanning approach.",
+                complexity: "Time: O(S) | Space: O(1) | Pattern: String Comparison",
+                code: `// Method 1: Horizontal Scanning
+public static String longestCommonPrefix(String[] strs) {
+    if (strs == null || strs.length == 0) return "";
+    if (strs.length == 1) return strs[0];
+    
+    String prefix = strs[0];
+    
+    for (int i = 1; i < strs.length; i++) {
+        while (strs[i].indexOf(prefix) != 0) {
+            prefix = prefix.substring(0, prefix.length() - 1);
+            if (prefix.isEmpty()) return "";
+        }
+    }
+    
+    return prefix;
+}
+
+// Method 2: Vertical Scanning
+public static String longestCommonPrefixVertical(String[] strs) {
+    if (strs == null || strs.length == 0) return "";
+    
+    for (int i = 0; i < strs[0].length(); i++) {
+        char c = strs[0].charAt(i);
+        
+        for (int j = 1; j < strs.length; j++) {
+            if (i >= strs[j].length() || strs[j].charAt(i) != c) {
+                return strs[0].substring(0, i);
+            }
+        }
+    }
+    
+    return strs[0];
+}
+
+// Method 3: Manual Implementation without indexOf
+public static String longestCommonPrefixManual(String[] strs) {
+    if (strs == null || strs.length == 0) return "";
+    if (strs.length == 1) return strs[0];
+    
+    StringBuilder prefix = new StringBuilder();
+    int minLength = strs[0].length();
+    
+    // Find minimum length
+    for (String str : strs) {
+        minLength = Math.min(minLength, str.length());
+    }
+    
+    for (int i = 0; i < minLength; i++) {
+        char currentChar = strs[0].charAt(i);
+        
+        // Check if all strings have same character at position i
+        for (int j = 1; j < strs.length; j++) {
+            if (strs[j].charAt(i) != currentChar) {
+                return prefix.toString();
+            }
+        }
+        
+        prefix.append(currentChar);
+    }
+    
+    return prefix.toString();
+}`,
+                keyPoints: [
+                    "Horizontal scanning reduces prefix iteratively",
+                    "Vertical scanning compares character by character",
+                    "Early termination when no common prefix",
+                    "Handle empty array and null cases"
+                ]
+            },
+            12: {
+                title: "Rotation Check (Manual Implementation)",
+                problem: "Check if one string is a rotation of another (manual implementation).",
+                companies: "Amazon, Google, Microsoft",
+                approach: "Manual concatenation or rotation generation and comparison.",
+                complexity: "Time: O(n) | Space: O(n) | Pattern: String Manipulation",
+                code: `// Method 1: Manual Concatenation (Classic Approach)
+public static boolean isRotation(String str1, String str2) {
+    if (str1 == null || str2 == null) return false;
+    if (str1.length() != str2.length()) return false;
+    if (str1.length() == 0) return true;
+    
+    // Concatenate str1 with itself
+    String concatenated = str1 + str1;
+    
+    // Check if str2 is substring of concatenated string (manual)
+    return containsSubstring(concatenated, str2);
+}
+
+private static boolean containsSubstring(String text, String pattern) {
+    if (pattern.length() > text.length()) return false;
+    
+    for (int i = 0; i <= text.length() - pattern.length(); i++) {
+        boolean found = true;
+        for (int j = 0; j < pattern.length(); j++) {
+            if (text.charAt(i + j) != pattern.charAt(j)) {
+                found = false;
+                break;
+            }
+        }
+        if (found) return true;
+    }
+    return false;
+}
+
+// Method 2: Generate All Rotations
+public static boolean isRotationGenerate(String str1, String str2) {
+    if (str1 == null || str2 == null) return false;
+    if (str1.length() != str2.length()) return false;
+    if (str1.length() == 0) return true;
+    
+    int len = str1.length();
+    
+    for (int i = 0; i < len; i++) {
+        // Build rotated string manually
+        StringBuilder rotated = new StringBuilder();
+        
+        // Add characters from position i to end
+        for (int j = i; j < len; j++) {
+            rotated.append(str1.charAt(j));
+        }
+        
+        // Add characters from start to position i-1
+        for (int j = 0; j < i; j++) {
+            rotated.append(str1.charAt(j));
+        }
+        
+        if (rotated.toString().equals(str2)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+// Method 3: Character by Character Building
+public static boolean isRotationCharByChar(String str1, String str2) {
+    if (str1 == null || str2 == null) return false;
+    if (str1.length() != str2.length()) return false;
+    
+    int len = str1.length();
+    
+    for (int rotation = 0; rotation < len; rotation++) {
+        boolean isMatch = true;
+        
+        for (int i = 0; i < len; i++) {
+            int rotatedIndex = (i + rotation) % len;
+            if (str1.charAt(rotatedIndex) != str2.charAt(i)) {
+                isMatch = false;
+                break;
+            }
+        }
+        
+        if (isMatch) return true;
+    }
+    
+    return false;
+}`,
+                keyPoints: [
+                    "Manual concatenation demonstrates the classic approach",
+                    "Direct rotation check shows understanding of rotation concept",
+                    "Character by character building shows string manipulation",
+                    "Two-pointer approach optimizes the search process"
+                ]
+            },
+            13: {
+                title: "Reverse Words in Sentence",
+                problem: "Reverse the order of words in a sentence while maintaining word integrity.",
+                companies: "Microsoft, Amazon, Google",
+                approach: "Split and reverse or in-place reversal with character manipulation.",
+                complexity: "Time: O(n) | Space: O(n) | Pattern: String Manipulation",
+                code: `// Method 1: Split and Reverse
+public static String reverseWords(String sentence) {
+    if (sentence == null || sentence.trim().isEmpty()) {
+        return sentence;
+    }
+    
+    // Manual split implementation
+    String[] words = manualSplit(sentence.trim());
+    StringBuilder result = new StringBuilder();
+    
+    // Add words in reverse order
+    for (int i = words.length - 1; i >= 0; i--) {
+        result.append(words[i]);
+        if (i > 0) result.append(" ");
+    }
+    
+    return result.toString();
+}
+
+private static String[] manualSplit(String str) {
+    // Count words first
+    int wordCount = 0;
+    boolean inWord = false;
+    
+    for (int i = 0; i < str.length(); i++) {
+        if (str.charAt(i) != ' ') {
+            if (!inWord) {
+                wordCount++;
+                inWord = true;
+            }
+        } else {
+            inWord = false;
+        }
+    }
+    
+    // Extract words
+    String[] words = new String[wordCount];
+    int wordIndex = 0;
+    StringBuilder currentWord = new StringBuilder();
+    
+    for (int i = 0; i < str.length(); i++) {
+        if (str.charAt(i) != ' ') {
+            currentWord.append(str.charAt(i));
+        } else if (currentWord.length() > 0) {
+            words[wordIndex++] = currentWord.toString();
+            currentWord = new StringBuilder();
+        }
+    }
+    
+    // Add last word if exists
+    if (currentWord.length() > 0) {
+        words[wordIndex] = currentWord.toString();
+    }
+    
+    return words;
+}
+
+// Method 2: In-place Reversal (Character Array)
+public static String reverseWordsInPlace(String sentence) {
+    if (sentence == null || sentence.trim().isEmpty()) {
+        return sentence;
+    }
+    
+    char[] chars = sentence.trim().toCharArray();
+    
+    // Reverse entire string
+    reverse(chars, 0, chars.length - 1);
+    
+    // Reverse each word back
+    int start = 0;
+    for (int i = 0; i <= chars.length; i++) {
+        if (i == chars.length || chars[i] == ' ') {
+            reverse(chars, start, i - 1);
+            start = i + 1;
+        }
+    }
+    
+    return new String(chars);
+}
+
+private static void reverse(char[] chars, int start, int end) {
+    while (start < end) {
+        char temp = chars[start];
+        chars[start] = chars[end];
+        chars[end] = temp;
+        start++;
+        end--;
+    }
+}`,
+                keyPoints: [
+                    "Split approach is simpler and cleaner",
+                    "In-place approach saves space",
+                    "Handle multiple spaces between words",
+                    "Trim leading/trailing spaces"
+                ]
+            },
+            14: {
+                title: "Vowel & Consonant Count",
+                problem: "Count the number of vowels and consonants in a string.",
+                companies: "TCS, Infosys, Cognizant",
+                approach: "Single pass with character classification using manual checks.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Character Classification",
+                code: `// Method 1: Manual Vowel Check
+public static int[] countVowelsConsonants(String str) {
+    if (str == null) return new int[]{0, 0};
+    
+    int vowels = 0, consonants = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        
+        // Convert to lowercase manually
+        if (c >= 'A' && c <= 'Z') {
+            c = (char)(c + 32);
+        }
+        
+        // Check if alphabetic
+        if (c >= 'a' && c <= 'z') {
+            if (isVowel(c)) {
+                vowels++;
+            } else {
+                consonants++;
+            }
+        }
+    }
+    
+    return new int[]{vowels, consonants};
+}
+
+private static boolean isVowel(char c) {
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+}
+
+// Method 2: Using Character Array for Vowels
+public static int[] countVowelsConsonantsArray(String str) {
+    if (str == null) return new int[]{0, 0};
+    
+    char[] vowelArray = {'a', 'e', 'i', 'o', 'u'};
+    int vowels = 0, consonants = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = toLowerCase(str.charAt(i));
+        
+        if (isAlphabetic(c)) {
+            boolean foundVowel = false;
+            
+            // Check against vowel array
+            for (char vowel : vowelArray) {
+                if (c == vowel) {
+                    foundVowel = true;
+                    break;
+                }
+            }
+            
+            if (foundVowel) {
+                vowels++;
+            } else {
+                consonants++;
+            }
+        }
+    }
+    
+    return new int[]{vowels, consonants};
+}
+
+private static char toLowerCase(char c) {
+    if (c >= 'A' && c <= 'Z') {
+        return (char)(c + 32);
+    }
+    return c;
+}
+
+private static boolean isAlphabetic(char c) {
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
+// Method 3: With Detailed Output
+public static void printVowelConsonantDetails(String str) {
+    if (str == null) {
+        System.out.println("Null string provided");
+        return;
+    }
+    
+    StringBuilder vowelsFound = new StringBuilder();
+    StringBuilder consonantsFound = new StringBuilder();
+    int vowelCount = 0, consonantCount = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = toLowerCase(str.charAt(i));
+        
+        if (isAlphabetic(c)) {
+            if (isVowel(c)) {
+                vowelsFound.append(c).append(" ");
+                vowelCount++;
+            } else {
+                consonantsFound.append(c).append(" ");
+                consonantCount++;
+            }
+        }
+    }
+    
+    System.out.println("Vowels (" + vowelCount + "): " + vowelsFound.toString().trim());
+    System.out.println("Consonants (" + consonantCount + "): " + consonantsFound.toString().trim());
+}`,
+                keyPoints: [
+                    "Consider only alphabetic characters",
+                    "Handle both uppercase and lowercase",
+                    "HashSet approach for faster vowel lookup",
+                    "Return structured data for clarity"
+                ]
+            },
+            15: {
+                title: "Duplicate Words in String",
+                problem: "Find and display duplicate words in a string.",
+                companies: "Wipro, TCS, HCL",
+                approach: "Manual word extraction and frequency counting using arrays.",
+                complexity: "Time: O(n) | Space: O(n) | Pattern: Hash Map",
+                code: `// Method 1: Manual Word Processing
+public static String[] findDuplicateWords(String sentence) {
+    if (sentence == null || sentence.trim().isEmpty()) {
+        return new String[0];
+    }
+    
+    // Extract words manually
+    String[] words = extractWords(sentence.toLowerCase());
+    if (words.length == 0) return new String[0];
+    
+    // Count word frequencies
+    String[] uniqueWords = new String[words.length];
+    int[] frequencies = new int[words.length];
+    int uniqueCount = 0;
+    
+    for (String word : words) {
+        int index = findWordIndex(uniqueWords, uniqueCount, word);
+        if (index == -1) {
+            uniqueWords[uniqueCount] = word;
+            frequencies[uniqueCount] = 1;
+            uniqueCount++;
+        } else {
+            frequencies[index]++;
+        }
+    }
+    
+    // Collect duplicates
+    String[] duplicates = new String[uniqueCount];
+    int duplicateCount = 0;
+    
+    for (int i = 0; i < uniqueCount; i++) {
+        if (frequencies[i] > 1) {
+            duplicates[duplicateCount++] = uniqueWords[i];
+        }
+    }
+    
+    // Trim array
+    String[] result = new String[duplicateCount];
+    System.arraycopy(duplicates, 0, result, 0, duplicateCount);
+    return result;
+}
+
+private static String[] extractWords(String sentence) {
+    // Count words
+    int wordCount = 0;
+    boolean inWord = false;
+    
+    for (int i = 0; i < sentence.length(); i++) {
+        char c = sentence.charAt(i);
+        if (isAlphabetic(c)) {
+            if (!inWord) {
+                wordCount++;
+                inWord = true;
+            }
+        } else {
+            inWord = false;
+        }
+    }
+    
+    // Extract words
+    String[] words = new String[wordCount];
+    int wordIndex = 0;
+    StringBuilder currentWord = new StringBuilder();
+    
+    for (int i = 0; i < sentence.length(); i++) {
+        char c = sentence.charAt(i);
+        if (isAlphabetic(c)) {
+            currentWord.append(c);
+        } else if (currentWord.length() > 0) {
+            words[wordIndex++] = currentWord.toString();
+            currentWord = new StringBuilder();
+        }
+    }
+    
+    // Add last word if exists
+    if (currentWord.length() > 0) {
+        words[wordIndex] = currentWord.toString();
+    }
+    
+    return words;
+}
+
+private static int findWordIndex(String[] words, int size, String target) {
+    for (int i = 0; i < size; i++) {
+        if (words[i].equals(target)) {
+            return i;
+        }
+    }
+    return -1;
+}`,
+                keyPoints: [
+                    "Case-insensitive comparison",
+                    "Remove punctuation from words",
+                    "LinkedHashMap preserves insertion order",
+                    "Handle empty strings after cleanup"
+                ]
+            },
+            16: {
+                title: "Maximum Occurring Character",
+                problem: "Find the character that appears most frequently.",
+                companies: "Amazon, Microsoft, Google",
+                approach: "Frequency counting with maximum tracking.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Frequency Count",
+                code: `// Method 1: Array-based Frequency Count
+public static char maxOccurringChar(String str) {
+    if (str == null || str.isEmpty()) {
+        return '\\0';
+    }
+    
+    int[] charCount = new int[256]; // ASCII characters
+    int maxCount = 0;
+    char maxChar = str.charAt(0);
+    
+    // Count frequencies and track maximum
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        charCount[c]++;
+        
+        if (charCount[c] > maxCount) {
+            maxCount = charCount[c];
+            maxChar = c;
+        }
+    }
+    
+    return maxChar;
+}
+
+// Method 2: Manual Frequency Tracking
+public static char maxOccurringCharManual(String str) {
+    if (str == null || str.isEmpty()) {
+        return '\\0';
+    }
+    
+    char[] characters = new char[str.length()];
+    int[] frequencies = new int[str.length()];
+    int uniqueCount = 0;
+    int maxFreq = 0;
+    char maxChar = str.charAt(0);
+    
+    for (int i = 0; i < str.length(); i++) {
+        char currentChar = str.charAt(i);
+        int index = findCharIndex(characters, uniqueCount, currentChar);
+        
+        if (index == -1) {
+            // New character
+            characters[uniqueCount] = currentChar;
+            frequencies[uniqueCount] = 1;
+            
+            if (1 > maxFreq) {
+                maxFreq = 1;
+                maxChar = currentChar;
+            }
+            uniqueCount++;
+        } else {
+            // Existing character
+            frequencies[index]++;
+            if (frequencies[index] > maxFreq) {
+                maxFreq = frequencies[index];
+                maxChar = currentChar;
+            }
+        }
+    }
+    
+    return maxChar;
+}
+
+// Method 3: Return All Maximum Characters
+public static char[] allMaxOccurringChars(String str) {
+    if (str == null || str.isEmpty()) {
+        return new char[0];
+    }
+    
+    int[] charCount = new int[256];
+    int maxCount = 0;
+    
+    // Count frequencies
+    for (int i = 0; i < str.length(); i++) {
+        charCount[str.charAt(i)]++;
+        maxCount = Math.max(maxCount, charCount[str.charAt(i)]);
+    }
+    
+    // Collect all characters with max frequency
+    char[] result = new char[256];
+    int resultCount = 0;
+    
+    for (int i = 0; i < 256; i++) {
+        if (charCount[i] == maxCount) {
+            result[resultCount++] = (char)i;
+        }
+    }
+    
+    // Trim result array
+    char[] finalResult = new char[resultCount];
+    System.arraycopy(result, 0, finalResult, 0, resultCount);
+    return finalResult;
+}`,
+                keyPoints: [
+                    "Track maximum while counting for efficiency",
+                    "Array approach for ASCII characters",
+                    "HashMap for Unicode support",
+                    "Handle multiple characters with same max frequency"
+                ]
+            },
+            17: {
+                title: "Check String Contains Digits Only (Manual Implementation)",
+                problem: "Check if string contains only digits (manual implementation, no built-in functions).",
+                companies: "TCS, Infosys, Wipro",
+                approach: "Character-by-character validation using ASCII values.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: Character Validation",
+                code: `// Method 1: ASCII Range Check (Most Efficient)
+public static boolean isDigitsOnly(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        // Check if character is in range '0' to '9' (ASCII 48-57)
+        if (c < '0' || c > '9') {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Method 2: Manual ASCII Value Check
+public static boolean isDigitsOnlyASCII(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+    
+    for (int i = 0; i < str.length(); i++) {
+        int ascii = (int) str.charAt(i);
+        // ASCII values: '0' = 48, '9' = 57
+        if (ascii < 48 || ascii > 57) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Method 3: Character Array Validation
+public static boolean isDigitsOnlyArray(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+    
+    char[] validDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        boolean isValid = false;
+        
+        // Check against valid digits array
+        for (char digit : validDigits) {
+            if (c == digit) {
+                isValid = true;
+                break;
+            }
+        }
+        
+        if (!isValid) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Method 4: Advanced - Handle Signs and Decimals
+public static boolean isValidNumber(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+    
+    int start = 0;
+    
+    // Handle optional sign
+    if (str.charAt(0) == '+' || str.charAt(0) == '-') {
+        if (str.length() == 1) return false; // Just sign
+        start = 1;
+    }
+    
+    boolean hasDecimal = false;
+    
+    for (int i = start; i < str.length(); i++) {
+        char c = str.charAt(i);
+        
+        if (c == '.') {
+            if (hasDecimal) return false; // Multiple decimals
+            hasDecimal = true;
+        } else if (c < '0' || c > '9') {
+            return false; // Non-digit character
+        }
+    }
+    
+    return true;
+}
+
+// Method 5: Parse to Integer (Manual)
+public static boolean canParseToInteger(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+    
+    int start = 0;
+    int sign = 1;
+    
+    // Handle sign
+    if (str.charAt(0) == '-') {
+        sign = -1;
+        start = 1;
+    } else if (str.charAt(0) == '+') {
+        start = 1;
+    }
+    
+    if (start == str.length()) return false; // Only sign
+    
+    long result = 0;
+    
+    for (int i = start; i < str.length(); i++) {
+        char c = str.charAt(i);
+        
+        if (c < '0' || c > '9') {
+            return false;
+        }
+        
+        int digit = c - '0';
+        result = result * 10 + digit;
+        
+        // Check for overflow
+        if (sign == 1 && result > Integer.MAX_VALUE) {
+            return false;
+        }
+        if (sign == -1 && -result < Integer.MIN_VALUE) {
+            return false;
+        }
+    }
+    
+    return true;
+}`,
+                keyPoints: [
+                    "ASCII range check (48-57) is most efficient",
+                    "Manual character validation avoids built-in functions",
+                    "Handle edge cases like signs, decimals, leading zeros",
+                    "Demonstrates understanding of character-to-number conversion"
+                ]
+            },
+            18: {
+                title: "Implement atoi()",
+                problem: "Convert string to integer (atoi implementation) with overflow handling.",
+                companies: "Google, Facebook, Amazon",
+                approach: "Character-by-character parsing with overflow handling.",
+                complexity: "Time: O(n) | Space: O(1) | Pattern: String Parsing",
+                code: `// Complete atoi() Implementation
+public static int atoi(String str) {
+    if (str == null || str.isEmpty()) {
+        return 0;
+    }
+    
+    int index = 0;
+    int sign = 1;
+    long result = 0;
+    
+    // Skip leading whitespace
+    while (index < str.length() && str.charAt(index) == ' ') {
+        index++;
+    }
+    
+    // Handle empty string after trimming
+    if (index == str.length()) {
+        return 0;
+    }
+    
+    // Handle sign
+    if (str.charAt(index) == '+' || str.charAt(index) == '-') {
+        sign = (str.charAt(index) == '-') ? -1 : 1;
+        index++;
+    }
+    
+    // Convert digits
+    while (index < str.length()) {
+        char c = str.charAt(index);
+        
+        // Stop at first non-digit
+        if (c < '0' || c > '9') {
+            break;
+        }
+        
+        int digit = c - '0';
+        
+        // Check for overflow before calculation
+        if (result > (Integer.MAX_VALUE - digit) / 10) {
+            return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+        }
+        
+        result = result * 10 + digit;
+        index++;
+    }
+    
+    return (int) (sign * result);
+}
+
+// Method 2: With Detailed Error Handling
+public static class AtoiResult {
+    public final int value;
+    public final boolean isValid;
+    public final String errorMessage;
+    
+    public AtoiResult(int value, boolean isValid, String errorMessage) {
+        this.value = value;
+        this.isValid = isValid;
+        this.errorMessage = errorMessage;
+    }
+}
+
+public static AtoiResult atoiDetailed(String str) {
+    if (str == null) {
+        return new AtoiResult(0, false, "Null string");
+    }
+    
+    if (str.isEmpty()) {
+        return new AtoiResult(0, false, "Empty string");
+    }
+    
+    int index = 0;
+    int sign = 1;
+    long result = 0;
+    
+    // Skip whitespace
+    while (index < str.length() && str.charAt(index) == ' ') {
+        index++;
+    }
+    
+    if (index == str.length()) {
+        return new AtoiResult(0, false, "Only whitespace");
+    }
+    
+    // Handle sign
+    if (str.charAt(index) == '+' || str.charAt(index) == '-') {
+        sign = (str.charAt(index) == '-') ? -1 : 1;
+        index++;
+    }
+    
+    if (index == str.length()) {
+        return new AtoiResult(0, false, "Only sign character");
+    }
+    
+    // Check first character after sign
+    if (str.charAt(index) < '0' || str.charAt(index) > '9') {
+        return new AtoiResult(0, false, "No digits found");
+    }
+    
+    // Convert digits
+    while (index < str.length()) {
+        char c = str.charAt(index);
+        
+        if (c < '0' || c > '9') {
+            break; // Stop at first non-digit
+        }
+        
+        int digit = c - '0';
+        
+        // Overflow check
+        if (result > (Integer.MAX_VALUE - digit) / 10) {
+            int overflowValue = sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            return new AtoiResult(overflowValue, false, "Integer overflow");
+        }
+        
+        result = result * 10 + digit;
+        index++;
+    }
+    
+    return new AtoiResult((int) (sign * result), true, "Success");
+}`,
+                keyPoints: [
+                    "Handle leading whitespace and signs",
+                    "Check for integer overflow before calculation",
+                    "Stop at first non-digit character",
+                    "Return boundary values for overflow cases"
+                ]
+            },
+            19: {
+                title: "Generate All Substrings",
+                problem: "Generate all possible substrings of a given string.",
+                companies: "Microsoft, Adobe, Oracle",
+                approach: "Two nested loops for all start-end combinations.",
+                complexity: "Time: O(n²) | Space: O(n²) | Pattern: String Generation",
+                code: `// Method 1: Generate All Substrings
+public static List<String> getAllSubstrings(String str) {
+    List<String> substrings = new ArrayList<>();
+    
+    if (str == null || str.isEmpty()) {
+        return substrings;
+    }
+    
+    // Generate all substrings using two nested loops
+    for (int i = 0; i < str.length(); i++) {
+        for (int j = i + 1; j <= str.length(); j++) {
+            substrings.add(str.substring(i, j));
+        }
+    }
+    
+    return substrings;
+}
+
+// Method 2: Generate Unique Substrings Only
+public static Set<String> getUniqueSubstrings(String str) {
+    Set<String> uniqueSubstrings = new HashSet<>();
+    
+    if (str == null || str.isEmpty()) {
+        return uniqueSubstrings;
+    }
+    
+    for (int i = 0; i < str.length(); i++) {
+        for (int j = i + 1; j <= str.length(); j++) {
+            uniqueSubstrings.add(str.substring(i, j));
+        }
+    }
+    
+    return uniqueSubstrings;
+}
+
+// Method 3: Manual Substring Building
+public static List<String> getAllSubstringsManual(String str) {
+    List<String> substrings = new ArrayList<>();
+    
+    if (str == null || str.isEmpty()) {
+        return substrings;
+    }
+    
+    for (int i = 0; i < str.length(); i++) {
+        StringBuilder currentSubstring = new StringBuilder();
+        
+        for (int j = i; j < str.length(); j++) {
+            currentSubstring.append(str.charAt(j));
+            substrings.add(currentSubstring.toString());
+        }
+    }
+    
+    return substrings;
+}
+
+// Method 4: Substrings by Length
+public static Map<Integer, List<String>> getSubstringsByLength(String str) {
+    Map<Integer, List<String>> substringsByLength = new HashMap<>();
+    
+    if (str == null || str.isEmpty()) {
+        return substringsByLength;
+    }
+    
+    for (int i = 0; i < str.length(); i++) {
+        for (int j = i + 1; j <= str.length(); j++) {
+            String substring = str.substring(i, j);
+            int length = substring.length();
+            
+            substringsByLength.computeIfAbsent(length, k -> new ArrayList<>()).add(substring);
+        }
+    }
+    
+    return substringsByLength;
+}
+
+// Method 5: Print All Substrings with Indices
+public static void printAllSubstringsWithIndices(String str) {
+    if (str == null || str.isEmpty()) {
+        System.out.println("Empty or null string");
+        return;
+    }
+    
+    System.out.println("All substrings of '" + str + "':");
+    int count = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        for (int j = i + 1; j <= str.length(); j++) {
+            String substring = str.substring(i, j);
+            System.out.println((++count) + ". [" + i + "," + (j-1) + "] = '" + substring + "'");
+        }
+    }
+    
+    System.out.println("Total substrings: " + count);
+}`,
+                keyPoints: [
+                    "Two nested loops for all start-end combinations",
+                    "O(n²) substrings possible for string of length n",
+                    "Use Set to avoid duplicate substrings",
+                    "Consider memory usage for large strings"
+                ]
+            },
+            20: {
+                title: "Balanced Parentheses",
+                problem: "Check if parentheses in a string are balanced using manual stack implementation.",
+                companies: "Google, Amazon, Microsoft",
+                approach: "Stack-based matching with manual stack implementation.",
+                complexity: "Time: O(n) | Space: O(n) | Pattern: Stack",
+                code: `// Method 1: Manual Stack Implementation
+public static boolean isBalanced(String str) {
+    if (str == null) return true;
+    
+    // Manual stack using array
+    char[] stack = new char[str.length()];
+    int top = -1;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        
+        // Push opening brackets
+        if (c == '(' || c == '[' || c == '{') {
+            stack[++top] = c;
+        }
+        // Check closing brackets
+        else if (c == ')' || c == ']' || c == '}') {
+            if (top == -1) return false; // No matching opening bracket
+            
+            char opening = stack[top--];
+            if (!isMatchingPair(opening, c)) {
+                return false;
+            }
+        }
+    }
+    
+    return top == -1; // Stack should be empty
+}
+
+private static boolean isMatchingPair(char opening, char closing) {
+    return (opening == '(' && closing == ')') ||
+           (opening == '[' && closing == ']') ||
+           (opening == '{' && closing == '}');
+}
+
+// Method 2: Only Parentheses (Simple Counter)
+public static boolean isBalancedParenthesesOnly(String str) {
+    if (str == null) return true;
+    
+    int count = 0;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        
+        if (c == '(') {
+            count++;
+        } else if (c == ')') {
+            count--;
+            if (count < 0) return false; // More closing than opening
+        }
+    }
+    
+    return count == 0;
+}
+
+// Method 3: Advanced - Multiple Types with Manual Stack
+public static boolean isBalancedAdvanced(String str) {
+    if (str == null) return true;
+    
+    char[] stack = new char[str.length()];
+    int top = -1;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        
+        switch (c) {
+            case '(':
+            case '[':
+            case '{':
+                stack[++top] = c;
+                break;
+                
+            case ')':
+                if (top == -1 || stack[top--] != '(') return false;
+                break;
+                
+            case ']':
+                if (top == -1 || stack[top--] != '[') return false;
+                break;
+                
+            case '}':
+                if (top == -1 || stack[top--] != '{') return false;
+                break;
+        }
+    }
+    
+    return top == -1;
+}
+
+// Method 4: Return Detailed Information
+public static class BalanceResult {
+    public final boolean isBalanced;
+    public final int firstUnbalancedIndex;
+    public final char firstUnbalancedChar;
+    
+    public BalanceResult(boolean isBalanced, int index, char character) {
+        this.isBalanced = isBalanced;
+        this.firstUnbalancedIndex = index;
+        this.firstUnbalancedChar = character;
+    }
+}
+
+public static BalanceResult checkBalanceDetailed(String str) {
+    if (str == null) return new BalanceResult(true, -1, '\\0');
+    
+    char[] stack = new char[str.length()];
+    int top = -1;
+    
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        
+        if (c == '(' || c == '[' || c == '{') {
+            stack[++top] = c;
+        } else if (c == ')' || c == ']' || c == '}') {
+            if (top == -1) {
+                return new BalanceResult(false, i, c);
+            }
+            
+            char opening = stack[top--];
+            if (!isMatchingPair(opening, c)) {
+                return new BalanceResult(false, i, c);
+            }
+        }
+    }
+    
+    if (top != -1) {
+        // Find first unmatched opening bracket
+        return new BalanceResult(false, -1, stack[0]);
+    }
+    
+    return new BalanceResult(true, -1, '\\0');
+}`,
+                keyPoints: [
+                    "Stack tracks opening brackets",
+                    "Match closing brackets with stack top",
+                    "Empty stack at end indicates balance",
+                    "Handle multiple types of brackets"
+                ]
+            }
+        };
+
+        function showProgram(programNum) {
+            currentProgram = programNum;
+            document.getElementById('indexView').style.display = 'none';
+            document.getElementById('programView').style.display = 'block';
+            
+            const data = programs[programNum];
+            if (!data) return;
+            
+            document.getElementById('currentProgramTitle').textContent = `Program ${programNum}: ${data.title}`;
+            
+            const content = `
+                <div class="problem-statement">
+                    <h3>🎯 Problem</h3>
+                    <p><strong>Companies:</strong> ${data.companies}</p>
+                    <p>${data.problem}</p>
+                </div>
+                
+                <div class="approach">
+                    <h3>💡 Approach</h3>
+                    <p>${data.approach}</p>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">Java Implementation</div>
+                    <div class="code">${data.code}</div>
+                </div>
+
+                <div class="key-points">
+                    <h3>🔑 Key Points</h3>
+                    <ul>
+                        ${data.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('programContent').innerHTML = content;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = programNum === 1;
+            document.getElementById('nextBtn').disabled = programNum === totalPrograms;
+        }
+
+        function navigateProgram(direction) {
+            const newProgram = currentProgram + direction;
+            if (newProgram >= 1 && newProgram <= totalPrograms) {
+                currentProgram = newProgram;
+                showProgram(currentProgram);
+            }
+        }
+
+        function showIndex() {
+            document.getElementById('indexView').style.display = 'block';
+            document.getElementById('programView').style.display = 'none';
+        }
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            tocItems.forEach(item => {
+                const title = item.querySelector('.program-title').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm)) {
+                    item.classList.remove('toc-item-hidden');
+                } else {
+                    item.classList.add('toc-item-hidden');
+                }
+            });
+        });
+
+        // Auto-show first program for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start with index view
+        });
+    </script>
+</body>
+</html>

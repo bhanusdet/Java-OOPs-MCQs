@@ -26,7 +26,36 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
 - Resource management
 - Best practices
 
-### 3. **[Java-Collections-Framework-Guide.html](Java-Collections-Framework-Guide.html)** - Collections Framework
+### 3. **[Java-Array-Programs.html](Java-Array-Programs.html)** - Array Programming Problems
+🔹 **20 essential SDET array programs** covering:
+- Two Sum & Maximum Subarray
+- Array Rotation & Reversal
+- Duplicate Detection & Removal  
+- Sorting Algorithms (Dutch Flag)
+- Binary Search Variants
+- Sliding Window Techniques
+- HashMap-based Solutions
+- Two-Pointer Approaches
+- Time/Space Optimization
+- Interview-ready implementations
+
+### 4. **[Java-String-Programs.html](Java-String-Programs.html)** - String Programming Problems
+📹 **20 high-frequency string problems** with **navigation-based interface** covering:
+- String Reversal & Palindrome Check (Manual Implementation)
+- Anagram Detection & Character Frequency Counting
+- First Non-Repeating Character & Unique Character Detection
+- Duplicate Removal & All String Permutations
+- Substring Search (KMP/Naive) & Pattern Matching
+- Longest Palindromic Substring & Common Prefix
+- String Rotation Check & Word Reversal
+- Manual atoi() Implementation & Digit Validation
+- Balanced Parentheses & All Substrings Generation
+- **Multiple Solution Approaches** per problem
+- **No Built-in Functions** - Pure algorithmic implementations
+- **Interactive Navigation** - Browse problems one-by-one like Array Programs
+- **Complete Code Solutions** with complexity analysis
+
+### 5. **[Java-Collections-Framework-Guide.html](Java-Collections-Framework-Guide.html)** - Collections Framework
 🔹 **Complete Collections Framework guide** covering:
 - Collection hierarchy and interfaces
 - List, Set, Queue, Map implementations
@@ -34,14 +63,14 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
 - Thread-safe collections
 - Best practices and use cases
 
-### 4. **[Java-Design-Patterns-Guide.html](Java-Design-Patterns-Guide.html)** - Design Patterns
+### 6. **[Java-Design-Patterns-Guide.html](Java-Design-Patterns-Guide.html)** - Design Patterns
 🔹 **Essential design patterns guide** covering:
 - Creational patterns (Singleton, Factory, Builder)
 - Structural patterns (Adapter, Decorator)
 - Behavioral patterns (Observer, Strategy)
 - Real-world examples and implementations
 
-### 5. **[Java-Core-Comparisons.html](Java-Core-Comparisons.html)** - Core Concepts & Comparisons
+### 7. **[Java-Core-Comparisons.html](Java-Core-Comparisons.html)** - Core Concepts & Comparisons
 🔹 **17 detailed comparison tables** covering:
 - String vs StringBuilder vs StringBuffer 
 - ArrayList vs LinkedList vs Vector
@@ -65,6 +94,8 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
 2. Open any HTML file in your browser:
    - `OOPs-MCQs.html` - Interactive OOP MCQs with 93 questions
    - `Java-Exception-Handling-MCQs.html` - Exception handling MCQs
+   - `Java-Array-Programs.html` - 20 array problems with navigation interface
+   - `Java-String-Programs.html` - 20 string problems with navigation interface  
    - `Java-Collections-Framework-Guide.html` - Complete collections guide
    - `Java-Design-Patterns-Guide.html` - Design patterns with examples
    - `Java-Core-Comparisons.html` - Side-by-side concept comparisons
@@ -75,9 +106,12 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
 - **📱 Mobile-Friendly**: Perfect viewing experience on phones and tablets  
 - **⚡ Interactive Elements**: Clickable options, navigation, and progress tracking
 - **🎯 Instant Feedback**: Immediate answers and detailed explanations
-- **🔍 Quick Navigation**: Table of contents and smooth scrolling
+- **🔍 Smart Navigation**: Both accordion and navigation-based interfaces
+- **🚀 Program Navigation**: Previous/Next buttons for programming problems
+- **🔍 Search Functionality**: Find specific problems quickly
 - **💾 No Installation**: Works directly in any modern web browser
 - **🌐 GitHub Pages Ready**: Can be hosted directly from GitHub
+- **📚 Pure HTML Collection**: No markdown files - everything in interactive HTML format
 
 ## 📊 Content Structure
 
@@ -87,6 +121,15 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
 - Correct answer with detailed explanation
 - Key concepts and learning points
 - Professional syntax highlighting for code
+
+### Programming Problems Include:
+- **Navigation Interface**: Browse through problems one-by-one (Array & String Programs)
+- **Multiple Solution Approaches**: 2-4 different implementations per problem
+- **Manual Implementations**: No built-in functions - pure algorithmic thinking
+- **Complete Code Solutions**: Full working implementations with error handling
+- **Complexity Analysis**: Time and space complexity for each approach
+- **Company Information**: Real companies where problems are frequently asked
+- **Interactive Features**: Search, navigation, and responsive design
 
 ### Guides & Comparisons Include:
 - Comprehensive topic coverage with examples
@@ -134,12 +177,31 @@ This project is open source and available under the [MIT License](LICENSE).
 
 *Master all essential Java concepts - from OOP fundamentals to advanced design patterns - with our comprehensive interactive collection.*
 
-## 📈 Repository Stats
+## 🎯 Interface Consistency
+
+**Programming Problems (Array & String)**: Navigation-based interface
+- Browse problems one-by-one with Previous/Next buttons
+- Individual problem view with complete solutions
+- Back to Index functionality for easy navigation
+- Search functionality to find specific problems
+
+**MCQs & Guides (OOP, Exception Handling, Collections, etc.)**: Accordion-based interface  
+- Expandable/collapsible sections
+- Table of contents for quick jumping
+- Expand All/Collapse All functionality
+- Smooth scrolling navigation
+
+## 📊 Repository Stats
 
 - **Total MCQs**: 128+ interactive questions across all major Java topics
+- **Programming Problems**: 40 essential SDET problems (20 Array + 20 String) with **navigation-based interface**
+- **Solution Approaches**: 80+ different implementation methods across all programming problems
 - **Comprehensive Guides**: 3 complete guides (Collections, Design Patterns, Core Comparisons)
 - **Comparison Tables**: 17+ detailed side-by-side comparisons
-- **Topics Covered**: OOP, Exception Handling, Collections, Design Patterns, Core Java
+- **Topics Covered**: OOP, Exception Handling, Array Programming, String Programming, Collections, Design Patterns, Core Java
+- **Manual Implementation Focus**: No built-in functions - pure algorithmic thinking
+- **Interface Types**: Both accordion (MCQs/Guides) and navigation-based (Programming Problems)
 - **Mobile Optimized**: 100% responsive design for all devices
+- **Pure HTML Format**: No markdown files - everything in interactive HTML
 - **Zero Dependencies**: Pure HTML/CSS/JS - works everywhere!
 - **GitHub Pages Ready**: Can be deployed instantly
