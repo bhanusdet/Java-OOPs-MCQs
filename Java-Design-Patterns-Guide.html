@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Java Design Patterns - Complete Guide</title>
+    <style>
+        :root {
+            --primary-color: #e67e22;
+            --secondary-color: #f39c12;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #e0e6ed;
+            --code-bg-java: #2d3748;
+            --code-text-java: #e2e8f0;
+            --code-bg-text: #f8f9fa;
+            --code-text-normal: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 20px;
+        }
+
+        .section-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section-body {
+            padding: 30px;
+            line-height: 1.7;
+        }
+
+        .section-body p {
+            margin-bottom: 16px;
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        .section-body h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        .section-body h5 {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .section-body ul {
+            margin: 15px 0 20px 25px;
+        }
+
+        .section-body li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Java Code Blocks - Black Background */
+        .code-block-java {
+            background: var(--code-bg-java);
+            border: 1px solid #4a5568;
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .code-block-java::before {
+            content: "java";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            color: #a0aec0;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .code-block-java pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            background: transparent;
+        }
+
+        .code-block-java code {
+            color: var(--code-text-java);
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Text/Diagram Blocks - Light Background */
+        .code-block-text {
+            background: var(--code-bg-text);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .code-block-text pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            background: transparent;
+        }
+
+        .code-block-text code {
+            color: var(--code-text-normal);
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+            background: transparent;
+            padding: 0;
+        }
+
+        .inline-code {
+            background: #f7fafc;
+            color: #e53e3e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+        }
+
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-table th {
+            background: var(--secondary-color);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .content-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+
+        .content-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .content-table tr:hover {
+            background: #e8f4fd;
+        }
+
+        .check-mark {
+            color: var(--success-color);
+            font-size: 1.1rem;
+        }
+
+        .cross-mark {
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section-body {
+                padding: 20px;
+            }
+
+            .code-block-java, .code-block-text {
+                margin: 15px -10px;
+                border-radius: 0;
+            }
+
+            .code-block-java pre, .code-block-text pre {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header" id="top">
+            <h1>🎨 Java Design Patterns - Complete Guide</h1>
+            <p>Master essential design patterns with practical examples and implementation details.</p>
+        </div>
+
+        <div class="content">
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Test Automation Framework Patterns {#framework-patterns}</h3>
+            </div>
+            <div class="section-body">
+                <h4>1. 🌐 WebDriver Singleton Pattern</h4>
+<p><strong>Problem</strong>: Multiple WebDriver instances cause conflicts <strong>Solution</strong>: Single WebDriver instance throughout test execution </p>
+<div class="code-block-java"><pre><code>
+public class WebDriverManager {
+    private static WebDriver driver;
+    private static final Object lock = new Object();
+    private WebDriverManager() {}
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            synchronized (lock) {
+                if (driver == null) {
+                    initializeDriver();
+                }
+            }
+        }
+        return driver;
+    }
+    private static void initializeDriver() {
+        String browserType = System.getProperty("browser", "chrome");
+        driver = BrowserFactory.createBrowser(browserType);
+    }
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
+}
+</code></pre></div>
+<p><strong>SDET Interview Points</strong>: </p>
+<ul>
+<li><span class="check-mark">✅</span> Prevents multiple browser instances</li>
+<li><span class="check-mark">✅</span> Thread-safe implementation</li>
+<li><span class="cross-mark">❌</span> Difficult to test in parallel</li>
+<li><strong>Alternative</strong>: ThreadLocal for parallel execution</li>
+</ul>
+<h4>2. 🏭 Browser Factory Pattern</h4>
+<p><strong>Problem</strong>: Hard-coded browser initialization <strong>Solution</strong>: Dynamic browser creation based on configuration </p>
+<div class="code-block-java"><pre><code>
+public class BrowserFactory {
+    public static WebDriver createBrowser(String browserType) {
+        switch (browserType.toLowerCase()) {
+            case "chrome":
+                WebDriverManager.setup().chromedriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless", "--no-sandbox");
+                return new ChromeDriver(chromeOptions);
+            case "firefox":
+                WebDriverManager.setup().firefoxdriver();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.setHeadless(true);
+                return new FirefoxDriver(firefoxOptions);
+            case "edge":
+                WebDriverManager.setup().edgedriver();
+                return new EdgeDriver();
+            default:
+                throw new IllegalArgumentException("Browser not supported: " + browserType);
+        }
+    }
+}
+</code></pre></div>
+<p><strong>SDET Benefits</strong>: </p>
+<ul>
+<li><span class="check-mark">✅</span> Easy browser switching via configuration</li>
+<li><span class="check-mark">✅</span> Centralized browser setup</li>
+<li><span class="check-mark">✅</span> Environment-specific configurations</li>
+</ul>
+<h4>3. 🏗️ Test Builder Pattern</h4>
+<p><strong>Problem</strong>: Complex test setup with many optional parameters <strong>Solution</strong>: Fluent API for test creation </p>
+<div class="code-block-java"><pre><code>
+public class TestCaseBuilder {
+    private String testName;
+    private String description;
+    private String browser;
+    private Map&lt;String, Object&gt; testData;
+    private List&lt;String&gt; tags;
+    private int priority;
+    public TestCaseBuilder setTestName(String testName) {
+        this.testName = testName;
+        return this;
+    }
+    public TestCaseBuilder setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+    public TestCaseBuilder setBrowser(String browser) {
+        this.browser = browser;
+        return this;
+    }
+    public TestCaseBuilder addTestData(String key, Object value) {
+        if (testData == null) testData = new HashMap&lt;&gt;();
+        testData.put(key, value);
+        return this;
+    }
+    public TestCaseBuilder addTag(String tag) {
+        if (tags == null) tags = new ArrayList&lt;&gt;();
+        tags.add(tag);
+        return this;
+    }
+    public TestCaseBuilder setPriority(int priority) {
+        this.priority = priority;
+        return this;
+    }
+    public TestCase build() {
+        return new TestCase(testName, description, browser, testData, tags, priority);
+    }
+}
+// Usage in Test
+TestCase loginTest = new TestCaseBuilder()
+    .setTestName("Valid Login Test")
+    .setDescription("Test successful login with valid credentials")
+    .setBrowser("chrome")
+    .addTestData("username", "testuser@example.com")
+    .addTestData("password", "password123")
+    .addTag("smoke")
+    .addTag("login")
+    .setPriority(1)
+    .build();
+</code></pre></div>
+<h4>4. 📄 Page Object Model (Enhanced)</h4>
+<p><strong>Problem</strong>: UI elements scattered across test code <strong>Solution</strong>: Centralized page element management </p>
+<div class="code-block-java"><pre><code>
+// Base Page Class
+public abstract class BasePage {
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
+    }
+    protected void waitAndClick(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+    }
+    protected void waitAndType(WebElement element, String text) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        element.clear();
+        element.sendKeys(text);
+    }
+}
+// Login Page Implementation
+public class LoginPage extends BasePage {
+    @FindBy(id = "username")
+    private WebElement usernameField;
+    @FindBy(id = "password") 
+    private WebElement passwordField;
+    @FindBy(css = "button[type='submit']")
+    private WebElement loginButton;
+    @FindBy(css = ".error-message")
+    private WebElement errorMessage;
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
+    public DashboardPage login(String username, String password) {
+        waitAndType(usernameField, username);
+        waitAndType(passwordField, password);
+        waitAndClick(loginButton);
+        return new DashboardPage(driver);
+    }
+    public String getErrorMessage() {
+        wait.until(ExpectedConditions.visibilityOf(errorMessage));
+        return errorMessage.getText();
+    }
+    public boolean isLoginPageDisplayed() {
+        return usernameField.isDisplayed() &amp;&amp; passwordField.isDisplayed();
+    }
+}
+</code></pre></div>
+<h4>5. 🎯 Strategy Pattern for Test Execution</h4>
+<p><strong>Problem</strong>: Different test execution strategies (sequential, parallel, distributed) <strong>Solution</strong>: Interchangeable execution strategies </p>
+<div class="code-block-java"><pre><code>
+// Strategy Interface
+public interface TestExecutionStrategy {
+    void executeTests(List&lt;TestCase&gt; tests);
+}
+// Sequential Execution
+public class SequentialExecution implements TestExecutionStrategy {
+    public void executeTests(List&lt;TestCase&gt; tests) {
+        for (TestCase test : tests) {
+            System.out.println("Executing test sequentially: " + test.getName());
+            test.execute();
+        }
+    }
+}
+// Parallel Execution
+public class ParallelExecution implements TestExecutionStrategy {
+    public void executeTests(List&lt;TestCase&gt; tests) {
+        tests.parallelStream().forEach(test -&gt; {
+            System.out.println("Executing test in parallel: " + test.getName());
+            test.execute();
+        });
+    }
+}
+// Test Runner Context
+public class TestRunner {
+    private TestExecutionStrategy strategy;
+    public void setStrategy(TestExecutionStrategy strategy) {
+        this.strategy = strategy;
+    }
+    public void runTests(List&lt;TestCase&gt; tests) {
+        strategy.executeTests(tests);
+    }
+}
+// Usage
+TestRunner runner = new TestRunner();
+runner.setStrategy(new ParallelExecution());
+runner.runTests(testSuite);
+</code></pre></div>
+<h4>6. 👁️ Observer Pattern for Test Reporting</h4>
+<p><strong>Problem</strong>: Multiple reporting systems need test results <strong>Solution</strong>: Observer pattern for result notification </p>
+<div class="code-block-java"><pre><code>
+// Observer Interface
+public interface TestResultObserver {
+    void onTestStart(TestCase test);
+    void onTestPass(TestCase test);
+    void onTestFail(TestCase test, String reason);
+    void onTestSkip(TestCase test, String reason);
+}
+// Concrete Observers
+public class HTMLReporter implements TestResultObserver {
+    public void onTestStart(TestCase test) {
+        System.out.println("HTML: Test started - " + test.getName());
+    }
+    public void onTestPass(TestCase test) {
+        System.out.println("HTML: ✅ Test passed - " + test.getName());
+    }
+    public void onTestFail(TestCase test, String reason) {
+        System.out.println("HTML: ❌ Test failed - " + test.getName() + ": " + reason);
+    }
+    public void onTestSkip(TestCase test, String reason) {
+        System.out.println("HTML: ⏭️ Test skipped - " + test.getName() + ": " + reason);
+    }
+}
+public class ExtentReporter implements TestResultObserver {
+    public void onTestStart(TestCase test) {
+        // ExtentReports implementation
+        System.out.println("Extent: Test started - " + test.getName());
+    }
+    public void onTestPass(TestCase test) {
+        System.out.println("Extent: ✅ Test passed - " + test.getName());
+    }
+    public void onTestFail(TestCase test, String reason) {
+        System.out.println("Extent: ❌ Test failed - " + test.getName());
+    }
+    public void onTestSkip(TestCase test, String reason) {
+        System.out.println("Extent: ⏭️ Test skipped - " + test.getName());
+    }
+}
+// Test Execution Manager
+public class TestExecutionManager {
+    private List&lt;TestResultObserver&gt; observers = new ArrayList&lt;&gt;();
+    public void addObserver(TestResultObserver observer) {
+        observers.add(observer);
+    }
+    public void removeObserver(TestResultObserver observer) {
+        observers.remove(observer);
+    }
+    private void notifyTestStart(TestCase test) {
+        observers.forEach(observer -&gt; observer.onTestStart(test));
+    }
+    private void notifyTestPass(TestCase test) {
+        observers.forEach(observer -&gt; observer.onTestPass(test));
+    }
+    private void notifyTestFail(TestCase test, String reason) {
+        observers.forEach(observer -&gt; observer.onTestFail(test, reason));
+    }
+}
+</code></pre></div>
+<p>--- </p>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Core Patterns with QA Examples {#core-patterns}</h3>
+            </div>
+            <div class="section-body">
+                <h4>🏭 Factory Pattern - Test Data Creation</h4>
+<div class="code-block-java"><pre><code>
+public class TestDataFactory {
+    public static User createUser(String userType) {
+        switch (userType.toLowerCase()) {
+            case "admin":
+                return new User("admin@test.com", "admin123", "ADMIN");
+            case "regular":
+                return new User("user@test.com", "user123", "USER");
+            case "guest":
+                return new User("guest@test.com", "", "GUEST");
+            default:
+                return new User("default@test.com", "default123", "USER");
+        }
+    }
+    public static PaymentMethod createPaymentMethod(String type) {
+        switch (type.toLowerCase()) {
+            case "creditcard":
+                return new CreditCard("4111111111111111", "123", "12/25");
+            case "paypal":
+                return new PayPal("test@paypal.com", "paypal123");
+            default:
+                throw new IllegalArgumentException("Payment method not supported");
+        }
+    }
+}
+</code></pre></div>
+<h4>🔧 Command Pattern - Test Actions</h4>
+<div class="code-block-java"><pre><code>
+// Command Interface
+public interface TestAction {
+    void execute();
+    void undo();
+    String getDescription();
+}
+// Concrete Commands
+public class ClickAction implements TestAction {
+    private WebElement element;
+    private String elementName;
+    public ClickAction(WebElement element, String elementName) {
+        this.element = element;
+        this.elementName = elementName;
+    }
+    public void execute() {
+        element.click();
+        System.out.println("Clicked on: " + elementName);
+    }
+    public void undo() {
+        // Navigate back or restore previous state
+        System.out.println("Undoing click on: " + elementName);
+    }
+    public String getDescription() {
+        return "Click on " + elementName;
+    }
+}
+public class TypeAction implements TestAction {
+    private WebElement element;
+    private String text;
+    private String previousText;
+    public TypeAction(WebElement element, String text) {
+        this.element = element;
+        this.text = text;
+        this.previousText = element.getAttribute("value");
+    }
+    public void execute() {
+        element.clear();
+        element.sendKeys(text);
+        System.out.println("Typed: " + text);
+    }
+    public void undo() {
+        element.clear();
+        element.sendKeys(previousText);
+        System.out.println("Restored previous text: " + previousText);
+    }
+    public String getDescription() {
+        return "Type '" + text + "'";
+    }
+}
+// Test Action Manager
+public class TestActionManager {
+    private Stack&lt;TestAction&gt; executedActions = new Stack&lt;&gt;();
+    public void executeAction(TestAction action) {
+        action.execute();
+        executedActions.push(action);
+    }
+    public void undoLastAction() {
+        if (!executedActions.isEmpty()) {
+            TestAction lastAction = executedActions.pop();
+            lastAction.undo();
+        }
+    }
+    public void undoAllActions() {
+        while (!executedActions.isEmpty()) {
+            undoLastAction();
+        }
+    }
+}
+</code></pre></div>
+<h4>📋 Template Method - Test Execution Workflow</h4>
+<div class="code-block-java"><pre><code>
+public abstract class BaseTest {
+    // Template method
+    public final void runTest() {
+        setupTest();
+        setupTestData();
+        executeTestSteps();
+        verifyResults();
+        cleanupTest();
+    }
+    protected void setupTest() {
+        System.out.println("🔧 Setting up test environment...");
+        // Common setup logic
+    }
+    protected void setupTestData() {
+        System.out.println("📊 Setting up test data...");
+        // Common test data setup
+    }
+    // Abstract methods - must be implemented by subclasses
+    protected abstract void executeTestSteps();
+    protected abstract void verifyResults();
+    protected void cleanupTest() {
+        System.out.println("🧹 Cleaning up test environment...");
+        // Common cleanup logic
+    }
+}
+// Concrete Test Implementation
+public class LoginTest extends BaseTest {
+    protected void executeTestSteps() {
+        System.out.println("1. Navigate to login page");
+        System.out.println("2. Enter username and password");
+        System.out.println("3. Click login button");
+    }
+    protected void verifyResults() {
+        System.out.println("✅ Verify user is logged in successfully");
+        System.out.println("✅ Verify dashboard is displayed");
+    }
+}
+</code></pre></div>
+<p>--- </p>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Pattern Implementation Cheat Sheet {#cheat-sheet}</h3>
+            </div>
+            <div class="section-body">
+                <h4>🚀 Quick Implementation Guide</h4>
+<table class="content-table">
+<thead><tr><th>Pattern</th><th>When to Use</th><th>SDET Example</th><th>Code Template</th></tr></thead><tbody>
+<tr><td><strong>Singleton</strong></td><td>Single instance needed</td><td>WebDriver, Config</td><td><code class="inline-code">private static volatile Instance</code></td></tr>
+<tr><td><strong>Factory</strong></td><td>Object creation varies</td><td>Browser, TestData</td><td><code class="inline-code">switch(type) { case "x": return new X(); }</code></td></tr>
+<tr><td><strong>Builder</strong></td><td>Complex object creation</td><td>TestCase, TestSuite</td><td><code class="inline-code">return this</code> for chaining</td></tr>
+<tr><td><strong>Strategy</strong></td><td>Algorithm varies</td><td>Test execution, Reporting</td><td><code class="inline-code">interface Strategy { void execute(); }</code></td></tr>
+<tr><td><strong>Observer</strong></td><td>Event notification</td><td>Test results, Logging</td><td><code class="inline-code">List<Observer> observers</code></td></tr>
+<tr><td><strong>Command</strong></td><td>Action encapsulation</td><td>Test steps, Undo operations</td><td><code class="inline-code">interface Command { void execute(); }</code></td></tr>
+<tr><td><strong>Template Method</strong></td><td>Algorithm skeleton</td><td>Test workflow</td><td><code class="inline-code">final void templateMethod()</code></td></tr>
+<tr><td><strong>Adapter</strong></td><td>Interface compatibility</td><td>Third-party tools</td><td><code class="inline-code">implements Target, wraps Adaptee</code></td></tr>
+</tbody></table>
+
+<h4>🎯 Pattern Selection for Common SDET Scenarios</h4>
+<table class="content-table">
+<thead><tr><th>Scenario</th><th>Recommended Pattern</th><th>Why?</th></tr></thead><tbody>
+<tr><td>WebDriver management</td><td>Singleton + Factory</td><td>Single instance + multiple browsers</td></tr>
+<tr><td>Page objects</td><td>Factory + Builder</td><td>Dynamic page creation + complex setup</td></tr>
+<tr><td>Test data creation</td><td>Factory + Builder</td><td>Different data types + optional fields</td></tr>
+<tr><td>Test execution</td><td>Strategy + Template Method</td><td>Multiple strategies + common workflow</td></tr>
+<tr><td>Reporting</td><td>Observer + Strategy</td><td>Multiple reporters + different formats</td></tr>
+<tr><td>Test actions</td><td>Command</td><td>Undo capability + action logging</td></tr>
+<tr><td>Framework integration</td><td>Adapter</td><td>Third-party tool compatibility</td></tr>
+</tbody></table>
+
+<p>--- </p>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Interview Q&A {#interview-qa}</h3>
+            </div>
+            <div class="section-body">
+                <h4>🎤 Top SDET Design Pattern Interview Questions</h4>
+<h5>Q1: How would you implement WebDriver using Singleton pattern? What are the pros and cons?</h5>
+<h5>A:</h5>
+<div class="code-block-java"><pre><code>
+// Thread-safe Singleton for WebDriver
+public class WebDriverManager {
+    private static volatile WebDriver driver;
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            synchronized (WebDriverManager.class) {
+                if (driver == null) {
+                    driver = new ChromeDriver();
+                }
+            }
+        }
+        return driver;
+    }
+}
+</code></pre></div>
+<p><strong>Pros:</strong> Single browser instance, memory efficient <strong>Cons:</strong> Parallel execution issues, testing difficulties <strong>Solution:</strong> Use ThreadLocal for parallel execution </p>
+<p>--- </p>
+<h5>Q2: Explain Factory pattern in test automation with example.</h5>
+<p><strong>A:</strong> Factory creates objects without specifying exact classes. </p>
+<div class="code-block-java"><pre><code>
+public class BrowserFactory {
+    public static WebDriver createDriver(String browser) {
+        switch(browser.toLowerCase()) {
+            case "chrome": return new ChromeDriver();
+            case "firefox": return new FirefoxDriver();
+            default: throw new IllegalArgumentException("Unsupported browser");
+        }
+    }
+}
+</code></pre></div>
+<p><strong>Benefits:</strong> Easy browser switching, centralized configuration, maintainable code </p>
+<p>--- </p>
+<h5>Q3: How does Page Object Model relate to design patterns?</h5>
+<p><strong>A:</strong> POM combines multiple patterns: </p>
+<ul>
+<li><strong>Factory</strong>: Creating page instances</li>
+<li><strong>Singleton</strong>: Shared driver instance</li>
+<li><strong>Builder</strong>: Complex page setup</li>
+<li><strong>Template Method</strong>: Common page operations</li>
+</ul>
+<p>--- </p>
+<h5>Q4: When would you NOT use design patterns in test automation?</h5>
+<h5>A:</h5>
+<ul>
+<li>Simple scripts (over-engineering)</li>
+<li>Proof of concepts</li>
+<li>One-time exploratory testing</li>
+<li>When team lacks pattern knowledge</li>
+<li>Performance-critical scenarios where patterns add overhead</li>
+</ul>
+<p>--- </p>
+<h5>Q5: Explain Observer pattern for test reporting.</h5>
+<p><strong>A:</strong> Multiple reporters observe test execution: </p>
+<div class="code-block-java"><pre><code>
+public interface TestObserver {
+    void onTestResult(TestResult result);
+}
+public class TestManager {
+    private List&lt;TestObserver&gt; observers = new ArrayList&lt;&gt;();
+    public void addObserver(TestObserver observer) {
+        observers.add(observer);
+    }
+    private void notifyObservers(TestResult result) {
+        observers.forEach(observer -&gt; observer.onTestResult(result));
+    }
+}
+</code></pre></div>
+<p>--- </p>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Real Framework Examples {#real-examples}</h3>
+            </div>
+            <div class="section-body">
+                <h4>🔧 Selenium Framework with Design Patterns</h4>
+<div class="code-block-java"><pre><code>
+// Complete framework structure
+public class AutomationFramework {
+    // Singleton WebDriver Manager
+    public class DriverManager {
+        private static final ThreadLocal&lt;WebDriver&gt; driverThreadLocal = new ThreadLocal&lt;&gt;();
+        public static void setDriver(String browserName) {
+            driverThreadLocal.set(BrowserFactory.createDriver(browserName));
+        }
+        public static WebDriver getDriver() {
+            return driverThreadLocal.get();
+        }
+        public static void quitDriver() {
+            WebDriver driver = driverThreadLocal.get();
+            if (driver != null) {
+                driver.quit();
+                driverThreadLocal.remove();
+            }
+        }
+    }
+    // Factory for browser creation
+    public class BrowserFactory {
+        public static WebDriver createDriver(String browser) {
+            switch (browser.toLowerCase()) {
+                case "chrome":
+                    return new ChromeDriver(getChromeOptions());
+                case "firefox":
+                    return new FirefoxDriver(getFirefoxOptions());
+                default:
+                    throw new RuntimeException("Browser not supported: " + browser);
+            }
+        }
+        private static ChromeOptions getChromeOptions() {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+            if (System.getProperty("headless", "false").equals("true")) {
+                options.addArguments("--headless");
+            }
+            return options;
+        }
+    }
+    // Builder for test configuration
+    public class TestConfigBuilder {
+        private String browser = "chrome";
+        private String environment = "staging";
+        private boolean headless = false;
+        private int timeout = 30;
+        public TestConfigBuilder setBrowser(String browser) {
+            this.browser = browser;
+            return this;
+        }
+        public TestConfigBuilder setEnvironment(String environment) {
+            this.environment = environment;
+            return this;
+        }
+        public TestConfigBuilder setHeadless(boolean headless) {
+            this.headless = headless;
+            return this;
+        }
+        public TestConfig build() {
+            return new TestConfig(browser, environment, headless, timeout);
+        }
+    }
+}
+</code></pre></div>
+<h4>🏗️ TestNG Integration Example</h4>
+<div class="code-block-java"><pre><code>
+public class BaseTest {
+    protected TestConfig config;
+    @BeforeClass
+    public void setupClass() {
+        config = new TestConfigBuilder()
+            .setBrowser(System.getProperty("browser", "chrome"))
+            .setEnvironment(System.getProperty("env", "staging"))
+            .setHeadless(Boolean.parseBoolean(System.getProperty("headless", "false")))
+            .build();
+    }
+    @BeforeMethod
+    public void setupTest() {
+        DriverManager.setDriver(config.getBrowser());
+    }
+    @AfterMethod
+    public void teardownTest() {
+        DriverManager.quitDriver();
+    }
+}
+</code></pre></div>
+<p>--- </p>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>📚 Key Takeaways for SDET/QA</h3>
+            </div>
+            <div class="section-body">
+                <h4><span class="check-mark">✅</span> Must Remember Points:</h4>
+<p>1. <strong>Singleton + ThreadLocal</strong> = Parallel execution support 2. <strong>Factory Pattern</strong> = Easy browser/data switching 3. <strong>Builder Pattern</strong> = Complex test object creation 4. <strong>Page Object Model</strong> = UI automation standard 5. <strong>Observer Pattern</strong> = Multi-reporter support 6. <strong>Strategy Pattern</strong> = Flexible test execution </p>
+<h4>🚨 Common Pitfalls:</h4>
+<p>1. <strong>Over-engineering</strong> simple test scripts 2. <strong>Singleton without ThreadLocal</strong> in parallel execution 3. <strong>Hard-coded values</strong> instead of Factory pattern 4. <strong>Tight coupling</strong> between test layers 5. <strong>Not considering maintenance</strong> when choosing patterns </p>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()" title="Back to top">↑</button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

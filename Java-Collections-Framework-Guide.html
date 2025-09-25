@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Java Collections Framework - Complete Guide</title>
+    <style>
+        :root {
+            --primary-color: #8e44ad;
+            --secondary-color: #9b59b6;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #e0e6ed;
+            --code-bg-java: #2d3748;
+            --code-text-java: #e2e8f0;
+            --code-bg-text: #f8f9fa;
+            --code-text-normal: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 20px;
+        }
+
+        .section-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section-body {
+            padding: 30px;
+            line-height: 1.7;
+        }
+
+        .section-body p {
+            margin-bottom: 16px;
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        .section-body h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        .section-body h5 {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .section-body ul {
+            margin: 15px 0 20px 25px;
+        }
+
+        .section-body li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Java Code Blocks - Black Background */
+        .code-block-java {
+            background: var(--code-bg-java);
+            border: 1px solid #4a5568;
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .code-block-java::before {
+            content: "java";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            color: #a0aec0;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .code-block-java pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            background: transparent;
+        }
+
+        .code-block-java code {
+            color: var(--code-text-java);
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Text/Diagram Blocks - Light Background */
+        .code-block-text {
+            background: var(--code-bg-text);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .code-block-text pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            background: transparent;
+        }
+
+        .code-block-text code {
+            color: var(--code-text-normal);
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre;
+            background: transparent;
+            padding: 0;
+        }
+
+        .inline-code {
+            background: #f7fafc;
+            color: #e53e3e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+        }
+
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-table th {
+            background: var(--secondary-color);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .content-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+
+        .content-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .content-table tr:hover {
+            background: #e8f4fd;
+        }
+
+        .check-mark {
+            color: var(--success-color);
+            font-size: 1.1rem;
+        }
+
+        .cross-mark {
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section-body {
+                padding: 20px;
+            }
+
+            .code-block-java, .code-block-text {
+                margin: 15px -10px;
+                border-radius: 0;
+            }
+
+            .code-block-java pre, .code-block-text pre {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header" id="top">
+            <h1>📚 Java Collections Framework - Complete Guide</h1>
+            <p>Comprehensive guide to Java Collections Framework with practical examples and detailed explanations.</p>
+        </div>
+
+        <div class="content">
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Collections Hierarchy</h3>
+            </div>
+            <div class="section-body">
+                <h4>Collections Framework Structure</h4>
+<div class="code-block-text"><pre><code>
+Collection (Interface)
+├── List (Interface) - Ordered, allows duplicates
+│   ├── ArrayList - Resizable array, fast access
+│   ├── LinkedList - Doubly-linked list, fast insertion
+│   └── Vector - Synchronized ArrayList (legacy)
+│
+├── Set (Interface) - No duplicates
+│   ├── HashSet - Hash table, no ordering
+│   ├── LinkedHashSet - Hash table + insertion order
+│   └── TreeSet - Red-black tree, sorted
+│
+└── Queue (Interface) - FIFO operations
+    ├── PriorityQueue - Heap-based priority queue
+    ├── ArrayDeque - Resizable array deque
+    └── LinkedList - Also implements Queue
+Map (Interface) - Key-value pairs, not part of Collection
+├── HashMap - Hash table, no ordering
+├── LinkedHashMap - Hash table + insertion/access order
+├── TreeMap - Red-black tree, sorted by keys
+└── ConcurrentHashMap - Thread-safe HashMap
+</code></pre></div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>List Implementations</h3>
+            </div>
+            <div class="section-body">
+                <h4>ArrayList - Most Used in Test Automation</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Storing test data (user credentials, test URLs)</li>
+<li>Test result collections</li>
+<li>Dynamic test suite creation</li>
+<li>Frequent random access to elements</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Test Data Management Example
+public class TestDataManager {
+    private List&lt;User&gt; testUsers;
+    private List&lt;String&gt; testUrls;
+    public TestDataManager() {
+        testUsers = new ArrayList&lt;&gt;();
+        testUrls = new ArrayList&lt;&gt;();
+        loadTestData();
+    }
+    public void loadTestData() {
+        // Add test users
+        testUsers.add(new User("admin@test.com", "admin123", "ADMIN"));
+        testUsers.add(new User("user@test.com", "user123", "USER"));
+        testUsers.add(new User("guest@test.com", "", "GUEST"));
+        // Add test URLs
+        testUrls.add("https://staging.example.com");
+        testUrls.add("https://dev.example.com");
+        testUrls.add("https://qa.example.com");
+    }
+    public User getRandomUser() {
+        Random random = new Random();
+        return testUsers.get(random.nextInt(testUsers.size()));
+    }
+    public List&lt;User&gt; getUsersByRole(String role) {
+        return testUsers.stream()
+                .filter(user -&gt; user.getRole().equals(role))
+                .collect(Collectors.toList());
+    }
+    // Common ArrayList operations in test automation
+    public void demonstrateOperations() {
+        List&lt;String&gt; testSteps = new ArrayList&lt;&gt;();
+        // Adding elements
+        testSteps.add("Open browser");
+        testSteps.add("Navigate to URL");
+        testSteps.add("Login with credentials");
+        testSteps.add("Verify dashboard");
+        // Accessing elements
+        String firstStep = testSteps.get(0); // O(1) - Fast access
+        // Iterating through elements
+        for (String step : testSteps) {
+            System.out.println("Step: " + step);
+        }
+        // Checking if element exists
+        boolean hasLoginStep = testSteps.contains("Login with credentials");
+        // Removing elements
+        testSteps.remove("Verify dashboard");
+        testSteps.remove(0); // Remove by index
+        // Size operations
+        int totalSteps = testSteps.size();
+        boolean isEmpty = testSteps.isEmpty();
+        // Converting to array (useful for assertions)
+        String[] stepsArray = testSteps.toArray(new String[0]);
+    }
+}
+</code></pre></div>
+<h5>ArrayList Key Points:</h5>
+<ul>
+<li><span class="check-mark">✅</span> Fast random access O(1)</li>
+<li><span class="check-mark">✅</span> Dynamic sizing</li>
+<li><span class="check-mark">✅</span> Maintains insertion order</li>
+<li><span class="check-mark">✅</span> Allows null values</li>
+<li><span class="cross-mark">❌</span> Slow insertion/deletion in middle O(n)</li>
+<li><span class="cross-mark">❌</span> Not thread-safe</li>
+</ul>
+<h4>LinkedList - For Sequential Operations</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Test step execution with frequent insertion/deletion</li>
+<li>Queue-like operations in test execution</li>
+<li>Building dynamic test flows</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Test Step Execution Example
+public class TestStepManager {
+    private LinkedList&lt;TestStep&gt; testSteps;
+    public TestStepManager() {
+        testSteps = new LinkedList&lt;&gt;();
+    }
+    public void addStep(TestStep step) {
+        testSteps.add(step); // O(1) - efficient
+    }
+    public void addStepAtBeginning(TestStep step) {
+        testSteps.addFirst(step); // O(1) - very efficient
+    }
+    public void insertStepAfter(TestStep newStep, TestStep afterStep) {
+        int index = testSteps.indexOf(afterStep);
+        if (index != -1) {
+            testSteps.add(index + 1, newStep); // O(n) to find, O(1) to insert
+        }
+    }
+    public void executeSteps() {
+        Iterator&lt;TestStep&gt; iterator = testSteps.iterator();
+        while (iterator.hasNext()) {
+            TestStep step = iterator.next();
+            try {
+                step.execute();
+            } catch (Exception e) {
+                // Remove failed step for retry logic
+                iterator.remove(); // O(1) - efficient removal
+                handleStepFailure(step, e);
+            }
+        }
+    }
+    // LinkedList as Queue for test execution
+    public void executeAsQueue() {
+        while (!testSteps.isEmpty()) {
+            TestStep step = testSteps.poll(); // Remove and return first element
+            step.execute();
+        }
+    }
+    // LinkedList as Stack for rollback operations
+    public void rollbackSteps() {
+        while (!testSteps.isEmpty()) {
+            TestStep step = testSteps.pop(); // Remove and return last element
+            step.rollback();
+        }
+    }
+}
+</code></pre></div>
+<h5>LinkedList Key Points:</h5>
+<ul>
+<li><span class="check-mark">✅</span> Fast insertion/deletion at ends O(1)</li>
+<li><span class="check-mark">✅</span> Implements both List and Queue interfaces</li>
+<li><span class="check-mark">✅</span> Good for sequential access</li>
+<li><span class="check-mark">✅</span> No capacity limitations</li>
+<li><span class="cross-mark">❌</span> Slow random access O(n)</li>
+<li><span class="cross-mark">❌</span> Higher memory overhead (node pointers)</li>
+</ul>
+<h4>ArrayList vs LinkedList Comparison</h4>
+<table class="content-table">
+<thead><tr><th>Operation</th><th>ArrayList</th><th>LinkedList</th><th>Best Choice</th></tr></thead><tbody>
+<tr><td><strong>Access by index</strong></td><td>O(1)</td><td>O(n)</td><td>ArrayList</td></tr>
+<tr><td><strong>Add at end</strong></td><td>O(1) amortized</td><td>O(1)</td><td>Both equal</td></tr>
+<tr><td><strong>Add at beginning</strong></td><td>O(n)</td><td>O(1)</td><td>LinkedList</td></tr>
+<tr><td><strong>Add in middle</strong></td><td>O(n)</td><td>O(n) to find + O(1) to insert</td><td>Similar performance</td></tr>
+<tr><td><strong>Remove by index</strong></td><td>O(n)</td><td>O(n) to find + O(1) to remove</td><td>Similar performance</td></tr>
+<tr><td><strong>Remove by iterator</strong></td><td>O(n)</td><td>O(1)</td><td>LinkedList</td></tr>
+<tr><td><strong>Memory usage</strong></td><td>Lower</td><td>Higher (node overhead)</td><td>ArrayList</td></tr>
+<tr><td><strong>Cache performance</strong></td><td>Better</td><td>Worse (non-contiguous)</td><td>ArrayList</td></tr>
+</tbody></table>
+
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Set Implementations</h3>
+            </div>
+            <div class="section-body">
+                <h4>HashSet - Unique Test Data</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Removing duplicate test data</li>
+<li>Fast lookup operations O(1)</li>
+<li>Storing unique test identifiers</li>
+<li>Email validation in forms</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Test Data Deduplication Example
+public class UniqueTestDataManager {
+    private Set&lt;String&gt; executedTestIds;
+    private Set&lt;User&gt; uniqueUsers;
+    private Set&lt;String&gt; validEmails;
+    public UniqueTestDataManager() {
+        executedTestIds = new HashSet&lt;&gt;();
+        uniqueUsers = new HashSet&lt;&gt;();
+        validEmails = new HashSet&lt;&gt;();
+    }
+    public boolean isTestExecuted(String testId) {
+        return executedTestIds.contains(testId); // O(1) average case
+    }
+    public void markTestExecuted(String testId) {
+        boolean added = executedTestIds.add(testId);
+        if (!added) {
+            System.out.println("Test " + testId + " was already executed");
+        }
+    }
+    public void addUniqueUser(User user) {
+        if (uniqueUsers.add(user)) { // add() returns false if already exists
+            System.out.println("Added new unique user: " + user.getEmail());
+        } else {
+            System.out.println("User already exists: " + user.getEmail());
+        }
+    }
+    public List&lt;String&gt; removeDuplicateEmails(List&lt;String&gt; emails) {
+        // Convert to Set to remove duplicates, then back to List
+        Set&lt;String&gt; uniqueEmails = new HashSet&lt;&gt;(emails);
+        return new ArrayList&lt;&gt;(uniqueEmails);
+    }
+    // Set operations for test data validation
+    public void validateTestData() {
+        Set&lt;String&gt; requiredFields = new HashSet&lt;&gt;();
+        requiredFields.add("username");
+        requiredFields.add("password");
+        requiredFields.add("email");
+        Set&lt;String&gt; actualFields = new HashSet&lt;&gt;();
+        actualFields.add("username");
+        actualFields.add("email");
+        // Check if all required fields are present
+        Set&lt;String&gt; missingFields = new HashSet&lt;&gt;(requiredFields);
+        missingFields.removeAll(actualFields); // Set difference
+        if (!missingFields.isEmpty()) {
+            System.out.println("Missing fields: " + missingFields);
+        }
+    }
+}
+</code></pre></div>
+<h5>HashSet Key Points:</h5>
+<ul>
+<li><span class="check-mark">✅</span> O(1) average time for add, remove, contains</li>
+<li><span class="check-mark">✅</span> No duplicates allowed</li>
+<li><span class="check-mark">✅</span> Allows one null value</li>
+<li><span class="check-mark">✅</span> Best performance for lookup operations</li>
+<li><span class="cross-mark">❌</span> No ordering guarantee</li>
+<li><span class="cross-mark">❌</span> Not thread-safe</li>
+</ul>
+<h4>TreeSet - Sorted Test Data</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Sorted test execution order</li>
+<li>Priority-based test selection</li>
+<li>Maintaining sorted test results</li>
+<li>Range queries on test data</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Priority Test Execution Example
+public class PriorityTestManager {
+    private TreeSet&lt;TestCase&gt; priorityTests;
+    private TreeSet&lt;Integer&gt; testScores;
+    public PriorityTestManager() {
+        // TreeSet with custom comparator for priority
+        priorityTests = new TreeSet&lt;&gt;((t1, t2) -&gt; {
+            int priorityCompare = Integer.compare(t1.getPriority(), t2.getPriority());
+            if (priorityCompare != 0) return priorityCompare;
+            return t1.getName().compareTo(t2.getName()); // Secondary sort by name
+        });
+        testScores = new TreeSet&lt;&gt;();
+    }
+    public void addTest(TestCase test) {
+        priorityTests.add(test);
+    }
+    public void executeTestsInPriorityOrder() {
+        for (TestCase test : priorityTests) { // Automatically sorted
+            System.out.println("Executing: " + test.getName() + 
+                             " (Priority: " + test.getPriority() + ")");
+            test.execute();
+        }
+    }
+    public TestCase getHighestPriorityTest() {
+        return priorityTests.first(); // O(log n)
+    }
+    public TestCase getLowestPriorityTest() {
+        return priorityTests.last(); // O(log n)
+    }
+    // Range operations for test score analysis
+    public void analyzeTestScores(List&lt;Integer&gt; scores) {
+        testScores.addAll(scores);
+        // Get scores in a specific range
+        NavigableSet&lt;Integer&gt; passingScores = testScores.subSet(70, true, 100, true);
+        NavigableSet&lt;Integer&gt; failingScores = testScores.headSet(70); // scores &lt; 70
+        NavigableSet&lt;Integer&gt; excellentScores = testScores.tailSet(90); // scores &gt;= 90
+        System.out.println("Passing scores: " + passingScores);
+        System.out.println("Failing scores: " + failingScores);
+        System.out.println("Excellent scores: " + excellentScores);
+        // Closest values
+        Integer closestToTarget = testScores.floor(75); // Largest &lt;= 75
+        Integer nextHigher = testScores.ceiling(75);    // Smallest &gt;= 75
+    }
+}
+</code></pre></div>
+<h5>TreeSet Key Points:</h5>
+<ul>
+<li><span class="check-mark">✅</span> Sorted order (natural or custom comparator)</li>
+<li><span class="check-mark">✅</span> O(log n) for add, remove, contains</li>
+<li><span class="check-mark">✅</span> Range operations support</li>
+<li><span class="check-mark">✅</span> NavigableSet interface methods</li>
+<li><span class="cross-mark">❌</span> Slower than HashSet for basic operations</li>
+<li><span class="cross-mark">❌</span> No null values allowed</li>
+<li><span class="cross-mark">❌</span> Elements must be Comparable or use Comparator</li>
+</ul>
+<h4>LinkedHashSet - Insertion Order Preservation</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Maintaining order of test execution</li>
+<li>Preserving order of form field validation</li>
+<li>Ordered unique collections</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Test Execution Order Manager
+public class OrderedTestManager {
+    private LinkedHashSet&lt;String&gt; testExecutionOrder;
+    public OrderedTestManager() {
+        testExecutionOrder = new LinkedHashSet&lt;&gt;();
+    }
+    public void addTestsInOrder(String... tests) {
+        for (String test : tests) {
+            testExecutionOrder.add(test);
+        }
+    }
+    public void executeTestsInOrder() {
+        for (String test : testExecutionOrder) {
+            // Tests execute in insertion order
+            System.out.println("Executing: " + test);
+        }
+    }
+}
+</code></pre></div>
+<h4>Set Implementations Comparison</h4>
+<table class="content-table">
+<thead><tr><th>Feature</th><th>HashSet</th><th>LinkedHashSet</th><th>TreeSet</th></tr></thead><tbody>
+<tr><td><strong>Ordering</strong></td><td>No order</td><td>Insertion order</td><td>Sorted order</td></tr>
+<tr><td><strong>Performance</strong></td><td>O(1) average</td><td>O(1) average</td><td>O(log n)</td></tr>
+<tr><td><strong>Null values</strong></td><td>One null allowed</td><td>One null allowed</td><td>No null</td></tr>
+<tr><td><strong>Memory usage</strong></td><td>Lowest</td><td>Medium (extra pointers)</td><td>Highest (tree structure)</td></tr>
+<tr><td><strong>Thread safe</strong></td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td><strong>Use case</strong></td><td>Fast lookups</td><td>Ordered unique items</td><td>Sorted unique items</td></tr>
+</tbody></table>
+
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Map Implementations</h3>
+            </div>
+            <div class="section-body">
+                <h4>HashMap - Configuration & Test Data Storage</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Test configuration properties</li>
+<li>Key-value test data pairs</li>
+<li>Caching test results</li>
+<li>Browser capabilities mapping</li>
+<li>User session data</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Test Configuration Manager
+public class TestConfigManager {
+    private Map&lt;String, String&gt; testProperties;
+    private Map&lt;String, List&lt;String&gt;&gt; browserCapabilities;
+    private Map&lt;String, TestResult&gt; testResults;
+    private Map&lt;String, User&gt; userCache;
+    public TestConfigManager() {
+        testProperties = new HashMap&lt;&gt;();
+        browserCapabilities = new HashMap&lt;&gt;();
+        testResults = new HashMap&lt;&gt;();
+        userCache = new HashMap&lt;&gt;();
+        loadConfigurations();
+    }
+    private void loadConfigurations() {
+        // Test properties
+        testProperties.put("base.url", "https://example.com");
+        testProperties.put("timeout", "30");
+        testProperties.put("browser", "chrome");
+        testProperties.put("headless", "false");
+        testProperties.put("environment", "staging");
+        // Browser capabilities
+        browserCapabilities.put("chrome", Arrays.asList("--no-sandbox", "--disable-gpu", "--headless"));
+        browserCapabilities.put("firefox", Arrays.asList("-headless", "--width=1920", "--height=1080"));
+        browserCapabilities.put("edge", Arrays.asList("--headless", "--disable-extensions"));
+    }
+    public String getProperty(String key) {
+        return testProperties.get(key);
+    }
+    public String getProperty(String key, String defaultValue) {
+        return testProperties.getOrDefault(key, defaultValue);
+    }
+    public void setProperty(String key, String value) {
+        testProperties.put(key, value);
+    }
+    public List&lt;String&gt; getBrowserCapabilities(String browser) {
+        return browserCapabilities.getOrDefault(browser, new ArrayList&lt;&gt;());
+    }
+    // Test result caching
+    public void cacheTestResult(String testName, TestResult result) {
+        testResults.put(testName, result);
+    }
+    public TestResult getCachedResult(String testName) {
+        return testResults.get(testName);
+    }
+    public boolean hasTestResult(String testName) {
+        return testResults.containsKey(testName);
+    }
+    // User caching for test data
+    public User getOrCreateUser(String userId) {
+        return userCache.computeIfAbsent(userId, id -&gt; createNewUser(id));
+    }
+    private User createNewUser(String id) {
+        return new User(id + "@test.com", "password123", "USER");
+    }
+    // Bulk operations
+    public void updateProperties(Map&lt;String, String&gt; newProperties) {
+        testProperties.putAll(newProperties);
+    }
+    public Map&lt;String, String&gt; getAllProperties() {
+        return new HashMap&lt;&gt;(testProperties); // Return defensive copy
+    }
+    // Common HashMap operations in testing
+    public void demonstrateOperations() {
+        Map&lt;String, String&gt; formData = new HashMap&lt;&gt;();
+        // Adding key-value pairs
+        formData.put("username", "testuser");
+        formData.put("password", "secret123");
+        formData.put("email", "test@example.com");
+        // Accessing values
+        String username = formData.get("username");
+        String phone = formData.get("phone"); // Returns null if not found
+        String phoneWithDefault = formData.getOrDefault("phone", "N/A");
+        // Checking existence
+        boolean hasUsername = formData.containsKey("username");
+        boolean hasValue = formData.containsValue("testuser");
+        // Iterating over map
+        for (Map.Entry&lt;String, String&gt; entry : formData.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+        // Keys and values
+        Set&lt;String&gt; keys = formData.keySet();
+        Collection&lt;String&gt; values = formData.values();
+        // Removing elements
+        String removedValue = formData.remove("password");
+        formData.remove("email", "test@example.com"); // Remove only if value matches
+    }
+}
+</code></pre></div>
+<h5>HashMap Key Points:</h5>
+<ul>
+<li><span class="check-mark">✅</span> O(1) average time for get, put, remove</li>
+<li><span class="check-mark">✅</span> Allows one null key and multiple null values</li>
+<li><span class="check-mark">✅</span> Best general-purpose Map implementation</li>
+<li><span class="check-mark">✅</span> No ordering of elements</li>
+<li><span class="cross-mark">❌</span> Not thread-safe</li>
+<li><span class="cross-mark">❌</span> Iteration order not guaranteed</li>
+</ul>
+<h4>ConcurrentHashMap - Thread-Safe Operations</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Parallel test execution</li>
+<li>Shared test data across threads</li>
+<li>Thread-safe caching</li>
+<li>Multi-threaded test reporting</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Thread-Safe Test Result Manager
+public class ThreadSafeTestManager {
+    private ConcurrentHashMap&lt;String, TestResult&gt; testResults;
+    private ConcurrentHashMap&lt;String, AtomicInteger&gt; testCounts;
+    public ThreadSafeTestManager() {
+        testResults = new ConcurrentHashMap&lt;&gt;();
+        testCounts = new ConcurrentHashMap&lt;&gt;();
+    }
+    public void recordTestResult(String testName, TestResult result) {
+        // Thread-safe put operation
+        testResults.put(testName, result);
+        // Atomic increment for test counts
+        testCounts.computeIfAbsent(testName, k -&gt; new AtomicInteger(0))
+                  .incrementAndGet();
+    }
+    public TestResult getTestResult(String testName) {
+        return testResults.get(testName);
+    }
+    public int getTestCount(String testName) {
+        AtomicInteger count = testCounts.get(testName);
+        return count != null ? count.get() : 0;
+    }
+    // Bulk operations that are thread-safe
+    public Map&lt;String, TestResult&gt; getPassedTests() {
+        return testResults.entrySet().parallelStream()
+                .filter(entry -&gt; entry.getValue().getStatus() == Status.PASSED)
+                .collect(Collectors.toConcurrentMap(
+                    Map.Entry::getKey,
+                    Map.Entry::getValue
+                ));
+    }
+    // Safe iteration during concurrent modification
+    public void printAllResults() {
+        testResults.forEach((testName, result) -&gt; {
+            System.out.println(testName + ": " + result.getStatus());
+        });
+    }
+}
+</code></pre></div>
+<h5>ConcurrentHashMap Key Points:</h5>
+<ul>
+<li><span class="check-mark">✅</span> Thread-safe operations</li>
+<li><span class="check-mark">✅</span> Better performance than synchronized HashMap</li>
+<li><span class="check-mark">✅</span> Supports atomic operations</li>
+<li><span class="check-mark">✅</span> Segmented locking for better concurrency</li>
+<li><span class="cross-mark">❌</span> No null keys or values allowed</li>
+<li><span class="cross-mark">❌</span> Higher memory overhead</li>
+</ul>
+<h4>TreeMap - Sorted Key-Value Storage</h4>
+<h5>When to Use:</h5>
+<ul>
+<li>Sorted test configuration</li>
+<li>Time-based test data storage</li>
+<li>Range queries on test results</li>
+<li>Ordered reporting data</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Sorted Test Configuration Manager
+public class SortedConfigManager {
+    private TreeMap&lt;String, String&gt; sortedConfig;
+    private TreeMap&lt;Date, TestResult&gt; timeBasedResults;
+    public SortedConfigManager() {
+        sortedConfig = new TreeMap&lt;&gt;();
+        timeBasedResults = new TreeMap&lt;&gt;();
+        loadSortedConfig();
+    }
+    private void loadSortedConfig() {
+        sortedConfig.put("timeout", "30");
+        sortedConfig.put("browser", "chrome");
+        sortedConfig.put("environment", "prod");
+        sortedConfig.put("baseUrl", "https://example.com");
+        // Keys will be automatically sorted: baseUrl, browser, environment, timeout
+    }
+    public void printConfigInOrder() {
+        sortedConfig.forEach((key, value) -&gt; {
+            System.out.println(key + ": " + value);
+        });
+    }
+    // Time-based test result analysis
+    public void recordTimedResult(Date timestamp, TestResult result) {
+        timeBasedResults.put(timestamp, result);
+    }
+    public Map&lt;Date, TestResult&gt; getResultsInTimeRange(Date startTime, Date endTime) {
+        return timeBasedResults.subMap(startTime, true, endTime, true);
+    }
+    public TestResult getLatestResult() {
+        return timeBasedResults.isEmpty() ? null : timeBasedResults.lastEntry().getValue();
+    }
+    public TestResult getEarliestResult() {
+        return timeBasedResults.isEmpty() ? null : timeBasedResults.firstEntry().getValue();
+    }
+}
+</code></pre></div>
+<h4>Map Implementations Comparison</h4>
+<table class="content-table">
+<thead><tr><th>Feature</th><th>HashMap</th><th>LinkedHashMap</th><th>TreeMap</th><th>ConcurrentHashMap</th></tr></thead><tbody>
+<tr><td><strong>Ordering</strong></td><td>None</td><td>Insertion/Access order</td><td>Sorted by key</td><td>None</td></tr>
+<tr><td><strong>Performance</strong></td><td>O(1) average</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td></tr>
+<tr><td><strong>Null handling</strong></td><td>One null key, multiple null values</td><td>Same as HashMap</td><td>No null keys</td><td>No nulls</td></tr>
+<tr><td><strong>Thread safe</strong></td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
+<tr><td><strong>Memory usage</strong></td><td>Lowest</td><td>Low-Medium</td><td>Highest</td><td>Medium-High</td></tr>
+<tr><td><strong>Use case</strong></td><td>General purpose</td><td>Order preservation</td><td>Sorted keys</td><td>Concurrent access</td></tr>
+</tbody></table>
+
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Performance Comparison</h3>
+            </div>
+            <div class="section-body">
+                <h4>Time Complexity Summary</h4>
+<table class="content-table">
+<thead><tr><th>Operation</th><th>ArrayList</th><th>LinkedList</th><th>HashSet</th><th>TreeSet</th><th>HashMap</th><th>TreeMap</th></tr></thead><tbody>
+<tr><td><strong>Add</strong></td><td>O(1) amortized</td><td>O(1)</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td><td>O(log n)</td></tr>
+<tr><td><strong>Remove</strong></td><td>O(n)</td><td>O(1) if position known</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td><td>O(log n)</td></tr>
+<tr><td><strong>Search/Contains</strong></td><td>O(n)</td><td>O(n)</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td><td>O(log n)</td></tr>
+<tr><td><strong>Access by index</strong></td><td>O(1)</td><td>O(n)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
+</tbody></table>
+
+<h4>Space Complexity</h4>
+<ul>
+<li><strong>ArrayList</strong>: O(n) - compact storage</li>
+<li><strong>LinkedList</strong>: O(n) - extra memory for node pointers</li>
+<li><strong>HashSet/HashMap</strong>: O(n) - hash table overhead</li>
+<li><strong>TreeSet/TreeMap</strong>: O(n) - tree structure overhead</li>
+</ul>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Thread Safety Summary</h3>
+            </div>
+            <div class="section-body">
+                <h4>Thread-Safe Collections</h4>
+<ul>
+<li><strong>Vector</strong> (legacy, use ArrayList instead)</li>
+<li><strong>Hashtable</strong> (legacy, use HashMap instead)</li>
+<li><strong>ConcurrentHashMap</strong> (modern choice)</li>
+<li><strong>Collections.synchronizedXxx()</strong> wrapper methods</li>
+</ul>
+<h4>Making Collections Thread-Safe</h4>
+<div class="code-block-java"><pre><code>
+// Synchronized wrappers
+List&lt;String&gt; syncList = Collections.synchronizedList(new ArrayList&lt;&gt;());
+Set&lt;String&gt; syncSet = Collections.synchronizedSet(new HashSet&lt;&gt;());
+Map&lt;String, String&gt; syncMap = Collections.synchronizedMap(new HashMap&lt;&gt;());
+// Modern concurrent collections
+ConcurrentHashMap&lt;String, String&gt; concurrentMap = new ConcurrentHashMap&lt;&gt;();
+CopyOnWriteArrayList&lt;String&gt; cowList = new CopyOnWriteArrayList&lt;&gt;();
+</code></pre></div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Best Practices for SDET/QA</h3>
+            </div>
+            <div class="section-body">
+                <h4>1. Choose Right Collection Based on Use Case</h4>
+<div class="code-block-java"><pre><code>
+// For test data with frequent random access
+List&lt;TestCase&gt; testCases = new ArrayList&lt;&gt;();
+// For unique test IDs with fast lookup
+Set&lt;String&gt; executedTests = new HashSet&lt;&gt;();
+// For configuration key-value pairs
+Map&lt;String, String&gt; config = new HashMap&lt;&gt;();
+// For ordered test execution
+LinkedHashSet&lt;String&gt; orderedTests = new LinkedHashSet&lt;&gt;();
+// For sorted priority tests
+TreeSet&lt;TestCase&gt; priorityTests = new TreeSet&lt;&gt;(Comparator.comparing(TestCase::getPriority));
+</code></pre></div>
+<h4>2. Initialize with Proper Capacity</h4>
+<div class="code-block-java"><pre><code>
+// Avoid frequent resizing if you know approximate size
+List&lt;String&gt; testData = new ArrayList&lt;&gt;(1000); // Initial capacity
+Map&lt;String, String&gt; config = new HashMap&lt;&gt;(50); // Initial capacity
+Set&lt;String&gt; uniqueIds = new HashSet&lt;&gt;(200); // Initial capacity
+</code></pre></div>
+<h4>3. Use Diamond Operator for Cleaner Code</h4>
+<div class="code-block-java"><pre><code>
+// Before Java 7
+Map&lt;String, List&lt;String&gt;&gt; oldStyle = new HashMap&lt;String, List&lt;String&gt;&gt;();
+// Java 7+ Diamond operator
+Map&lt;String, List&lt;String&gt;&gt; newStyle = new HashMap&lt;&gt;();
+</code></pre></div>
+<h4>4. Defensive Copying for Thread Safety</h4>
+<div class="code-block-java"><pre><code>
+public class TestConfigManager {
+    private final Map&lt;String, String&gt; config = new HashMap&lt;&gt;();
+    public Map&lt;String, String&gt; getConfig() {
+        return new HashMap&lt;&gt;(config); // Return defensive copy
+    }
+    public void setConfig(Map&lt;String, String&gt; newConfig) {
+        this.config.clear();
+        this.config.putAll(newConfig); // Don't expose internal reference
+    }
+}
+</code></pre></div>
+<h4>5. Use Appropriate Methods for Bulk Operations</h4>
+<div class="code-block-java"><pre><code>
+// Efficient bulk operations
+List&lt;String&gt; testIds = Arrays.asList("test1", "test2", "test3");
+Set&lt;String&gt; uniqueIds = new HashSet&lt;&gt;(testIds); // Bulk constructor
+// Add multiple elements
+Collection&lt;String&gt; moreTests = Arrays.asList("test4", "test5");
+uniqueIds.addAll(moreTests);
+// Remove multiple elements
+Collection&lt;String&gt; testsToRemove = Arrays.asList("test1", "test2");
+uniqueIds.removeAll(testsToRemove);
+</code></pre></div>
+<h4>6. Iterator vs Enhanced For Loop</h4>
+<div class="code-block-java"><pre><code>
+List&lt;String&gt; tests = new ArrayList&lt;&gt;();
+// Enhanced for loop (preferred for read-only)
+for (String test : tests) {
+    System.out.println(test);
+}
+// Iterator (required for safe removal)
+Iterator&lt;String&gt; iterator = tests.iterator();
+while (iterator.hasNext()) {
+    String test = iterator.next();
+    if (test.startsWith("obsolete")) {
+        iterator.remove(); // Safe removal during iteration
+    }
+}
+</code></pre></div>
+<h4>7. Null Safety</h4>
+<div class="code-block-java"><pre><code>
+// Check for null before operations
+if (testList != null &amp;&amp; !testList.isEmpty()) {
+    processTests(testList);
+}
+// Use Optional for better null handling
+Optional&lt;String&gt; config = Optional.ofNullable(getConfigValue("key"));
+config.ifPresent(value -&gt; processConfig(value));
+// Default values
+String browser = configMap.getOrDefault("browser", "chrome");
+</code></pre></div>
+<h4>8. Memory Efficient Operations</h4>
+<div class="code-block-java"><pre><code>
+// Trim ArrayList to reduce memory usage
+ArrayList&lt;String&gt; tests = new ArrayList&lt;&gt;();
+// ... populate list
+tests.trimToSize(); // Reduce capacity to actual size
+// Clear collections when done
+testResults.clear(); // Help GC
+</code></pre></div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Common Pitfalls to Avoid</h3>
+            </div>
+            <div class="section-body">
+                <h4>1. Modifying Collection During Iteration</h4>
+<div class="code-block-java"><pre><code>
+// ❌ Wrong - ConcurrentModificationException
+List&lt;String&gt; tests = new ArrayList&lt;&gt;();
+for (String test : tests) {
+    if (condition) {
+        tests.remove(test); // Throws exception
+    }
+}
+// ✅ Correct - Use iterator
+Iterator&lt;String&gt; iterator = tests.iterator();
+while (iterator.hasNext()) {
+    String test = iterator.next();
+    if (condition) {
+        iterator.remove(); // Safe removal
+    }
+}
+</code></pre></div>
+<h4>2. Using == Instead of equals()</h4>
+<div class="code-block-java"><pre><code>
+// ❌ Wrong
+String test1 = "test";
+String test2 = new String("test");
+if (test1 == test2) { // false - different objects
+    // This won't execute
+}
+// ✅ Correct
+if (test1.equals(test2)) { // true - same content
+    // This will execute
+}
+</code></pre></div>
+<h4>3. Not Overriding equals() and hashCode()</h4>
+<div class="code-block-java"><pre><code>
+public class TestCase {
+    private String name;
+    private int priority;
+    // ✅ Must override both for proper collection behavior
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        TestCase testCase = (TestCase) obj;
+        return priority == testCase.priority &amp;&amp; 
+               Objects.equals(name, testCase.name);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, priority);
+    }
+}
+</code></pre></div>
+<h4>4. Wrong Collection Choice</h4>
+<div class="code-block-java"><pre><code>
+// ❌ Wrong - LinkedList for frequent random access
+List&lt;String&gt; tests = new LinkedList&lt;&gt;();
+for (int i = 0; i &lt; 1000; i++) {
+    String test = tests.get(i); // O(n) operation - very slow!
+}
+// ✅ Correct - ArrayList for frequent random access  
+List&lt;String&gt; tests = new ArrayList&lt;&gt;();
+for (int i = 0; i &lt; 1000; i++) {
+    String test = tests.get(i); // O(1) operation - fast!
+}
+</code></pre></div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Interview Questions & Answers</h3>
+            </div>
+            <div class="section-body">
+                <h4>Q1: Explain the difference between ArrayList and LinkedList with examples.</h4>
+<h5>Answer:</h5>
+<p>ArrayList uses a resizable array internally, while LinkedList uses a doubly-linked list structure. </p>
+<h5>ArrayList:</h5>
+<ul>
+<li>Fast random access O(1)</li>
+<li>Slow insertion/deletion in middle O(n)</li>
+<li>Better for frequent get operations</li>
+<li>Lower memory overhead</li>
+</ul>
+<h5>LinkedList:</h5>
+<ul>
+<li>Slow random access O(n)</li>
+<li>Fast insertion/deletion at known positions O(1)</li>
+<li>Better for frequent add/remove operations</li>
+<li>Higher memory overhead (node pointers)</li>
+</ul>
+<h5>Example Use Cases:</h5>
+<div class="code-block-java"><pre><code>
+// ArrayList - Good for test data storage with frequent access
+List&lt;User&gt; testUsers = new ArrayList&lt;&gt;();
+User randomUser = testUsers.get(5); // O(1) - Fast
+// LinkedList - Good for test step execution with frequent modifications
+LinkedList&lt;TestStep&gt; steps = new LinkedList&lt;&gt;();
+steps.addFirst(new SetupStep()); // O(1) - Fast
+steps.addLast(new CleanupStep()); // O(1) - Fast
+</code></pre></div>
+<h4>Q2: When would you use HashSet vs TreeSet?</h4>
+<h5>Answer:</h5>
+<h5>HashSet:</h5>
+<ul>
+<li>When you need fastest possible lookups O(1)</li>
+<li>Order doesn't matter</li>
+<li>Just need to eliminate duplicates</li>
+</ul>
+<h5>TreeSet:</h5>
+<ul>
+<li>When you need elements in sorted order</li>
+<li>Need range operations (subset, headset, tailset)</li>
+<li>Want to find min/max elements quickly</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// HashSet - Fast duplicate removal
+Set&lt;String&gt; testIds = new HashSet&lt;&gt;();
+boolean exists = testIds.contains("test123"); // O(1) - Very fast
+// TreeSet - Sorted test execution by priority
+TreeSet&lt;TestCase&gt; tests = new TreeSet&lt;&gt;(Comparator.comparing(TestCase::getPriority));
+TestCase highestPriority = tests.first(); // O(log n) - Get min element
+</code></pre></div>
+<h4>Q3: Explain HashMap internal working.</h4>
+<h5>Answer:</h5>
+<p>HashMap uses an array of buckets (linked lists/trees) with hash codes to distribute elements. </p>
+<h5>Process:</h5>
+<p>1. Calculate hash code of key using hashCode() 2. Apply hash function to determine bucket index 3. If bucket is empty, add new entry 4. If bucket has entries, check for existing key using equals() 5. If key exists, update value; otherwise add new entry </p>
+<h5>Collision Handling:</h5>
+<ul>
+<li>Java 8+: Linked list converts to balanced tree when > 8 elements</li>
+<li>Load factor 0.75 triggers resize (capacity doubled)</li>
+</ul>
+<div class="code-block-java"><pre><code>
+// Internal structure (simplified)
+class HashMap&lt;K,V&gt; {
+    Node&lt;K,V&gt;[] table; // Array of buckets
+    static class Node&lt;K,V&gt; {
+        final int hash;
+        final K key;
+        V value;
+        Node&lt;K,V&gt; next; // For chaining
+    }
+    public V put(K key, V value) {
+        int hash = hash(key);
+        int index = hash &amp; (table.length - 1); // Find bucket
+        // Add to bucket...
+    }
+}
+</code></pre></div>
+<h4>Q4: How do you handle ConcurrentModificationException?</h4>
+<h5>Answer:</h5>
+<p>This exception occurs when a collection is modified while being iterated. </p>
+<h5>Solutions:</h5>
+<p>1. <strong>Use Iterator.remove():</strong> </p>
+<div class="code-block-java"><pre><code>
+List&lt;String&gt; tests = new ArrayList&lt;&gt;();
+Iterator&lt;String&gt; iterator = tests.iterator();
+while (iterator.hasNext()) {
+    String test = iterator.next();
+    if (shouldRemove(test)) {
+        iterator.remove(); // Safe removal
+    }
+}
+</code></pre></div>
+<p>2. <strong>Use ConcurrentHashMap for thread-safe operations:</strong> </p>
+<div class="code-block-java"><pre><code>
+ConcurrentHashMap&lt;String, TestResult&gt; results = new ConcurrentHashMap&lt;&gt;();
+// Safe to modify while iterating from different threads
+</code></pre></div>
+<p>3. <strong>Use removeIf() for bulk conditional removal:</strong> </p>
+<div class="code-block-java"><pre><code>
+tests.removeIf(test -&gt; test.getStatus() == Status.FAILED);
+</code></pre></div>
+<h4>Q5: What is the difference between HashMap and ConcurrentHashMap?</h4>
+<h5>Answer:</h5>
+<table class="content-table">
+<thead><tr><th>Feature</th><th>HashMap</th><th>ConcurrentHashMap</th></tr></thead><tbody>
+<tr><td><strong>Thread Safety</strong></td><td>Not thread-safe</td><td>Thread-safe</td></tr>
+<tr><td><strong>Performance</strong></td><td>Faster (no sync overhead)</td><td>Slightly slower</td></tr>
+<tr><td><strong>Null Values</strong></td><td>Allows null key/values</td><td>No nulls allowed</td></tr>
+<tr><td><strong>Locking</strong></td><td>No locking</td><td>Segmented locking</td></tr>
+<tr><td><strong>Iteration</strong></td><td>Fast but not thread-safe</td><td>Safe during concurrent modification</td></tr>
+</tbody></table>
+
+<h5>Usage Example:</h5>
+<div class="code-block-java"><pre><code>
+// HashMap - Single-threaded test execution
+Map&lt;String, TestResult&gt; singleThreadResults = new HashMap&lt;&gt;();
+// ConcurrentHashMap - Parallel test execution
+Map&lt;String, TestResult&gt; parallelResults = new ConcurrentHashMap&lt;&gt;();
+// Multiple threads can safely update parallelResults
+ExecutorService executor = Executors.newFixedThreadPool(4);
+for (TestCase test : testSuite) {
+    executor.submit(() -&gt; {
+        TestResult result = executeTest(test);
+        parallelResults.put(test.getId(), result); // Thread-safe
+    });
+}
+</code></pre></div>
+<h4>Q6: How do you sort a List of custom objects?</h4>
+<h5>Answer:</h5>
+<p>There are several ways to sort custom objects: </p>
+<h5>1. Implement Comparable interface:</h5>
+<div class="code-block-java"><pre><code>
+public class TestCase implements Comparable&lt;TestCase&gt; {
+    private String name;
+    private int priority;
+    @Override
+    public int compareTo(TestCase other) {
+        return Integer.compare(this.priority, other.priority);
+    }
+}
+List&lt;TestCase&gt; tests = new ArrayList&lt;&gt;();
+Collections.sort(tests); // Natural ordering by priority
+</code></pre></div>
+<h5>2. Use Comparator (preferred for flexibility):</h5>
+<div class="code-block-java"><pre><code>
+List&lt;TestCase&gt; tests = new ArrayList&lt;&gt;();
+// Sort by priority (ascending)
+tests.sort(Comparator.comparing(TestCase::getPriority));
+// Sort by priority (descending)
+tests.sort(Comparator.comparing(TestCase::getPriority).reversed());
+// Multi-level sorting
+tests.sort(Comparator.comparing(TestCase::getPriority)
+                     .thenComparing(TestCase::getName));
+// Custom sorting logic
+tests.sort((t1, t2) -&gt; {
+    if (t1.getPriority() != t2.getPriority()) {
+        return Integer.compare(t1.getPriority(), t2.getPriority());
+    }
+    return t1.getName().compareTo(t2.getName());
+});
+</code></pre></div>
+<h4>Q7: What is the difference between Iterator and ListIterator?</h4>
+<h5>Answer:</h5>
+<table class="content-table">
+<thead><tr><th>Feature</th><th>Iterator</th><th>ListIterator</th></tr></thead><tbody>
+<tr><td><strong>Direction</strong></td><td>Forward only</td><td>Both forward and backward</td></tr>
+<tr><td><strong>Collections</strong></td><td>All collections</td><td>Lists only</td></tr>
+<tr><td><strong>Modification</strong></td><td>remove() only</td><td>add(), remove(), set()</td></tr>
+<tr><td><strong>Index operations</strong></td><td>No</td><td>Yes (nextIndex(), previousIndex())</td></tr>
+</tbody></table>
+
+<h5>Example:</h5>
+<div class="code-block-java"><pre><code>
+List&lt;String&gt; tests = new ArrayList&lt;&gt;();
+// Iterator - forward only
+Iterator&lt;String&gt; iter = tests.iterator();
+while (iter.hasNext()) {
+    String test = iter.next();
+    if (shouldRemove(test)) {
+        iter.remove(); // Only removal allowed
+    }
+}
+// ListIterator - bidirectional with more operations
+ListIterator&lt;String&gt; listIter = tests.listIterator();
+while (listIter.hasNext()) {
+    String test = listIter.next();
+    if (needsUpdate(test)) {
+        listIter.set("Updated: " + test); // Can modify
+    }
+    if (needsNewTest(test)) {
+        listIter.add("New test"); // Can add
+    }
+}
+// Backward iteration
+while (listIter.hasPrevious()) {
+    String test = listIter.previous();
+    System.out.println("Previous test: " + test);
+}
+</code></pre></div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Practical Test Automation Examples</h3>
+            </div>
+            <div class="section-body">
+                <h4>Example 1: Test Data Management Framework</h4>
+<div class="code-block-java"><pre><code>
+public class TestDataFramework {
+    private List&lt;User&gt; users;
+    private Map&lt;String, List&lt;String&gt;&gt; testDataSets;
+    private Set&lt;String&gt; usedEmails;
+    private Queue&lt;TestEnvironment&gt; availableEnvironments;
+    public TestDataFramework() {
+        users = new ArrayList&lt;&gt;();
+        testDataSets = new HashMap&lt;&gt;();
+        usedEmails = new HashSet&lt;&gt;();
+        availableEnvironments = new LinkedList&lt;&gt;();
+        initializeTestData();
+    }
+    private void initializeTestData() {
+        // Load different user types
+        users.add(new User("admin@test.com", "admin123", "ADMIN"));
+        users.add(new User("user@test.com", "user123", "USER"));
+        users.add(new User("premium@test.com", "premium123", "PREMIUM"));
+        // Load test data sets
+        testDataSets.put("login", Arrays.asList("validUser", "invalidUser", "blockedUser"));
+        testDataSets.put("payment", Arrays.asList("visa", "mastercard", "paypal"));
+        testDataSets.put("products", Arrays.asList("electronics", "books", "clothing"));
+        // Load available test environments
+        availableEnvironments.offer(new TestEnvironment("env1", "https://env1.test.com"));
+        availableEnvironments.offer(new TestEnvironment("env2", "https://env2.test.com"));
+    }
+    public User getUserByRole(String role) {
+        return users.stream()
+                   .filter(user -&gt; user.getRole().equalsIgnoreCase(role))
+                   .findFirst()
+                   .orElse(users.get(0)); // Default to first user
+    }
+    public String getUniqueEmail() {
+        String baseEmail = "testuser";
+        String domain = "@automation.test";
+        int counter = 1;
+        String email;
+        do {
+            email = baseEmail + counter + domain;
+            counter++;
+        } while (usedEmails.contains(email));
+        usedEmails.add(email);
+        return email;
+    }
+    public List&lt;String&gt; getTestDataSet(String category) {
+        return new ArrayList&lt;&gt;(testDataSets.getOrDefault(category, Collections.emptyList()));
+    }
+    public TestEnvironment getAvailableEnvironment() {
+        return availableEnvironments.poll(); // Remove and return first available
+    }
+    public void releaseEnvironment(TestEnvironment environment) {
+        availableEnvironments.offer(environment); // Make available again
+    }
+}
+</code></pre></div>
+<h4>Example 2: Test Result Aggregation System</h4>
+<div class="code-block-java"><pre><code>
+public class TestResultAggregator {
+    private Map&lt;String, TestResult&gt; allResults;
+    private Map&lt;TestStatus, List&lt;TestResult&gt;&gt; resultsByStatus;
+    private TreeMap&lt;Date, List&lt;TestResult&gt;&gt; resultsByTime;
+    private Set&lt;String&gt; failedTestNames;
+    public TestResultAggregator() {
+        allResults = new ConcurrentHashMap&lt;&gt;(); // Thread-safe for parallel execution
+        resultsByStatus = new HashMap&lt;&gt;();
+        resultsByTime = new TreeMap&lt;&gt;();
+        failedTestNames = new HashSet&lt;&gt;();
+        // Initialize status categories
+        for (TestStatus status : TestStatus.values()) {
+            resultsByStatus.put(status, new ArrayList&lt;&gt;());
+        }
+    }
+    public void addTestResult(TestResult result) {
+        String testId = result.getTestId();
+        Date timestamp = result.getTimestamp();
+        TestStatus status = result.getStatus();
+        // Store in main results map
+        allResults.put(testId, result);
+        // Categorize by status
+        resultsByStatus.get(status).add(result);
+        // Group by time (for timeline analysis)
+        resultsByTime.computeIfAbsent(timestamp, k -&gt; new ArrayList&lt;&gt;()).add(result);
+        // Track failed tests
+        if (status == TestStatus.FAILED) {
+            failedTestNames.add(testId);
+        }
+    }
+    public TestSummary generateSummary() {
+        int total = allResults.size();
+        int passed = resultsByStatus.get(TestStatus.PASSED).size();
+        int failed = resultsByStatus.get(TestStatus.FAILED).size();
+        int skipped = resultsByStatus.get(TestStatus.SKIPPED).size();
+        double passRate = total &gt; 0 ? (double) passed / total * 100 : 0;
+        return new TestSummary(total, passed, failed, skipped, passRate);
+    }
+    public List&lt;TestResult&gt; getFailedTests() {
+        return new ArrayList&lt;&gt;(resultsByStatus.get(TestStatus.FAILED));
+    }
+    public List&lt;TestResult&gt; getTestsInTimeRange(Date startTime, Date endTime) {
+        return resultsByTime.subMap(startTime, true, endTime, true)
+                           .values()
+                           .stream()
+                           .flatMap(List::stream)
+                           .collect(Collectors.toList());
+    }
+    public Map&lt;String, Integer&gt; getStatusCounts() {
+        Map&lt;String, Integer&gt; counts = new HashMap&lt;&gt;();
+        resultsByStatus.forEach((status, results) -&gt; 
+            counts.put(status.name(), results.size()));
+        return counts;
+    }
+    public boolean hasFailures() {
+        return !failedTestNames.isEmpty();
+    }
+    public Set&lt;String&gt; getFailedTestNames() {
+        return new HashSet&lt;&gt;(failedTestNames); // Defensive copy
+    }
+}
+</code></pre></div>
+<h4>Example 3: Browser Configuration Manager</h4>
+<div class="code-block-java"><pre><code>
+public class BrowserConfigManager {
+    private Map&lt;String, Map&lt;String, Object&gt;&gt; browserConfigs;
+    private LinkedHashMap&lt;String, String&gt; executionOrder; // Maintains order
+    private Set&lt;String&gt; supportedBrowsers;
+    public BrowserConfigManager() {
+        browserConfigs = new HashMap&lt;&gt;();
+        executionOrder = new LinkedHashMap&lt;&gt;();
+        supportedBrowsers = new HashSet&lt;&gt;();
+        initializeBrowserConfigs();
+    }
+    private void initializeBrowserConfigs() {
+        // Chrome configuration
+        Map&lt;String, Object&gt; chromeConfig = new HashMap&lt;&gt;();
+        chromeConfig.put("arguments", Arrays.asList("--no-sandbox", "--disable-gpu", "--headless"));
+        chromeConfig.put("windowSize", "1920x1080");
+        chromeConfig.put("timeouts", Map.of("implicit", 10, "pageLoad", 30));
+        browserConfigs.put("chrome", chromeConfig);
+        // Firefox configuration
+        Map&lt;String, Object&gt; firefoxConfig = new HashMap&lt;&gt;();
+        firefoxConfig.put("arguments", Arrays.asList("-headless", "--width=1920", "--height=1080"));
+        firefoxConfig.put("preferences", Map.of("dom.disable_beforeunload", true));
+        browserConfigs.put("firefox", firefoxConfig);
+        // Edge configuration
+        Map&lt;String, Object&gt; edgeConfig = new HashMap&lt;&gt;();
+        edgeConfig.put("arguments", Arrays.asList("--headless", "--disable-extensions"));
+        browserConfigs.put("edge", edgeConfig);
+        // Set supported browsers
+        supportedBrowsers.addAll(browserConfigs.keySet());
+        // Set default execution order
+        executionOrder.put("chrome", "Chrome Browser");
+        executionOrder.put("firefox", "Firefox Browser");
+        executionOrder.put("edge", "Edge Browser");
+    }
+    @SuppressWarnings("unchecked")
+    public List&lt;String&gt; getBrowserArguments(String browser) {
+        Map&lt;String, Object&gt; config = browserConfigs.get(browser.toLowerCase());
+        if (config != null &amp;&amp; config.containsKey("arguments")) {
+            return (List&lt;String&gt;) config.get("arguments");
+        }
+        return new ArrayList&lt;&gt;();
+    }
+    public boolean isBrowserSupported(String browser) {
+        return supportedBrowsers.contains(browser.toLowerCase());
+    }
+    public Set&lt;String&gt; getSupportedBrowsers() {
+        return new HashSet&lt;&gt;(supportedBrowsers); // Defensive copy
+    }
+    public LinkedHashMap&lt;String, String&gt; getBrowserExecutionOrder() {
+        return new LinkedHashMap&lt;&gt;(executionOrder); // Maintains insertion order
+    }
+    public void addCustomBrowser(String name, Map&lt;String, Object&gt; config) {
+        browserConfigs.put(name.toLowerCase(), new HashMap&lt;&gt;(config));
+        supportedBrowsers.add(name.toLowerCase());
+        executionOrder.put(name.toLowerCase(), name);
+    }
+    public Map&lt;String, Object&gt; getBrowserConfig(String browser) {
+        return browserConfigs.getOrDefault(browser.toLowerCase(), new HashMap&lt;&gt;());
+    }
+}
+</code></pre></div>
+<h4>Example 4: Page Object Factory with Collections</h4>
+<div class="code-block-java"><pre><code>
+public class PageObjectFactory {
+    private Map&lt;Class&lt;?&gt;, Object&gt; pageInstances;
+    private Set&lt;Class&lt;?&gt;&gt; initializedPages;
+    private List&lt;PageObject&gt; pageHierarchy;
+    private WebDriver driver;
+    public PageObjectFactory(WebDriver driver) {
+        this.driver = driver;
+        this.pageInstances = new ConcurrentHashMap&lt;&gt;();
+        this.initializedPages = ConcurrentHashMap.newKeySet();
+        this.pageHierarchy = new ArrayList&lt;&gt;();
+    }
+    @SuppressWarnings("unchecked")
+    public &lt;T extends PageObject&gt; T getPage(Class&lt;T&gt; pageClass) {
+        return (T) pageInstances.computeIfAbsent(pageClass, clazz -&gt; {
+            try {
+                T pageInstance = (T) clazz.getDeclaredConstructor(WebDriver.class)
+                                         .newInstance(driver);
+                initializedPages.add(clazz);
+                pageHierarchy.add(pageInstance);
+                return pageInstance;
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to create page instance: " + clazz.getName(), e);
+            }
+        });
+    }
+    public boolean isPageInitialized(Class&lt;?&gt; pageClass) {
+        return initializedPages.contains(pageClass);
+    }
+    public void clearPageCache() {
+        pageInstances.clear();
+        initializedPages.clear();
+        pageHierarchy.clear();
+    }
+    public List&lt;PageObject&gt; getPageHierarchy() {
+        return new ArrayList&lt;&gt;(pageHierarchy); // Defensive copy
+    }
+    public Set&lt;Class&lt;?&gt;&gt; getInitializedPageTypes() {
+        return new HashSet&lt;&gt;(initializedPages); // Defensive copy
+    }
+}
+</code></pre></div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Memory Management Tips</h3>
+            </div>
+            <div class="section-body">
+                <h4>1. Clear Collections When Done</h4>
+<div class="code-block-java"><pre><code>
+// Clear large collections to help GC
+testResults.clear();
+testData.clear();
+// Set references to null for large objects
+massiveTestDataList = null;
+</code></pre></div>
+<h4>2. Use Weak References for Caches</h4>
+<div class="code-block-java"><pre><code>
+import java.lang.ref.WeakReference;
+public class PageObjectCache {
+    private Map&lt;String, WeakReference&lt;PageObject&gt;&gt; cache = new HashMap&lt;&gt;();
+    public PageObject getPage(String key) {
+        WeakReference&lt;PageObject&gt; ref = cache.get(key);
+        if (ref != null) {
+            PageObject page = ref.get();
+            if (page != null) {
+                return page; // Still in memory
+            } else {
+                cache.remove(key); // Was garbage collected
+            }
+        }
+        // Create new page object...
+        return null;
+    }
+}
+</code></pre></div>
+<h4>3. Optimize Collection Sizes</h4>
+<div class="code-block-java"><pre><code>
+// Pre-size collections if you know approximate size
+List&lt;TestCase&gt; tests = new ArrayList&lt;&gt;(expectedTestCount);
+Map&lt;String, String&gt; config = new HashMap&lt;&gt;(configSize);
+// Trim ArrayList capacity when done adding
+ArrayList&lt;String&gt; results = new ArrayList&lt;&gt;();
+// ... add elements
+results.trimToSize(); // Reduce memory footprint
+</code></pre></div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()" title="Back to top">↑</button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
