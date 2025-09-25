@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ Java Exception Handling MCQs - Interactive Quiz</title>
+    <style>
+        :root {
+            --primary-color: #c0392b;
+            --secondary-color: #e74c3c;
+            --accent-color: #27ae60;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #e0e6ed;
+            --code-bg: #f4f4f4;
+            --answer-bg: #d4edda;
+            --explanation-bg: #fff3cd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .question-container {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-number {
+            font-size: 1rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+
+        .options {
+            margin: 25px 0;
+        }
+
+        .option {
+            padding: 15px 20px;
+            margin: 12px 0;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: #fdfdfd;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .option:hover {
+            background: #e3f2fd;
+            border-color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #e3f2fd;
+            border-color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .option.correct {
+            background: #d4edda !important;
+            border-color: #27ae60 !important;
+            color: #155724;
+            font-weight: 600;
+        }
+
+        .option.wrong {
+            background: #f8d7da !important;
+            border-color: #e74c3c !important;
+            color: #721c24;
+            font-weight: 600;
+        }
+
+        .option.correct::after {
+            content: " ✓";
+            color: #27ae60;
+            font-weight: bold;
+            float: right;
+        }
+
+        .option.wrong::after {
+            content: " ✗";
+            color: #e74c3c;
+            font-weight: bold;
+            float: right;
+        }
+
+        .feedback-enabled .option:not(.correct):not(.wrong) {
+            opacity: 0.6;
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .pulse-correct {
+            animation: pulseCorrect 0.6s ease-in-out;
+        }
+
+        @keyframes pulseCorrect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .answer-section {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .answer-section.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .answer {
+            background: var(--answer-bg);
+            border: 1px solid var(--success-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .answer-label {
+            font-weight: 700;
+            color: var(--success-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .explanation {
+            background: var(--explanation-bg);
+            border: 1px solid var(--warning-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .explanation-label {
+            font-weight: 700;
+            color: var(--warning-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .nav-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .prev-button {
+            background: #3498db;
+            color: white;
+        }
+
+        .prev-button:hover:not(:disabled) {
+            background: #2980b9;
+            transform: translateX(-2px);
+        }
+
+        .next-button {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .next-button:hover:not(:disabled) {
+            background: var(--primary-color);
+            transform: translateX(2px);
+        }
+
+        .show-answer-button {
+            background: var(--warning-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .show-answer-button:hover {
+            background: #e67e22;
+            transform: translateY(-1px);
+        }
+
+        .question-info {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .completion-message {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .completion-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .completion-message h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .restart-button {
+            background: white;
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .restart-button:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        @keyframes slideInFade {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideOutFade {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(50px); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Java Exception Handling MCQs - Interactive Quiz</h1>
+            <p>Master Java exception handling through interactive questions with navigation controls.</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="questionContainer">
+                <!-- Questions will be populated by JavaScript -->
+            </div>
+
+            <div class="completion-message" id="completionMessage">
+                <h3>🎉 Congratulations!</h3>
+                <p>You've completed all 35 questions!</p>
+                <p>Great job on finishing the MCQ collection.</p>
+                <button class="restart-button" onclick="restartQuiz()">Start Over</button>
+            </div>
+
+            <div class="navigation" id="navigation">
+                <button class="nav-button prev-button" id="prevButton" onclick="previousQuestion()">
+                    ← Previous
+                </button>
+                
+                <div class="question-info" id="questionInfo">
+                    Question 1 of 35
+                </div>
+                
+                <button class="nav-button next-button" id="nextButton" onclick="nextQuestion()">
+                    Next →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Using JSON.parse instead of template literals to avoid escaping issues
+        const questionsData = [
+        {
+                "title": "1. Basic Exception Hierarchy",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            int result = 10 / 0;\n        } catch (Exception e) {\n            System.out.println(e.getClass().getSimpleName());\n        }\n    }\n}",
+                "options": [
+                        "a) Exception",
+                        "b) RuntimeException",
+                        "c) ArithmeticException",
+                        "d) Compilation error"
+                ],
+                "answer": "c) ArithmeticException",
+                "explanation": "Division by zero throws ArithmeticException, which is caught by the broader Exception catch block. getClass().getSimpleName() returns the actual exception class name.",
+                "correct_index": 2
+        },
+        {
+                "title": "2. Checked vs Unchecked Exceptions",
+                "text": "",
+                "code": "class Test {\n    public static void method1() throws IOException {\n        throw new FileNotFoundException(\"File not found\");\n    }\n\n    public static void method2() {\n        throw new NullPointerException(\"Null pointer\");\n    }\n\n    public static void main(String[] args) {\n        method1(); // Line A\n        method2(); // Line B\n    }\n}",
+                "options": [
+                        "a) Both lines compile successfully",
+                        "b) Compilation error at Line A only",
+                        "c) Compilation error at Line B only",
+                        "d) Compilation error at both lines"
+                ],
+                "answer": "b) Compilation error at Line A only",
+                "explanation": "FileNotFoundException is a checked exception that must be handled or declared. NullPointerException is unchecked and doesn't require handling.",
+                "correct_index": 1
+        },
+        {
+                "title": "3. Multiple Catch Blocks Order",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            String str = null;\n            str.length();\n        } catch (RuntimeException e) {\n            System.out.print(\"Runtime \");\n        } catch (NullPointerException e) {\n            System.out.print(\"NullPointer \");\n        } catch (Exception e) {\n            System.out.print(\"Exception \");\n        }\n    }\n}",
+                "options": [
+                        "a) Prints: Runtime",
+                        "b) Prints: NullPointer",
+                        "c) Compilation error",
+                        "d) Prints: Exception"
+                ],
+                "answer": "c) Compilation error",
+                "explanation": "NullPointerException is a subclass of RuntimeException. More specific exceptions must be caught before more general ones.",
+                "correct_index": 2
+        },
+        {
+                "title": "4. Try-With-Resources",
+                "text": "",
+                "code": "class MyResource implements AutoCloseable {\n    String name;\n    MyResource(String name) { this.name = name; }\n\n    public void close() {\n        System.out.print(name + \"-Close \");\n    }\n\n    void use() {\n        System.out.print(name + \"-Use \");\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try (MyResource r1 = new MyResource(\"R1\");\n             MyResource r2 = new MyResource(\"R2\")) {\n            r1.use();\n            r2.use();\n        }\n    }\n}",
+                "options": [
+                        "a) R1-Use R2-Use R1-Close R2-Close",
+                        "b) R1-Use R2-Use R2-Close R1-Close",
+                        "c) R2-Use R1-Use R1-Close R2-Close",
+                        "d) R2-Use R1-Use R2-Close R1-Close"
+                ],
+                "answer": "b) R1-Use R2-Use R2-Close R1-Close",
+                "explanation": "Resources are closed in reverse order of their declaration (LIFO - Last In, First Out).",
+                "correct_index": 1
+        },
+        {
+                "title": "5. Exception in Finally Block",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            System.out.print(\"Try \");\n            throw new RuntimeException(\"Try Exception\");\n        } catch (Exception e) {\n            System.out.print(\"Catch \");\n            throw new RuntimeException(\"Catch Exception\");\n        } finally {\n            System.out.print(\"Finally \");\n            throw new RuntimeException(\"Finally Exception\");\n        }\n    }\n}",
+                "options": [
+                        "a) Prints: Try Catch Finally, then throws \"Try Exception\"",
+                        "b) Prints: Try Catch Finally, then throws \"Finally Exception\"",
+                        "c) Prints: Try Catch Finally, then throws \"Catch Exception\"",
+                        "d) Compilation error"
+                ],
+                "answer": "b) Prints: Try Catch Finally, then throws \"Finally Exception\"",
+                "explanation": "Finally block always executes. If finally throws an exception, it suppresses any previous exceptions from try/catch blocks.",
+                "correct_index": 1
+        },
+        {
+                "title": "6. Custom Exception Hierarchy",
+                "text": "",
+                "code": "class CustomException extends Exception {\n    CustomException(String msg) { super(msg); }\n}\n\nclass SpecificException extends CustomException {\n    SpecificException(String msg) { super(msg); }\n}\n\nclass Test {\n    static void method() throws CustomException {\n        throw new SpecificException(\"Specific error\");\n    }\n\n    public static void main(String[] args) {\n        try {\n            method();\n        } catch (SpecificException e) {\n            System.out.print(\"Specific \");\n        } catch (CustomException e) {\n            System.out.print(\"Custom \");\n        }\n    }\n}",
+                "options": [
+                        "a) Specific",
+                        "b) Custom",
+                        "c) Compilation error",
+                        "d) Both Specific and Custom"
+                ],
+                "answer": "a) Specific",
+                "explanation": "Most specific exception is caught first. SpecificException is more specific than CustomException.",
+                "correct_index": 0
+        },
+        {
+                "title": "7. Exception Propagation",
+                "text": "",
+                "code": "class Test {\n    static void method1() {\n        method2();\n        System.out.print(\"Method1 \");\n    }\n\n    static void method2() {\n        method3();\n        System.out.print(\"Method2 \");\n    }\n\n    static void method3() {\n        throw new RuntimeException(\"Error\");\n    }\n\n    public static void main(String[] args) {\n        try {\n            method1();\n        } catch (Exception e) {\n            System.out.print(\"Caught \");\n        }\n    }\n}",
+                "options": [
+                        "a) Method2 Method1 Caught",
+                        "b) Method1 Method2 Caught",
+                        "c) Caught",
+                        "d) Method3 Method2 Method1 Caught"
+                ],
+                "answer": "c) Caught",
+                "explanation": "When method3() throws exception, it immediately propagates up the call stack without executing remaining statements in method2() and method1().",
+                "correct_index": 2
+        },
+        {
+                "title": "8. Suppressed Exceptions in Try-With-Resources",
+                "text": "",
+                "code": "class Resource implements AutoCloseable {\n    public void close() {\n        throw new RuntimeException(\"Close Exception\");\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try (Resource r = new Resource()) {\n            throw new RuntimeException(\"Try Exception\");\n        } catch (Exception e) {\n            System.out.print(e.getMessage() + \" \");\n            System.out.print(e.getSuppressed().length);\n        }\n    }\n}",
+                "options": [
+                        "a) Close Exception 0",
+                        "b) Try Exception 1",
+                        "c) Try Exception 0",
+                        "d) Close Exception 1"
+                ],
+                "answer": "b) Try Exception 1",
+                "explanation": "Primary exception from try block is thrown, close() exception becomes suppressed and can be accessed via getSuppressed().",
+                "correct_index": 1
+        },
+        {
+                "title": "9. Method Overriding with Exceptions",
+                "text": "",
+                "code": "class Parent {\n    void method() throws IOException {\n        throw new IOException(\"Parent\");\n    }\n}\n\nclass Child extends Parent {\n    void method() throws FileNotFoundException {\n        throw new FileNotFoundException(\"Child\");\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try {\n            Parent p = new Child();\n            p.method();\n        } catch (IOException e) {\n            System.out.print(e.getMessage());\n        }\n    }\n}",
+                "options": [
+                        "a) Parent",
+                        "b) Child",
+                        "c) Compilation error",
+                        "d) IOException"
+                ],
+                "answer": "b) Child",
+                "explanation": "Child can throw same or subclass exceptions. FileNotFoundException is subclass of IOException. Runtime polymorphism calls Child's method.",
+                "correct_index": 1
+        },
+        {
+                "title": "10. Exception Chaining",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            method1();\n        } catch (Exception e) {\n            System.out.print(e.getMessage() + \" \");\n            System.out.print(e.getCause().getMessage());\n        }\n    }\n\n    static void method1() throws Exception {\n        try {\n            method2();\n        } catch (RuntimeException e) {\n            throw new Exception(\"Method1 Exception\", e);\n        }\n    }\n\n    static void method2() {\n        throw new NullPointerException(\"Method2 Exception\");\n    }\n}",
+                "options": [
+                        "a) Method1 Exception Method2 Exception",
+                        "b) Method2 Exception Method1 Exception",
+                        "c) Method1 Exception null",
+                        "d) NullPointerException"
+                ],
+                "answer": "a) Method1 Exception Method2 Exception",
+                "explanation": "Exception chaining allows preserving original exception as cause. getCause() returns the wrapped original exception.",
+                "correct_index": 0
+        },
+        {
+                "title": "11. Assert Statement with Exceptions",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            int x = 5;\n            assert x > 10 : \"x should be greater than 10\";\n            System.out.print(\"After assert \");\n        } catch (AssertionError e) {\n            System.out.print(\"Assertion failed: \" + e.getMessage());\n        }\n    }\n}",
+                "options": [
+                        "a) Prints: After assert",
+                        "b) Prints: Assertion failed: x should be greater than 10",
+                        "c) Compilation error",
+                        "d) No output"
+                ],
+                "answer": "b) Prints: Assertion failed: x should be greater than 10",
+                "explanation": "When assertions are enabled and assertion fails, AssertionError is thrown with the specified message.",
+                "correct_index": 1
+        },
+        {
+                "title": "12. Return in Try-Catch-Finally",
+                "text": "",
+                "code": "public class Test {\n    static int method() {\n        try {\n            return 1;\n        } catch (Exception e) {\n            return 2;\n        } finally {\n            return 3;\n        }\n    }\n\n    public static void main(String[] args) {\n        System.out.print(method());\n    }\n}",
+                "options": [
+                        "a) 1",
+                        "b) 2",
+                        "c) 3",
+                        "d) Compilation error"
+                ],
+                "answer": "c) 3",
+                "explanation": "Finally block's return statement overrides any return from try or catch blocks.",
+                "correct_index": 2
+        },
+        {
+                "title": "13. Exception Translation",
+                "text": "",
+                "code": "class BusinessException extends Exception {\n    BusinessException(String msg, Throwable cause) { super(msg, cause); }\n}\n\nclass DataAccessLayer {\n    void saveData() throws SQLException {\n        throw new SQLException(\"Database connection failed\");\n    }\n}\n\nclass BusinessLayer {\n    DataAccessLayer dal = new DataAccessLayer();\n\n    void processData() throws BusinessException {\n        try {\n            dal.saveData();\n        } catch (SQLException e) {\n            throw new BusinessException(\"Business operation failed\", e);\n        }\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try {\n            new BusinessLayer().processData();\n        } catch (BusinessException e) {\n            System.out.print(e.getCause().getClass().getSimpleName());\n        }\n    }\n}",
+                "options": [
+                        "a) BusinessException",
+                        "b) SQLException",
+                        "c) Exception",
+                        "d) Throwable"
+                ],
+                "answer": "b) SQLException",
+                "explanation": "Exception translation wraps lower-level exceptions in higher-level exceptions. getCause() returns the original SQLException.",
+                "correct_index": 1
+        },
+        {
+                "title": "14. Multi-Catch Block",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            String str = args[0];\n            int num = Integer.parseInt(str);\n            int result = 10 / num;\n            System.out.print(result);\n        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {\n            System.out.print(\"Input Error\");\n        } catch (ArithmeticException e) {\n            System.out.print(\"Math Error\");\n        }\n    }\n}",
+                "options": [
+                        "a) Prints: Input Error",
+                        "b) Prints: Math Error",
+                        "c) Exception is thrown",
+                        "d) Compilation error"
+                ],
+                "answer": "a) Prints: Input Error",
+                "explanation": "Accessing args[0] when no arguments provided throws ArrayIndexOutOfBoundsException, caught by multi-catch block.",
+                "correct_index": 0
+        },
+        {
+                "title": "15. Exception in Static Block",
+                "text": "",
+                "code": "public class Test {\n    static {\n        System.out.print(\"Static block \");\n        if (true) {\n            throw new RuntimeException(\"Static exception\");\n        }\n    }\n\n    public static void main(String[] args) {\n        System.out.print(\"Main method\");\n    }\n}",
+                "options": [
+                        "a) Prints: Static block Main method",
+                        "b) Prints: Static block, then throws exception",
+                        "c) Prints: Main method",
+                        "d) Compilation error"
+                ],
+                "answer": "b) Prints: Static block, then throws exception",
+                "explanation": "Exception in static block prevents class initialization and causes ExceptionInInitializerError to be thrown.",
+                "correct_index": 1
+        },
+        {
+                "title": "16. Nested Try-Catch Blocks",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            try {\n                int[] arr = {1, 2};\n                System.out.print(arr[5]);\n            } catch (NullPointerException e) {\n                System.out.print(\"Inner NPE \");\n            }\n            System.out.print(\"After inner try \");\n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.out.print(\"Outer AIOBE \");\n        }\n    }\n}",
+                "options": [
+                        "a) Inner NPE After inner try",
+                        "b) Outer AIOBE",
+                        "c) Inner NPE Outer AIOBE",
+                        "d) After inner try"
+                ],
+                "answer": "b) Outer AIOBE",
+                "explanation": "ArrayIndexOutOfBoundsException is not caught by inner catch (which only catches NPE), so it propagates to outer catch.",
+                "correct_index": 1
+        },
+        {
+                "title": "17. Exception Handling in Constructor",
+                "text": "",
+                "code": "class MyClass {\n    MyClass() throws Exception {\n        System.out.print(\"Constructor \");\n        throw new Exception(\"Constructor exception\");\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try {\n            MyClass obj = new MyClass();\n            System.out.print(\"Object created \");\n        } catch (Exception e) {\n            System.out.print(\"Exception caught \");\n        }\n    }\n}",
+                "options": [
+                        "a) Constructor Object created",
+                        "b) Constructor Exception caught",
+                        "c) Object created Exception caught",
+                        "d) Exception caught"
+                ],
+                "answer": "b) Constructor Exception caught",
+                "explanation": "Constructor throws exception after printing, so object creation fails and exception is caught.",
+                "correct_index": 1
+        },
+        {
+                "title": "18. Checked Exception in Lambda",
+                "text": "",
+                "code": "import java.util.*;\nimport java.io.*;\n\npublic class Test {\n    public static void main(String[] args) {\n        List<String> files = Arrays.asList(\"file1.txt\", \"file2.txt\");\n\n        files.forEach(filename -> {\n            try {\n                throw new IOException(\"File error\");\n            } catch (IOException e) {\n                System.out.print(\"Caught \");\n            }\n        });\n    }\n}",
+                "options": [
+                        "a) Caught",
+                        "b) Caught Caught",
+                        "c) Compilation error",
+                        "d) IOException"
+                ],
+                "answer": "b) Caught Caught",
+                "explanation": "Lambda executes for each element in list (2 elements), each throwing and catching IOException.",
+                "correct_index": 1
+        },
+        {
+                "title": "19. Exception Handling with Inheritance",
+                "text": "",
+                "code": "class A {\n    void method() throws IOException { }\n}\n\nclass B extends A {\n    void method() throws Exception { // Line X\n        super.method();\n    }\n}",
+                "options": [
+                        "a) Compiles successfully",
+                        "b) Compilation error - broader exception not allowed",
+                        "c) Runtime error",
+                        "d) Must use throws IOException"
+                ],
+                "answer": "b) Compilation error - broader exception not allowed",
+                "explanation": "Overriding method cannot throw broader checked exceptions than the parent method declares.",
+                "correct_index": 1
+        },
+        {
+                "title": "20. Finally Block Execution",
+                "text": "",
+                "code": "public class Test {\n    static boolean finallyExecuted = false;\n\n    static int method() {\n        try {\n            System.exit(0);\n            return 1;\n        } finally {\n            finallyExecuted = true;\n            System.out.print(\"Finally \");\n        }\n    }\n\n    public static void main(String[] args) {\n        method();\n        System.out.print(finallyExecuted);\n    }\n}",
+                "options": [
+                        "a) Finally true",
+                        "b) Finally false",
+                        "c) No output",
+                        "d) false"
+                ],
+                "answer": "c) No output",
+                "explanation": "System.exit() terminates JVM immediately, preventing finally block execution.",
+                "correct_index": 2
+        },
+        {
+                "title": "21. Exception Matching Hierarchy",
+                "text": "",
+                "code": "public class Test {\n    public static void main(String[] args) {\n        try {\n            throw new FileNotFoundException(\"File not found\");\n        } catch (IOException e) {\n            System.out.print(\"IOException \");\n        } catch (Exception e) {\n            System.out.print(\"Exception \");\n        } catch (FileNotFoundException e) {\n            System.out.print(\"FileNotFoundException \");\n        }\n    }\n}",
+                "options": [
+                        "a) Prints: IOException",
+                        "b) Prints: FileNotFoundException",
+                        "c) Prints: Exception",
+                        "d) Compilation error"
+                ],
+                "answer": "d) Compilation error",
+                "explanation": "FileNotFoundException catch block is unreachable because it's already handled by IOException catch block above it.",
+                "correct_index": 3
+        },
+        {
+                "title": "22. Resource Management with Exception",
+                "text": "",
+                "code": "class MyResource implements AutoCloseable {\n    boolean closed = false;\n\n    public void close() throws Exception {\n        closed = true;\n        System.out.print(\"Resource closed \");\n        throw new Exception(\"Close failed\");\n    }\n\n    public void use() throws Exception {\n        if (closed) throw new IllegalStateException(\"Resource already closed\");\n        System.out.print(\"Using resource \");\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try (MyResource resource = new MyResource()) {\n            resource.use();\n            throw new RuntimeException(\"Use failed\");\n        } catch (Exception e) {\n            System.out.print(\"Caught: \" + e.getClass().getSimpleName());\n        }\n    }\n}",
+                "options": [
+                        "a) Using resource Resource closed Caught: RuntimeException",
+                        "b) Using resource Resource closed Caught: Exception",
+                        "c) Using resource Caught: IllegalStateException",
+                        "d) Resource closed Caught: Exception"
+                ],
+                "answer": "a) Using resource Resource closed Caught: RuntimeException",
+                "explanation": "Primary exception from try block (RuntimeException) is thrown, close() exception becomes suppressed.",
+                "correct_index": 0
+        },
+        {
+                "title": "23. Exception Handling in Thread",
+                "text": "",
+                "code": "class MyThread extends Thread {\n    public void run() {\n        try {\n            Thread.sleep(1000);\n            throw new RuntimeException(\"Thread exception\");\n        } catch (InterruptedException e) {\n            System.out.print(\"Interrupted \");\n        }\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try {\n            MyThread t = new MyThread();\n            t.start();\n            t.join();\n        } catch (Exception e) {\n            System.out.print(\"Main caught: \" + e.getClass().getSimpleName());\n        }\n    }\n}",
+                "options": [
+                        "a) Prints: Interrupted",
+                        "b) Prints: Main caught: RuntimeException",
+                        "c) Prints: Main caught: InterruptedException",
+                        "d) Thread terminates with uncaught exception"
+                ],
+                "answer": "d) Thread terminates with uncaught exception",
+                "explanation": "RuntimeException in thread's run() method is not caught, causing thread to terminate. Main thread's catch block cannot catch exceptions from other threads.",
+                "correct_index": 3
+        },
+        {
+                "title": "24. Exception Re-throwing",
+                "text": "",
+                "code": "public class Test {\n    static void method1() throws Exception {\n        try {\n            method2();\n        } catch (RuntimeException e) {\n            System.out.print(\"Caught in method1 \");\n            throw e; // Re-throwing\n        }\n    }\n\n    static void method2() {\n        throw new IllegalArgumentException(\"Invalid argument\");\n    }\n\n    public static void main(String[] args) {\n        try {\n            method1();\n        } catch (IllegalArgumentException e) {\n            System.out.print(\"Caught in main \");\n        }\n    }\n}",
+                "options": [
+                        "a) Caught in method1",
+                        "b) Caught in main",
+                        "c) Caught in method1 Caught in main",
+                        "d) IllegalArgumentException"
+                ],
+                "answer": "c) Caught in method1 Caught in main",
+                "explanation": "Exception is caught in method1, printed, then re-thrown and caught again in main.",
+                "correct_index": 2
+        },
+        {
+                "title": "25. Exception with Generic Methods",
+                "text": "",
+                "code": "class Test {\n    static <T extends Exception> void throwException(T exception) throws T {\n        throw exception;\n    }\n\n    public static void main(String[] args) {\n        try {\n            throwException(new IOException(\"IO Error\"));\n        } catch (IOException e) {\n            System.out.print(\"Caught IOException\");\n        }\n    }\n}",
+                "options": [
+                        "a) Prints: Caught IOException",
+                        "b) Compilation error in throwException method",
+                        "c) Compilation error in main method",
+                        "d) Runtime error"
+                ],
+                "answer": "a) Prints: Caught IOException",
+                "explanation": "Generic method with bounded type parameter can throw the parameterized exception type.",
+                "correct_index": 0
+        },
+        {
+                "title": "26. Exception Handling with Switch Expression",
+                "text": "",
+                "code": "public class Test {\n    static String handleError(int code) {\n        return switch (code) {\n            case 1 -> throw new IllegalArgumentException(\"Invalid code 1\");\n            case 2 -> {\n                try {\n                    throw new RuntimeException(\"Error 2\");\n                } catch (RuntimeException e) {\n                    yield \"Handled: \" + e.getMessage();\n                }\n            }\n            default -> \"Unknown code\";\n        };\n    }\n\n    public static void main(String[] args) {\n        try {\n            System.out.print(handleError(2));\n        } catch (Exception e) {\n            System.out.print(\"Main caught: \" + e.getMessage());\n        }\n    }\n}",
+                "options": [
+                        "a) Handled: Error 2",
+                        "b) Main caught: Error 2",
+                        "c) Main caught: Invalid code 1",
+                        "d) Unknown code"
+                ],
+                "answer": "a) Handled: Error 2",
+                "explanation": "Switch expression with case 2 handles exception internally and yields the result.",
+                "correct_index": 0
+        },
+        {
+                "title": "27. Exception Specification Mismatch",
+                "text": "",
+                "code": "interface Calculator {\n    int divide(int a, int b) throws ArithmeticException;\n}\n\nclass SimpleCalculator implements Calculator {\n    public int divide(int a, int b) throws Exception { // Line X\n        if (b == 0) throw new Exception(\"Division by zero\");\n        return a / b;\n    }\n}",
+                "options": [
+                        "a) Compiles successfully",
+                        "b) Compilation error - broader exception not allowed",
+                        "c) Must remove throws clause",
+                        "d) Should throw ArithmeticException only"
+                ],
+                "answer": "b) Compilation error - broader exception not allowed",
+                "explanation": "Interface method declares ArithmeticException (unchecked), but implementation cannot throw broader checked Exception.",
+                "correct_index": 1
+        },
+        {
+                "title": "28. Exception in Object Initialization",
+                "text": "",
+                "code": "class Test {\n    static int value = getValue();\n\n    static int getValue() {\n        System.out.print(\"Getting value \");\n        throw new RuntimeException(\"Initialization failed\");\n    }\n\n    public static void main(String[] args) {\n        try {\n            System.out.print(\"Value: \" + Test.value);\n        } catch (Exception e) {\n            System.out.print(\"Exception: \" + e.getMessage());\n        }\n    }\n}",
+                "options": [
+                        "a) Getting value Value: 0",
+                        "b) Getting value Exception: Initialization failed",
+                        "c) Exception: Initialization failed",
+                        "d) Getting value, then ExceptionInInitializerError"
+                ],
+                "answer": "d) Getting value, then ExceptionInInitializerError",
+                "explanation": "Exception during static initialization causes ExceptionInInitializerError to wrap the original exception.",
+                "correct_index": 3
+        },
+        {
+                "title": "29. Checked Exception Erasure",
+                "text": "",
+                "code": "class Test {\n    @SuppressWarnings(\"unchecked\")\n    static <T extends Throwable> void throwUnchecked(Throwable t) throws T {\n        throw (T) t;\n    }\n\n    public static void main(String[] args) {\n        try {\n            throwUnchecked(new IOException(\"Checked exception\"));\n        } catch (RuntimeException e) {\n            System.out.print(\"Caught runtime: \" + e.getClass().getSimpleName());\n        } catch (Exception e) {\n            System.out.print(\"Caught checked: \" + e.getClass().getSimpleName());\n        }\n    }\n}",
+                "options": [
+                        "a) Caught runtime: IOException",
+                        "b) Caught checked: IOException",
+                        "c) Compilation error",
+                        "d) ClassCastException"
+                ],
+                "answer": "b) Caught checked: IOException",
+                "explanation": "Generic type erasure allows throwing checked exceptions as if they were unchecked, but the actual exception type remains IOException.",
+                "correct_index": 1
+        },
+        {
+                "title": "30. Exception Handling in Stream Operations",
+                "text": "",
+                "code": "import java.util.*;\nimport java.util.function.*;\n\nclass Test {\n    static void riskyMethod(String s) throws Exception {\n        if (s.length() > 3) throw new Exception(\"Too long: \" + s);\n        System.out.print(s + \" \");\n    }\n\n    public static void main(String[] args) {\n        List<String> words = Arrays.asList(\"hi\", \"hello\", \"bye\");\n\n        words.forEach(word -> {\n            try {\n                riskyMethod(word);\n            } catch (Exception e) {\n                System.out.print(\"[\" + e.getMessage() + \"] \");\n            }\n        });\n    }\n}",
+                "options": [
+                        "a) hi hello bye",
+                        "b) hi [Too long: hello] bye",
+                        "c) hi bye [Too long: hello]",
+                        "d) Exception"
+                ],
+                "answer": "b) hi [Too long: hello] bye",
+                "explanation": "forEach processes elements in order. \"hi\" prints normally, \"hello\" throws exception (caught and message printed), \"bye\" prints normally.",
+                "correct_index": 1
+        },
+        {
+                "title": "31. Exception Handling with Method References",
+                "text": "",
+                "code": "import java.util.*;\n\nclass Test {\n    static void process(String s) throws RuntimeException {\n        if (s == null) throw new NullPointerException(\"Null string\");\n        System.out.print(s.toUpperCase() + \" \");\n    }\n\n    public static void main(String[] args) {\n        List<String> items = Arrays.asList(\"hello\", null, \"world\");\n\n        try {\n            items.forEach(Test::process);\n        } catch (NullPointerException e) {\n            System.out.print(\"Caught: \" + e.getMessage());\n        }\n    }\n}",
+                "options": [
+                        "a) HELLO NULL WORLD",
+                        "b) HELLO Caught: Null string",
+                        "c) HELLO WORLD",
+                        "d) Caught: Null string"
+                ],
+                "answer": "b) HELLO Caught: Null string",
+                "explanation": "First element processes normally, second element throws exception which terminates the forEach and gets caught.",
+                "correct_index": 1
+        },
+        {
+                "title": "32. Exception Masking in Finally",
+                "text": "",
+                "code": "class Test {\n    static void method() throws Exception {\n        Exception tryException = null;\n        Exception finallyException = null;\n\n        try {\n            tryException = new Exception(\"Try block exception\");\n            throw tryException;\n        } finally {\n            finallyException = new Exception(\"Finally block exception\");\n            throw finallyException;\n        }\n    }\n\n    public static void main(String[] args) {\n        try {\n            method();\n        } catch (Exception e) {\n            System.out.print(e.getMessage() + \" \");\n            System.out.print(\"Suppressed: \" + e.getSuppressed().length);\n        }\n    }\n}",
+                "options": [
+                        "a) Try block exception Suppressed: 0",
+                        "b) Finally block exception Suppressed: 1",
+                        "c) Finally block exception Suppressed: 0",
+                        "d) Try block exception Suppressed: 1"
+                ],
+                "answer": "b) Finally block exception Suppressed: 1",
+                "explanation": "Finally block exception masks try block exception. Try block exception becomes suppressed exception.",
+                "correct_index": 1
+        },
+        {
+                "title": "33. Exception Handling with Varargs",
+                "text": "",
+                "code": "class Test {\n    static void process(String... args) throws Exception {\n        for (String arg : args) {\n            if (arg == null) throw new Exception(\"Null argument at position\");\n            System.out.print(arg + \" \");\n        }\n    }\n\n    public static void main(String[] args) {\n        try {\n            process(\"A\", \"B\");\n            process(\"C\", null, \"D\");\n        } catch (Exception e) {\n            System.out.print(\"Exception caught\");\n        }\n    }\n}",
+                "options": [
+                        "a) A B C D Exception caught",
+                        "b) A B C Exception caught",
+                        "c) A B Exception caught",
+                        "d) A B C null D Exception caught"
+                ],
+                "answer": "b) A B C Exception caught",
+                "explanation": "First call succeeds, second call processes \"C\" then throws exception on null, caught in main.",
+                "correct_index": 1
+        },
+        {
+                "title": "34. Exception Handling in Enum Constructor",
+                "text": "",
+                "code": "enum Status {\n    ACTIVE(\"A\") {\n        void process() throws Exception {\n            throw new Exception(\"Active processing failed\");\n        }\n    },\n    INACTIVE(\"I\") {\n        void process() {\n            System.out.print(\"Inactive processed \");\n        }\n    };\n\n    private String code;\n    Status(String code) { this.code = code; }\n    abstract void process() throws Exception;\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try {\n            Status.INACTIVE.process();\n            Status.ACTIVE.process();\n        } catch (Exception e) {\n            System.out.print(\"Caught: \" + e.getMessage());\n        }\n    }\n}",
+                "options": [
+                        "a) Inactive processed Caught: Active processing failed",
+                        "b) Caught: Active processing failed",
+                        "c) Inactive processed",
+                        "d) Active processing failed"
+                ],
+                "answer": "a) Inactive processed Caught: Active processing failed",
+                "explanation": "INACTIVE.process() executes successfully, then ACTIVE.process() throws exception which is caught.",
+                "correct_index": 0
+        },
+        {
+                "title": "35. Exception Handling with Record Classes",
+                "text": "",
+                "code": "record Person(String name, int age) {\n    Person {\n        if (name == null) throw new IllegalArgumentException(\"Name cannot be null\");\n        if (age < 0) throw new IllegalArgumentException(\"Age cannot be negative\");\n        System.out.print(\"Person created: \" + name + \" \");\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        try {\n            Person p1 = new Person(\"Alice\", 25);\n            Person p2 = new Person(\"Bob\", -5);\n        } catch (IllegalArgumentException e) {\n            System.out.print(\"Error: \" + e.getMessage());\n        }\n    }\n}",
+                "options": [
+                        "a) Person created: Alice Person created: Bob",
+                        "b) Person created: Alice Error: Age cannot be negative",
+                        "c) Error: Name cannot be null",
+                        "d) Error: Age cannot be negative"
+                ],
+                "answer": "b) Person created: Alice Error: Age cannot be negative",
+                "explanation": "First Person creates successfully, second Person fails validation in compact constructor.",
+                "correct_index": 1
+        }
+];
+        
+        let currentQuestion = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let showingAnswer = false;
+        let feedbackEnabled = false;
+
+        function initializeQuiz() {
+            displayQuestion(0);
+            updateNavigation();
+            updateProgress();
+        }
+
+        function displayQuestion(index) {
+            const container = document.getElementById('questionContainer');
+            const question = questionsData[index];
+            
+            let optionsHtml = '';
+            question.options.forEach((option, i) => {
+                const isSelected = userAnswers[index] === i;
+                optionsHtml += `
+                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectOption(${i})" data-option-index="${i}">
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            // Format code block if exists
+            let codeHtml = '';
+            if (question.code && question.code.trim()) {
+                const escapedCode = question.code
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/&/g, '&amp;');
+                codeHtml = `<div class="code-block">${escapedCode}</div>`;
+            }
+            
+            container.innerHTML = `
+                <div class="question-container active">
+                    <div class="question-header">
+                        <div class="question-number">Question ${index + 1} of ${questionsData.length}</div>
+                    </div>
+                    <div class="question-title">${question.title}</div>
+                    ${question.text ? `<div class="question-text">${question.text}</div>` : ''}
+                    ${codeHtml}
+                    <div class="options" id="optionsContainer">
+                        ${optionsHtml}
+                    </div>
+                    <button class="show-answer-button" onclick="toggleAnswer()">Show Answer</button>
+                    <div class="answer-section" id="answerSection">
+                        <div class="answer">
+                            <div class="answer-label">Answer: ${question.answer}</div>
+                        </div>
+                        <div class="explanation">
+                            <div class="explanation-label">Explanation:</div>
+                            ${question.explanation}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            showingAnswer = false;
+            feedbackEnabled = false;
+            currentQuestion = index;
+        }
+
+        function selectOption(optionIndex) {
+            const question = questionsData[currentQuestion];
+            const correctIndex = question.correct_index;
+            
+            userAnswers[currentQuestion] = optionIndex;
+            
+            // Remove any existing feedback immediately when user makes a new selection
+            removeFeedback();
+            
+            // Get all options
+            const options = document.querySelectorAll('.option');
+            const selectedOption = options[optionIndex];
+            
+            // Clear previous selections and feedback
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'wrong', 'shake', 'pulse-correct');
+            });
+            
+            // Mark the selected option
+            selectedOption.classList.add('selected');
+            
+            // Provide feedback only for wrong answers
+            if (optionIndex === correctIndex) {
+                // Correct answer - just show as selected, no special feedback
+                selectedOption.classList.add('correct', 'pulse-correct');
+                // Clear any feedback mode styling
+                document.getElementById('optionsContainer').classList.remove('feedback-enabled');
+                feedbackEnabled = false;
+            } else {
+                // Wrong answer - show feedback
+                selectedOption.classList.add('wrong', 'shake');
+                
+                // Show brief feedback message for wrong answer (shorter duration)
+                showBriefFeedback('✗ Try another option!', 'error');
+                
+                // Enable feedback mode styling
+                document.getElementById('optionsContainer').classList.add('feedback-enabled');
+                feedbackEnabled = true;
+            }
+        }
+
+        function removeFeedback() {
+            // Immediately remove any existing feedback
+            const existingFeedback = document.querySelector('.brief-feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showBriefFeedback(message, type) {
+            // Remove any existing feedback first
+            removeFeedback();
+            
+            // Create feedback element
+            const feedback = document.createElement('div');
+            feedback.className = `brief-feedback ${type}`;
+            feedback.textContent = message;
+            feedback.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 16px;
+                border-radius: 6px;
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideInFade 0.2s ease-out;
+                font-size: 0.9rem;
+                ${type === 'success' ? 
+                    'background: #d4edda; color: #155724; border: 1px solid #27ae60;' : 
+                    'background: #f8d7da; color: #721c24; border: 1px solid #e74c3c;'
+                }
+            `;
+            
+            document.body.appendChild(feedback);
+            
+            // Auto remove after 1.5 seconds (much faster)
+            setTimeout(() => {
+                if (feedback.parentNode) {
+                    feedback.style.animation = 'slideOutFade 0.2s ease-in';
+                    setTimeout(() => feedback.remove(), 200);
+                }
+            }, 1500);
+        }
+
+        function toggleAnswer() {
+            const answerSection = document.getElementById('answerSection');
+            const button = document.querySelector('.show-answer-button');
+            
+            if (!showingAnswer) {
+                answerSection.classList.add('show');
+                button.textContent = 'Hide Answer';
+                showingAnswer = true;
+            } else {
+                answerSection.classList.remove('show');
+                button.textContent = 'Show Answer';
+                showingAnswer = false;
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questionsData.length - 1) {
+                displayQuestion(currentQuestion + 1);
+                updateNavigation();
+                updateProgress();
+            } else {
+                showCompletion();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                displayQuestion(currentQuestion - 1);
+                updateNavigation();
+                updateProgress();
+            }
+        }
+
+        function updateNavigation() {
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const questionInfo = document.getElementById('questionInfo');
+            
+            prevButton.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === questionsData.length - 1) {
+                nextButton.textContent = 'Finish';
+            } else {
+                nextButton.textContent = 'Next →';
+            }
+            
+            questionInfo.textContent = `Question ${currentQuestion + 1} of ${questionsData.length}`;
+        }
+
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const progress = ((currentQuestion + 1) / questionsData.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        function showCompletion() {
+            document.getElementById('questionContainer').style.display = 'none';
+            document.getElementById('navigation').style.display = 'none';
+            document.getElementById('completionMessage').classList.add('show');
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questionsData.length).fill(null);
+            showingAnswer = false;
+            feedbackEnabled = false;
+            
+            document.getElementById('questionContainer').style.display = 'block';
+            document.getElementById('navigation').style.display = 'flex';
+            document.getElementById('completionMessage').classList.remove('show');
+            
+            displayQuestion(0);
+            updateNavigation();
+            updateProgress();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousQuestion();
+            } else if (e.key === 'ArrowRight') {
+                nextQuestion();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                toggleAnswer();
+            } else if (e.key >= '1' && e.key <= '4') {
+                // Allow selecting options with number keys
+                const optionIndex = parseInt(e.key) - 1;
+                if (optionIndex < questionsData[currentQuestion].options.length) {
+                    selectOption(optionIndex);
+                }
+            }
+        });
+
+        // Initialize the quiz when page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>
