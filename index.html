@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Interview Prep - Complete Collection</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #e0e6ed;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .collections {
+            padding: 80px 0;
+        }
+
+        .collections h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .collection-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .collection-card.featured {
+            border-top-color: var(--accent-color);
+            background: linear-gradient(135deg, #fff, #fff9f9);
+        }
+
+        .collection-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .collection-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+
+        .collection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .collection-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .collection-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .collection-features li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .collection-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .collection-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .collection-button:hover {
+            background: #2980b9;
+        }
+
+        .collection-button.featured {
+            background: var(--accent-color);
+        }
+
+        .collection-button.featured:hover {
+            background: #c0392b;
+        }
+
+        .features {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--background-color);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .footer h2 {
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .github-link {
+            display: inline-block;
+            margin-top: 30px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .collection-card {
+                padding: 25px;
+            }
+        }
+
+        .new-badge {
+            background: var(--accent-color);
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 500;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Java Interview Prep 🚀</h1>
+            <p>Comprehensive collections of tricky Java MCQs, programming problems, guides, and comparisons with detailed explanations</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">168+</span>
+                    <span class="stat-label">MCQs & Programs</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label">Interactive Collections</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Manual</span>
+                    <span class="stat-label">Implementation</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Interview Ready</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collections">
+        <div class="container">
+            <h2>🌐 Interactive Collections</h2>
+            <div class="collections-grid">
+                
+                <!-- OOPs MCQs -->
+                <div class="collection-card">
+                    <div class="collection-header">
+                        <span class="collection-icon">🎯</span>
+                        <div class="collection-title">Object-Oriented Programming MCQs</div>
+                    </div>
+                    <div class="collection-description">
+                        93 carefully selected tricky OOP MCQs covering all major object-oriented programming concepts with detailed explanations.
+                    </div>
+                    <ul class="collection-features">
+                        <li>Inheritance & Polymorphism</li>
+                        <li>Encapsulation & Abstraction</li>
+                        <li>Overloading & Overriding</li>
+                        <li>String Immutability</li>
+                        <li>Wrapper Class Caching</li>
+                        <li>Interfaces & Anonymous Classes</li>
+                    </ul>
+                    <a href="OOPs-MCQs.html" class="collection-button">Start OOPs Quiz →</a>
+                </div>
+
+                <!-- Exception Handling MCQs -->
+                <div class="collection-card">
+                    <div class="collection-header">
+                        <span class="collection-icon">⚠️</span>
+                        <div class="collection-title">Exception Handling MCQs</div>
+                    </div>
+                    <div class="collection-description">
+                        35 comprehensive exception handling MCQs covering error management, try-catch blocks, and best practices.
+                    </div>
+                    <ul class="collection-features">
+                        <li>Try-Catch-Finally Blocks</li>
+                        <li>Checked vs Unchecked Exceptions</li>
+                        <li>Custom Exception Classes</li>
+                        <li>Exception Propagation</li>
+                        <li>Resource Management</li>
+                        <li>Error Handling Best Practices</li>
+                    </ul>
+                    <a href="Java-Exception-Handling-MCQs.html" class="collection-button">Start Exception Quiz →</a>
+                </div>
+
+                <!-- Array Programs -->
+                <div class="collection-card">
+                    <div class="collection-header">
+                        <span class="collection-icon">💻</span>
+                        <div class="collection-title">Array Programming Problems</div>
+                    </div>
+                    <div class="collection-description">
+                        20 essential SDET array programming problems with optimized solutions, complexity analysis, and interview tips.
+                    </div>
+                    <ul class="collection-features">
+                        <li>Two Sum & Maximum Subarray</li>
+                        <li>Array Rotation & Reversal</li>
+                        <li>Duplicate Detection & Removal</li>
+                        <li>Sorting Algorithms (Dutch Flag)</li>
+                        <li>Binary Search Variants</li>
+                        <li>Sliding Window & Two Pointers</li>
+                    </ul>
+                    <a href="Java-Array-Programs.html" class="collection-button">Explore Array Programs →</a>
+                </div>
+
+                <!-- String Programs - NEW -->
+                <div class="collection-card featured">
+                    <div class="collection-header">
+                        <span class="collection-icon">🔥</span>
+                        <div class="collection-title">String Programming Problems<span class="new-badge">NEW</span></div>
+                    </div>
+                    <div class="collection-description">
+                        20 high-frequency string problems with manual implementations - no built-in functions allowed!
+                    </div>
+                    <ul class="collection-features">
+                        <li>String Reversal & Palindrome Check</li>
+                        <li>Anagram Detection & Character Frequency</li>
+                        <li>Manual Implementation (No Built-ins)</li>
+                        <li>Character Manipulation Techniques</li>
+                        <li>ASCII Value Operations</li>
+                        <li>Real SDET Interview Questions</li>
+                    </ul>
+                    <a href="Java-String-Programs.html" class="collection-button featured">Master String Problems →</a>
+                </div>
+
+                <!-- Collections Framework Guide -->
+                <div class="collection-card">
+                    <div class="collection-header">
+                        <span class="collection-icon">📚</span>
+                        <div class="collection-title">Collections Framework Guide</div>
+                    </div>
+                    <div class="collection-description">
+                        Complete Collections Framework guide with detailed explanations, performance comparisons, and practical examples.
+                    </div>
+                    <ul class="collection-features">
+                        <li>Collection Hierarchy & Interfaces</li>
+                        <li>List, Set, Queue, Map Implementations</li>
+                        <li>Performance Comparisons</li>
+                        <li>Thread-Safe Collections</li>
+                        <li>Best Practices & Use Cases</li>
+                        <li>Real-World Examples</li>
+                    </ul>
+                    <a href="Java-Collections-Framework-Guide.html" class="collection-button">Read Collections Guide →</a>
+                </div>
+
+                <!-- Design Patterns Guide -->
+                <div class="collection-card">
+                    <div class="collection-header">
+                        <span class="collection-icon">🏗️</span>
+                        <div class="collection-title">Design Patterns Guide</div>
+                    </div>
+                    <div class="collection-description">
+                        Essential design patterns guide covering creational, structural, and behavioral patterns with Java implementations.
+                    </div>
+                    <ul class="collection-features">
+                        <li>Creational Patterns (Singleton, Factory)</li>
+                        <li>Structural Patterns (Adapter, Decorator)</li>
+                        <li>Behavioral Patterns (Observer, Strategy)</li>
+                        <li>Real-World Use Cases</li>
+                        <li>Implementation Examples</li>
+                        <li>Best Practices</li>
+                    </ul>
+                    <a href="Java-Design-Patterns-Guide.html" class="collection-button">Learn Design Patterns →</a>
+                </div>
+
+                <!-- Core Comparisons -->
+                <div class="collection-card">
+                    <div class="collection-header">
+                        <span class="collection-icon">⚖️</span>
+                        <div class="collection-title">Core Concepts & Comparisons</div>
+                    </div>
+                    <div class="collection-description">
+                        17 detailed comparison tables covering core Java concepts, data structures, and framework components.
+                    </div>
+                    <ul class="collection-features">
+                        <li>String vs StringBuilder vs StringBuffer</li>
+                        <li>ArrayList vs LinkedList vs Vector</li>
+                        <li>HashMap vs TreeMap vs LinkedHashMap</li>
+                        <li>Synchronized vs Concurrent Collections</li>
+                        <li>Abstract Classes vs Interfaces</li>
+                        <li>Checked vs Unchecked Exceptions</li>
+                    </ul>
+                    <a href="Java-Core-Comparisons.html" class="collection-button">View Comparisons →</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="container">
+            <h2>💡 Why Choose This Collection?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🎨</span>
+                    <div class="feature-title">Beautiful Interface</div>
+                    <div class="feature-description">Professional, responsive design optimized for all devices with smooth interactions</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📱</span>
+                    <div class="feature-title">Mobile-Friendly</div>
+                    <div class="feature-description">Perfect viewing experience on phones, tablets, and desktop devices</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <div class="feature-title">Interactive Elements</div>
+                    <div class="feature-description">Clickable options, smooth navigation, search functionality, and progress tracking</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <div class="feature-title">Instant Feedback</div>
+                    <div class="feature-description">Immediate answers with detailed explanations and key learning points</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔍</span>
+                    <div class="feature-title">Quick Navigation</div>
+                    <div class="feature-description">Table of contents, search functionality, and smooth scrolling for easy browsing</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💾</span>
+                    <div class="feature-title">No Installation</div>
+                    <div class="feature-description">Works directly in any modern web browser with zero dependencies</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <h2>🚀 Ready to Master Java Interviews?</h2>
+            <p>Start with any collection above and build your confidence with comprehensive, well-explained content designed for interview success.</p>
+            <a href="https://github.com/bhanusdet/Java-OOPs-MCQs" class="github-link">
+                ⭐ Star on GitHub
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.collection-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.6s ease';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
