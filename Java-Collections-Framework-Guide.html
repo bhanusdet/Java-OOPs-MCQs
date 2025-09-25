@@ -203,14 +203,20 @@
             border: 1px solid #e2e8f0;
         }
 
+        .content-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
         .content-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 0;
             background: white;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .content-table th {
@@ -269,6 +275,10 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
             .header h1 {
                 font-size: 2rem;
             }
@@ -278,7 +288,8 @@
             }
             
             .section-body {
-                padding: 20px;
+                padding: 15px;
+                overflow-x: auto;
             }
 
             .code-block-java, .code-block-text {
@@ -289,6 +300,66 @@
             .code-block-java pre, .code-block-text pre {
                 padding: 15px;
                 font-size: 0.8rem;
+            }
+            
+            .content-table {
+                min-width: 100%;
+                font-size: 0.85rem;
+            }
+            
+            .content-table th,
+            .content-table td {
+                padding: 8px 6px;
+                min-width: 120px;
+                white-space: nowrap;
+            }
+            
+            .content-table th {
+                font-size: 0.85rem;
+            }
+            
+            .content-table td {
+                font-size: 0.8rem;
+            }
+            
+            /* Allow scrolling for table containers */
+            .section-body {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Ensure proper touch scrolling */
+            .content-table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .section-body {
+                padding: 10px;
+            }
+            
+            .content-table th,
+            .content-table td {
+                padding: 6px 4px;
+                font-size: 0.75rem;
+                min-width: 100px;
             }
         }
     </style>
@@ -477,7 +548,8 @@ public class TestStepManager {
 <li><span class="cross-mark">❌</span> Higher memory overhead (node pointers)</li>
 </ul>
 <h4>ArrayList vs LinkedList Comparison</h4>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Operation</th><th>ArrayList</th><th>LinkedList</th><th>Best Choice</th></tr></thead><tbody>
 <tr><td><strong>Access by index</strong></td><td>O(1)</td><td>O(n)</td><td>ArrayList</td></tr>
 <tr><td><strong>Add at end</strong></td><td>O(1) amortized</td><td>O(1)</td><td>Both equal</td></tr>
@@ -488,6 +560,7 @@ public class TestStepManager {
 <tr><td><strong>Memory usage</strong></td><td>Lower</td><td>Higher (node overhead)</td><td>ArrayList</td></tr>
 <tr><td><strong>Cache performance</strong></td><td>Better</td><td>Worse (non-contiguous)</td><td>ArrayList</td></tr>
 </tbody></table>
+</div>
 
             </div>
         </div>
@@ -657,7 +730,8 @@ public class OrderedTestManager {
 }
 </code></pre></div>
 <h4>Set Implementations Comparison</h4>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Feature</th><th>HashSet</th><th>LinkedHashSet</th><th>TreeSet</th></tr></thead><tbody>
 <tr><td><strong>Ordering</strong></td><td>No order</td><td>Insertion order</td><td>Sorted order</td></tr>
 <tr><td><strong>Performance</strong></td><td>O(1) average</td><td>O(1) average</td><td>O(log n)</td></tr>
@@ -666,6 +740,7 @@ public class OrderedTestManager {
 <tr><td><strong>Thread safe</strong></td><td>No</td><td>No</td><td>No</td></tr>
 <tr><td><strong>Use case</strong></td><td>Fast lookups</td><td>Ordered unique items</td><td>Sorted unique items</td></tr>
 </tbody></table>
+</div>
 
             </div>
         </div>
@@ -886,7 +961,8 @@ public class SortedConfigManager {
 }
 </code></pre></div>
 <h4>Map Implementations Comparison</h4>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Feature</th><th>HashMap</th><th>LinkedHashMap</th><th>TreeMap</th><th>ConcurrentHashMap</th></tr></thead><tbody>
 <tr><td><strong>Ordering</strong></td><td>None</td><td>Insertion/Access order</td><td>Sorted by key</td><td>None</td></tr>
 <tr><td><strong>Performance</strong></td><td>O(1) average</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td></tr>
@@ -895,6 +971,7 @@ public class SortedConfigManager {
 <tr><td><strong>Memory usage</strong></td><td>Lowest</td><td>Low-Medium</td><td>Highest</td><td>Medium-High</td></tr>
 <tr><td><strong>Use case</strong></td><td>General purpose</td><td>Order preservation</td><td>Sorted keys</td><td>Concurrent access</td></tr>
 </tbody></table>
+</div>
 
             </div>
         </div>
@@ -906,13 +983,15 @@ public class SortedConfigManager {
             </div>
             <div class="section-body">
                 <h4>Time Complexity Summary</h4>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Operation</th><th>ArrayList</th><th>LinkedList</th><th>HashSet</th><th>TreeSet</th><th>HashMap</th><th>TreeMap</th></tr></thead><tbody>
 <tr><td><strong>Add</strong></td><td>O(1) amortized</td><td>O(1)</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td><td>O(log n)</td></tr>
 <tr><td><strong>Remove</strong></td><td>O(n)</td><td>O(1) if position known</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td><td>O(log n)</td></tr>
 <tr><td><strong>Search/Contains</strong></td><td>O(n)</td><td>O(n)</td><td>O(1) average</td><td>O(log n)</td><td>O(1) average</td><td>O(log n)</td></tr>
 <tr><td><strong>Access by index</strong></td><td>O(1)</td><td>O(n)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
 </tbody></table>
+</div>
 
 <h4>Space Complexity</h4>
 <ul>
@@ -1229,7 +1308,8 @@ tests.removeIf(test -&gt; test.getStatus() == Status.FAILED);
 </code></pre></div>
 <h4>Q5: What is the difference between HashMap and ConcurrentHashMap?</h4>
 <h5>Answer:</h5>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Feature</th><th>HashMap</th><th>ConcurrentHashMap</th></tr></thead><tbody>
 <tr><td><strong>Thread Safety</strong></td><td>Not thread-safe</td><td>Thread-safe</td></tr>
 <tr><td><strong>Performance</strong></td><td>Faster (no sync overhead)</td><td>Slightly slower</td></tr>
@@ -1237,6 +1317,7 @@ tests.removeIf(test -&gt; test.getStatus() == Status.FAILED);
 <tr><td><strong>Locking</strong></td><td>No locking</td><td>Segmented locking</td></tr>
 <tr><td><strong>Iteration</strong></td><td>Fast but not thread-safe</td><td>Safe during concurrent modification</td></tr>
 </tbody></table>
+</div>
 
 <h5>Usage Example:</h5>
 <div class="code-block-java"><pre><code>
@@ -1289,13 +1370,15 @@ tests.sort((t1, t2) -&gt; {
 </code></pre></div>
 <h4>Q7: What is the difference between Iterator and ListIterator?</h4>
 <h5>Answer:</h5>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Feature</th><th>Iterator</th><th>ListIterator</th></tr></thead><tbody>
 <tr><td><strong>Direction</strong></td><td>Forward only</td><td>Both forward and backward</td></tr>
 <tr><td><strong>Collections</strong></td><td>All collections</td><td>Lists only</td></tr>
 <tr><td><strong>Modification</strong></td><td>remove() only</td><td>add(), remove(), set()</td></tr>
 <tr><td><strong>Index operations</strong></td><td>No</td><td>Yes (nextIndex(), previousIndex())</td></tr>
 </tbody></table>
+</div>
 
 <h5>Example:</h5>
 <div class="code-block-java"><pre><code>

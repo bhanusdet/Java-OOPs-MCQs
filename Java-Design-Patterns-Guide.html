@@ -203,14 +203,20 @@
             border: 1px solid #e2e8f0;
         }
 
+        .content-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
         .content-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 0;
             background: white;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .content-table th {
@@ -269,6 +275,10 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
             .header h1 {
                 font-size: 2rem;
             }
@@ -278,7 +288,8 @@
             }
             
             .section-body {
-                padding: 20px;
+                padding: 15px;
+                overflow-x: auto;
             }
 
             .code-block-java, .code-block-text {
@@ -289,6 +300,66 @@
             .code-block-java pre, .code-block-text pre {
                 padding: 15px;
                 font-size: 0.8rem;
+            }
+            
+            .content-table {
+                min-width: 100%;
+                font-size: 0.85rem;
+            }
+            
+            .content-table th,
+            .content-table td {
+                padding: 8px 6px;
+                min-width: 120px;
+                white-space: nowrap;
+            }
+            
+            .content-table th {
+                font-size: 0.85rem;
+            }
+            
+            .content-table td {
+                font-size: 0.8rem;
+            }
+            
+            /* Allow scrolling for table containers */
+            .section-body {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Ensure proper touch scrolling */
+            .content-table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .section-body {
+                padding: 10px;
+            }
+            
+            .content-table th,
+            .content-table td {
+                padding: 6px 4px;
+                font-size: 0.75rem;
+                min-width: 100px;
             }
         }
     </style>
@@ -735,7 +806,8 @@ public class LoginTest extends BaseTest {
             </div>
             <div class="section-body">
                 <h4>🚀 Quick Implementation Guide</h4>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Pattern</th><th>When to Use</th><th>SDET Example</th><th>Code Template</th></tr></thead><tbody>
 <tr><td><strong>Singleton</strong></td><td>Single instance needed</td><td>WebDriver, Config</td><td><code class="inline-code">private static volatile Instance</code></td></tr>
 <tr><td><strong>Factory</strong></td><td>Object creation varies</td><td>Browser, TestData</td><td><code class="inline-code">switch(type) { case "x": return new X(); }</code></td></tr>
@@ -746,9 +818,11 @@ public class LoginTest extends BaseTest {
 <tr><td><strong>Template Method</strong></td><td>Algorithm skeleton</td><td>Test workflow</td><td><code class="inline-code">final void templateMethod()</code></td></tr>
 <tr><td><strong>Adapter</strong></td><td>Interface compatibility</td><td>Third-party tools</td><td><code class="inline-code">implements Target, wraps Adaptee</code></td></tr>
 </tbody></table>
+</div>
 
 <h4>🎯 Pattern Selection for Common SDET Scenarios</h4>
-<table class="content-table">
+<div class="content-table-wrapper">
+    <table class="content-table">
 <thead><tr><th>Scenario</th><th>Recommended Pattern</th><th>Why?</th></tr></thead><tbody>
 <tr><td>WebDriver management</td><td>Singleton + Factory</td><td>Single instance + multiple browsers</td></tr>
 <tr><td>Page objects</td><td>Factory + Builder</td><td>Dynamic page creation + complex setup</td></tr>
@@ -758,6 +832,7 @@ public class LoginTest extends BaseTest {
 <tr><td>Test actions</td><td>Command</td><td>Undo capability + action logging</td></tr>
 <tr><td>Framework integration</td><td>Adapter</td><td>Third-party tool compatibility</td></tr>
 </tbody></table>
+</div>
 
 <p>--- </p>
             </div>

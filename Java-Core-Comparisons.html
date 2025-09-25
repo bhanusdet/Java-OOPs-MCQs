@@ -37,7 +37,7 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            overflow-x: auto;
         }
 
         .header {
@@ -131,14 +131,20 @@
             color: #d63384;
         }
 
+        .content-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
         .content-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 0;
             background: white;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .content-table th {
@@ -197,6 +203,10 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
             .header h1 {
                 font-size: 2rem;
             }
@@ -206,7 +216,68 @@
             }
             
             .section-body {
+                padding: 15px;
+                overflow-x: auto;
+            }
+            
+            .content-table {
+                min-width: 100%;
+                font-size: 0.85rem;
+            }
+            
+            .content-table th,
+            .content-table td {
+                padding: 8px 6px;
+                min-width: 120px;
+                white-space: nowrap;
+            }
+            
+            .content-table th {
+                font-size: 0.85rem;
+            }
+            
+            .content-table td {
+                font-size: 0.8rem;
+            }
+            
+            /* Allow scrolling for table containers */
+            .section-body {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Ensure proper touch scrolling */
+            .content-table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header {
                 padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .section-body {
+                padding: 10px;
+            }
+            
+            .content-table th,
+            .content-table td {
+                padding: 6px 4px;
+                font-size: 0.75rem;
+                min-width: 100px;
             }
         }
     </style>
@@ -224,8 +295,9 @@
             <div class="section-header">
                 <h3>🔹 OOPs Core Concepts</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
 <thead><tr><th>Feature</th><th>Encapsulation</th><th>Abstraction</th><th>Inheritance</th><th>Polymorphism</th></tr></thead><tbody>
 <tr><td><strong>Focus</strong></td><td>Hides <strong>data</strong> (variables)</td><td>Hides <strong>implementation</strong> (methods)</td><td>Reuse code by deriving new class from existing</td><td>Same method/behavior but in <strong>different forms</strong></td></tr>
 <tr><td><strong>Achieved by</strong></td><td>Access modifiers, getters/setters</td><td>Abstract classes & Interfaces</td><td><code class="inline-code">extends</code> (class) / <code class="inline-code">implements</code> (interface)</td><td>Method Overloading & Method Overriding</td></tr>
@@ -235,7 +307,7 @@
 <tr><td><strong>Real-life analogy</strong></td><td>Capsule hides medicine</td><td>Car hides engine complexity</td><td>Child inherits traits from parent (e.g., eye color)</td><td>A person acts as <strong>student, employee, customer</strong></td></tr>
 <tr><td><strong>Type</strong></td><td>Implementation detail</td><td>Design/Blueprint detail</td><td>Structural relationship</td><td>Behavioral relationship</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -244,8 +316,9 @@
             <div class="section-header">
                 <h3>🔹 Abstract Class vs Interface</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
 <thead><tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr></thead><tbody>
 <tr><td><strong>Purpose</strong></td><td>Provides a <strong>partial abstraction</strong> → can have both abstract and concrete methods</td><td>Provides a <strong>full abstraction contract</strong></td></tr>
 <tr><td><strong>Keywords</strong></td><td>Declared using <code class="inline-code">abstract</code> keyword</td><td>Declared using <code class="inline-code">interface</code> keyword</td></tr>
@@ -257,7 +330,7 @@
 <tr><td><strong>When to use</strong></td><td>Common code + enforce contracts</td><td>100% abstraction or multiple inheritance</td></tr>
 <tr><td><strong>Analogy</strong></td><td><em>Vehicle</em> class with partial implementation</td><td><em>Drivable</em>, <em>Flyable</em> → pure contracts</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -266,15 +339,16 @@
             <div class="section-header">
                 <h3>🔹 Access Modifiers</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
 <thead><tr><th>Modifier</th><th>Same Class</th><th>Same Package</th><th>Subclass (Diff Package)</th><th>Other Package</th><th>Example Usage</th></tr></thead><tbody>
 <tr><td><strong>public</strong></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td>APIs, utilities</td></tr>
 <tr><td><strong>protected</strong></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="cross-mark">❌</span></td><td>Subclass access</td></tr>
 <tr><td><strong>default (no keyword)</strong></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="cross-mark">❌</span></td><td><span class="cross-mark">❌</span></td><td>Package-private utilities</td></tr>
-<tr><td><strong>private</strong></td><td><span class="check-mark">✅</span></td><td><span class="cross-mark">❌</span></td><td><span class="cross-mark">❌</span></td><td><span class="cross-mark">❌</span></td><td>Encapsulation (sensitive data, helper methods)</td></tr>
+<tr><td><strong>private</strong></td><td><span class=\"check-mark\">✅</span></td><td><span class=\"cross-mark\">❌</span></td><td><span class=\"cross-mark\">❌</span></td><td><span class=\"cross-mark\">❌</span></td><td>Encapsulation (sensitive data, helper methods)</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -283,15 +357,16 @@
             <div class="section-header">
                 <h3>🔹 throw vs throws vs Exception vs Error</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
-<thead><tr><th>Feature</th><th><code class="inline-code">throw</code></th><th><code class="inline-code">throws</code></th><th>Checked Exception</th><th>Error</th></tr></thead><tbody>
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
+<thead><tr><th>Feature</th><th><code class=\"inline-code\">throw</code></th><th><code class=\"inline-code\">throws</code></th><th>Checked Exception</th><th>Error</th></tr></thead><tbody>
 <tr><td><strong>Type</strong></td><td>Keyword</td><td>Keyword</td><td>Class (recoverable issue)</td><td>Class (serious JVM issue)</td></tr>
 <tr><td><strong>Usage</strong></td><td>Explicitly throw exception</td><td>Declare exception in method signature</td><td>Must be caught/declared</td><td>Not recommended to catch</td></tr>
 <tr><td><strong>Checked?</strong></td><td>Can throw checked/unchecked</td><td>Declares only checked</td><td>Compile-time check</td><td>Runtime only</td></tr>
-<tr><td><strong>Example</strong></td><td><code class="inline-code">throw new IOException();</code></td><td><code class="inline-code">void read() throws IOException {}</code></td><td><code class="inline-code">IOException</code>, <code class="inline-code">SQLException</code></td><td><code class="inline-code">OutOfMemoryError</code>, <code class="inline-code">StackOverflow</code></td></tr>
+<tr><td><strong>Example</strong></td><td><code class=\"inline-code\">throw new IOException();</code></td><td><code class=\"inline-code\">void read() throws IOException {}</code></td><td><code class=\"inline-code\">IOException</code>, <code class=\"inline-code\">SQLException</code></td><td><code class=\"inline-code\">OutOfMemoryError</code>, <code class=\"inline-code\">StackOverflow</code></td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -300,15 +375,16 @@
             <div class="section-header">
                 <h3>🔹 final vs finally vs finalize</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
-<thead><tr><th>Feature</th><th><code class="inline-code">final</code></th><th><code class="inline-code">finally</code></th><th><code class="inline-code">finalize</code></th></tr></thead><tbody>
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
+<thead><tr><th>Feature</th><th><code class=\"inline-code\">final</code></th><th><code class=\"inline-code\">finally</code></th><th><code class=\"inline-code\">finalize</code></th></tr></thead><tbody>
 <tr><td><strong>Type</strong></td><td>Keyword</td><td>Block</td><td>Method (<code class="inline-code">protected void finalize()</code>)</td></tr>
 <tr><td><strong>Usage</strong></td><td>Const variables, prevent inheritance, prevent override</td><td>Cleanup code after try-catch</td><td>Called by GC before object destruction</td></tr>
 <tr><td><strong>Execution</strong></td><td>Compile-time restriction</td><td>Always executes (except <code class="inline-code">System.exit(0)</code>)</td><td>Not guaranteed (GC dependent, deprecated)</td></tr>
-<tr><td><strong>Example</strong></td><td><code class="inline-code">final int x=10;</code> <br> <code class="inline-code">final class A{}</code></td><td><code class="inline-code">try{} finally{}</code></td><td><code class="inline-code">@Override protected void finalize(){}</code></td></tr>
+<tr><td><strong>Example</strong></td><td><code class=\"inline-code\">final int x=10;</code> <br> <code class=\"inline-code\">final class A{}</code></td><td><code class=\"inline-code\">try{} finally{}</code></td><td><code class=\"inline-code\">@Override protected void finalize(){}</code></td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -317,14 +393,15 @@
             <div class="section-header">
                 <h3>🔹 == vs equals()</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
-<thead><tr><th>Feature</th><th><code class="inline-code">==</code> (operator)</th><th><code class="inline-code">.equals()</code> (method)</th></tr></thead><tbody>
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
+<thead><tr><th>Feature</th><th><code class=\"inline-code\">==</code> (operator)</th><th><code class=\"inline-code\">.equals()</code> (method)</th></tr></thead><tbody>
 <tr><td><strong>Checks</strong></td><td>Reference (memory address)</td><td>Value/content equality (can override)</td></tr>
 <tr><td><strong>Default</strong></td><td>Works for primitives & references</td><td>From <code class="inline-code">Object</code> → same as <code class="inline-code">==</code> unless overridden</td></tr>
-<tr><td><strong>Example</strong></td><td><code class="inline-code">s1 == s2</code> → false (different refs)</td><td><code class="inline-code">s1.equals(s2)</code> → true (same content)</td></tr>
+<tr><td><strong>Example</strong></td><td><code class=\"inline-code\">s1 == s2</code> → false (different refs)</td><td><code class=\"inline-code\">s1.equals(s2)</code> → true (same content)</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -333,14 +410,15 @@
             <div class="section-header">
                 <h3>🔹 String vs StringBuilder vs StringBuffer</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
-<thead><tr><th>Feature</th><th><code class="inline-code">String</code></th><th><code class="inline-code">StringBuilder</code></th><th><code class="inline-code">StringBuffer</code></th></tr></thead><tbody>
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
+<thead><tr><th>Feature</th><th><code class=\"inline-code\">String</code></th><th><code class=\"inline-code\">StringBuilder</code></th><th><code class=\"inline-code\">StringBuffer</code></th></tr></thead><tbody>
 <tr><td><strong>Mutability</strong></td><td>Immutable</td><td>Mutable</td><td>Mutable</td></tr>
 <tr><td><strong>Thread Safety</strong></td><td>Immutable = safe</td><td>Not thread-safe</td><td>Thread-safe (synchronized)</td></tr>
 <tr><td><strong>Performance</strong></td><td>Slower for changes</td><td>Fastest for single-thread</td><td>Slower than Builder</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -349,14 +427,15 @@
             <div class="section-header">
                 <h3>🔹 Checked vs Unchecked Exception</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
 <thead><tr><th>Feature</th><th>Checked Exception</th><th>Unchecked Exception</th></tr></thead><tbody>
 <tr><td><strong>Type</strong></td><td>Compile-time</td><td>Runtime</td></tr>
 <tr><td><strong>Examples</strong></td><td><code class="inline-code">IOException</code>, <code class="inline-code">SQLException</code></td><td><code class="inline-code">NullPointerException</code>, <code class="inline-code">ArithmeticException</code></td></tr>
 <tr><td><strong>Handling</strong></td><td>Must declare/handle</td><td>No declaration needed</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -365,14 +444,15 @@
             <div class="section-header">
                 <h3>🔹 Overloading vs Overriding</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
 <thead><tr><th>Feature</th><th>Overloading (Compile-time)</th><th>Overriding (Runtime)</th></tr></thead><tbody>
 <tr><td><strong>Params</strong></td><td>Must differ (type/number/order)</td><td>Must be same</td></tr>
 <tr><td><strong>Return type</strong></td><td>Can differ (covariant allowed)</td><td>Must be same or covariant</td></tr>
 <tr><td><strong>Polymorphism</strong></td><td>Compile-time</td><td>Runtime</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -381,14 +461,15 @@
             <div class="section-header">
                 <h3>🔹 Comparable vs Comparator</h3>
             </div>
-            <div class="section-body">
-                <table class="content-table">
+            <div class=\"section-body\">
+                <div class=\"content-table-wrapper\">
+                    <table class=\"content-table\">
 <thead><tr><th>Feature</th><th>Comparable</th><th>Comparator</th></tr></thead><tbody>
 <tr><td><strong>Package</strong></td><td><code class="inline-code">java.lang</code></td><td><code class="inline-code">java.util</code></td></tr>
 <tr><td><strong>Method</strong></td><td><code class="inline-code">compareTo(Object o)</code></td><td><code class="inline-code">compare(Object o1, Object o2)</code></td></tr>
 <tr><td><strong>Sorting</strong></td><td>Natural ordering</td><td>Custom ordering</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -398,12 +479,13 @@
                 <h3>🔹 this vs super</h3>
             </div>
             <div class="section-body">
-                <table class="content-table">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
 <thead><tr><th>Feature</th><th><code class="inline-code">this</code></th><th><code class="inline-code">super</code></th></tr></thead><tbody>
 <tr><td><strong>Refers to</strong></td><td>Current object</td><td>Parent class object</td></tr>
 <tr><td><strong>Usage</strong></td><td>Call current fields/methods</td><td>Call parent fields/methods/ctor</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -413,13 +495,14 @@
                 <h3>🔹 Heap vs Stack Memory</h3>
             </div>
             <div class="section-body">
-                <table class="content-table">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
 <thead><tr><th>Feature</th><th>Stack Memory</th><th>Heap Memory</th></tr></thead><tbody>
 <tr><td><strong>Stores</strong></td><td>Method calls, local vars</td><td>Objects, instance vars</td></tr>
 <tr><td><strong>Access</strong></td><td>LIFO, very fast</td><td>Slower, managed by GC</td></tr>
 <tr><td><strong>Life</strong></td><td>Until method ends</td><td>Until GC collects</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -429,13 +512,14 @@
                 <h3>🔹 String Pool vs Heap String</h3>
             </div>
             <div class="section-body">
-                <table class="content-table">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
 <thead><tr><th>Feature</th><th>String Pool (interned)</th><th>Heap String</th></tr></thead><tbody>
 <tr><td><strong>Creation</strong></td><td><code class="inline-code">"abc"</code></td><td><code class="inline-code">new String("abc")</code></td></tr>
 <tr><td><strong>Memory</strong></td><td>Shared in SCP</td><td>New object in Heap</td></tr>
 <tr><td><strong>Equality</strong></td><td>Same ref for same value</td><td>Always new reference</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -445,13 +529,14 @@
                 <h3>🔹 Process vs Thread</h3>
             </div>
             <div class="section-body">
-                <table class="content-table">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
 <thead><tr><th>Feature</th><th>Process</th><th>Thread</th></tr></thead><tbody>
 <tr><td><strong>Definition</strong></td><td>Independent program in execution</td><td>Lightweight unit inside process</td></tr>
 <tr><td><strong>Memory</strong></td><td>Own memory space</td><td>Shared memory with process</td></tr>
 <tr><td><strong>Switching</strong></td><td>Expensive (context switch)</td><td>Cheaper switching</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -461,13 +546,14 @@
                 <h3>🔹 Synchronized Method vs Synchronized Block</h3>
             </div>
             <div class="section-body">
-                <table class="content-table">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
 <thead><tr><th>Feature</th><th>Synchronized Method</th><th>Synchronized Block</th></tr></thead><tbody>
 <tr><td><strong>Scope</strong></td><td>Locks entire method</td><td>Locks only specific block/object</td></tr>
 <tr><td><strong>Performance</strong></td><td>Less efficient</td><td>More efficient</td></tr>
 <tr><td><strong>Granularity</strong></td><td>Coarse-grained</td><td>Fine-grained</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -477,13 +563,14 @@
                 <h3>🔹 Enumeration vs Iterator vs ListIterator</h3>
             </div>
             <div class="section-body">
-                <table class="content-table">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
 <thead><tr><th>Feature</th><th>Enumeration (Legacy)</th><th>Iterator</th><th>ListIterator</th></tr></thead><tbody>
 <tr><td><strong>Direction</strong></td><td>Forward only</td><td>Forward only</td><td>Forward + Backward</td></tr>
 <tr><td><strong>Modification</strong></td><td>Cannot remove</td><td>Can remove</td><td>Can add/remove/update</td></tr>
 <tr><td><strong>Use-case</strong></td><td>Legacy collections</td><td>All collections</td><td>Lists only</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
@@ -493,12 +580,13 @@
                 <h3>🔹 WeakReference vs SoftReference vs StrongReference</h3>
             </div>
             <div class="section-body">
-                <table class="content-table">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
 <thead><tr><th>Feature</th><th>Strong Reference</th><th>Soft Reference</th><th>Weak Reference</th></tr></thead><tbody>
 <tr><td><strong>GC Behavior</strong></td><td>Never collected until unreachable</td><td>Collected if memory needed</td><td>Collected at next GC cycle</td></tr>
 <tr><td><strong>Use-case</strong></td><td>Normal objects</td><td>Caching</td><td>WeakHashMap, listeners</td></tr>
 </tbody></table>
-
+                </div>
             </div>
         </div>
         
