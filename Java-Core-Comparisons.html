@@ -57,7 +57,70 @@
             font-size: 1.1rem;
             opacity: 0.9;
             max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        .quick-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .quick-nav h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            max-width: 900px;
             margin: 0 auto;
+        }
+
+        .nav-item {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .category-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .category-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
         }
 
         .content {
@@ -211,6 +274,27 @@
                 font-size: 2rem;
             }
             
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .quick-nav {
+                padding: 20px;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .category-header {
+                padding: 20px;
+            }
+            
+            .category-header h2 {
+                font-size: 1.5rem;
+            }
+            
             .content {
                 padding: 20px;
             }
@@ -258,11 +342,32 @@
             }
             
             .header {
-                padding: 20px;
+                padding: 20px 15px;
             }
             
             .header h1 {
                 font-size: 1.8rem;
+            }
+            
+            .quick-nav {
+                padding: 15px;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-item {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .category-header {
+                padding: 15px;
+            }
+            
+            .category-header h2 {
+                font-size: 1.3rem;
             }
             
             .content {
@@ -287,203 +392,207 @@
         <div class="header" id="top">
             <h1>📖 Java Core Concepts - Complete Comparisons</h1>
             <p>Complete reference guide with side-by-side comparisons of core Java concepts.</p>
+            
+            <!-- Quick Navigation -->
+            <div class="quick-nav">
+                <h3>🚀 Quick Navigation</h3>
+                <div class="nav-grid">
+                    <a href="#oops-concepts" class="nav-item">🔹 OOPs Concepts</a>
+                    <a href="#classes-interfaces" class="nav-item">🔹 Classes & Interfaces</a>
+                    <a href="#keywords-modifiers" class="nav-item">🔹 Keywords & Modifiers</a>
+                    <a href="#memory-management" class="nav-item">🔹 Memory Management</a>
+                    <a href="#string-operations" class="nav-item">🔹 String Operations</a>
+                    <a href="#exception-handling" class="nav-item">🔹 Exception Handling</a>
+                    <a href="#concurrency" class="nav-item">🔹 Concurrency</a>
+                    <a href="#collections-comparison" class="nav-item">🔹 Collections</a>
+                </div>
+            </div>
         </div>
 
         <div class="content">
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 OOPs Core Concepts</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th>Encapsulation</th><th>Abstraction</th><th>Inheritance</th><th>Polymorphism</th></tr></thead><tbody>
-<tr><td><strong>Focus</strong></td><td>Hides <strong>data</strong> (variables)</td><td>Hides <strong>implementation</strong> (methods)</td><td>Reuse code by deriving new class from existing</td><td>Same method/behavior but in <strong>different forms</strong></td></tr>
-<tr><td><strong>Achieved by</strong></td><td>Access modifiers, getters/setters</td><td>Abstract classes & Interfaces</td><td><code class="inline-code">extends</code> (class) / <code class="inline-code">implements</code> (interface)</td><td>Method Overloading & Method Overriding</td></tr>
-<tr><td><strong>Purpose</strong></td><td>Data hiding & protection</td><td>Show only essential features</td><td>Promote reusability and hierarchical relationships</td><td>Flexibility & dynamic behavior at runtime</td></tr>
-<tr><td><strong>Access</strong></td><td>Restricts direct access to fields</td><td>Restricts knowledge of "how"</td><td>Child class inherits parent's fields & methods</td><td>One interface, many implementations</td></tr>
-<tr><td><strong>Code Impact</strong></td><td>Secure and controlled access</td><td>Defines contracts (what to do)</td><td>Reduces redundancy, improves maintainability</td><td>Increases extensibility, promotes loose coupling</td></tr>
-<tr><td><strong>Real-life analogy</strong></td><td>Capsule hides medicine</td><td>Car hides engine complexity</td><td>Child inherits traits from parent (e.g., eye color)</td><td>A person acts as <strong>student, employee, customer</strong></td></tr>
-<tr><td><strong>Type</strong></td><td>Implementation detail</td><td>Design/Blueprint detail</td><td>Structural relationship</td><td>Behavioral relationship</td></tr>
-</tbody></table>
+            
+            <!-- OOPs Concepts Section -->
+            <div class="category-section" id="oops-concepts">
+                <div class="category-header">
+                    <h2>🔹 Object-Oriented Programming Concepts</h2>
+                    <p>Core OOPs principles and their relationships</p>
                 </div>
-            </div>
-        </div>
-        
 
+            </div>
+            
         <div class="content-section">
             <div class="section-header">
-                <h3>🔹 Abstract Class vs Interface</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr></thead><tbody>
-<tr><td><strong>Purpose</strong></td><td>Provides a <strong>partial abstraction</strong> → can have both abstract and concrete methods</td><td>Provides a <strong>full abstraction contract</strong></td></tr>
-<tr><td><strong>Keywords</strong></td><td>Declared using <code class="inline-code">abstract</code> keyword</td><td>Declared using <code class="inline-code">interface</code> keyword</td></tr>
-<tr><td><strong>Method Types</strong></td><td>Abstract + Concrete + Static + Final</td><td>Java 7 → Abstract only <br> Java 8 → Default + Static <br> Java 9 → Private methods also</td></tr>
-<tr><td><strong>Variables</strong></td><td>Instance variables allowed</td><td>Only <code class="inline-code">public static final</code> (constants)</td></tr>
-<tr><td><strong>Access Modifiers</strong></td><td><code class="inline-code">public</code>, <code class="inline-code">protected</code>, <code class="inline-code">private</code></td><td>Always <code class="inline-code">public</code></td></tr>
-<tr><td><strong>Multiple Inheritance</strong></td><td>Only <strong>one</strong> abstract class</td><td>Multiple interfaces supported</td></tr>
-<tr><td><strong>Constructor</strong></td><td>Allowed</td><td>Not allowed</td></tr>
-<tr><td><strong>When to use</strong></td><td>Common code + enforce contracts</td><td>100% abstraction or multiple inheritance</td></tr>
-<tr><td><strong>Analogy</strong></td><td><em>Vehicle</em> class with partial implementation</td><td><em>Drivable</em>, <em>Flyable</em> → pure contracts</td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 Access Modifiers</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Modifier</th><th>Same Class</th><th>Same Package</th><th>Subclass (Diff Package)</th><th>Other Package</th><th>Example Usage</th></tr></thead><tbody>
-<tr><td><strong>public</strong></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td>APIs, utilities</td></tr>
-<tr><td><strong>protected</strong></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="cross-mark">❌</span></td><td>Subclass access</td></tr>
-<tr><td><strong>default (no keyword)</strong></td><td><span class="check-mark">✅</span></td><td><span class="check-mark">✅</span></td><td><span class="cross-mark">❌</span></td><td><span class="cross-mark">❌</span></td><td>Package-private utilities</td></tr>
-<tr><td><strong>private</strong></td><td><span class=\"check-mark\">✅</span></td><td><span class=\"cross-mark\">❌</span></td><td><span class=\"cross-mark\">❌</span></td><td><span class=\"cross-mark\">❌</span></td><td>Encapsulation (sensitive data, helper methods)</td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 throw vs throws vs Exception vs Error</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th><code class=\"inline-code\">throw</code></th><th><code class=\"inline-code\">throws</code></th><th>Checked Exception</th><th>Error</th></tr></thead><tbody>
-<tr><td><strong>Type</strong></td><td>Keyword</td><td>Keyword</td><td>Class (recoverable issue)</td><td>Class (serious JVM issue)</td></tr>
-<tr><td><strong>Usage</strong></td><td>Explicitly throw exception</td><td>Declare exception in method signature</td><td>Must be caught/declared</td><td>Not recommended to catch</td></tr>
-<tr><td><strong>Checked?</strong></td><td>Can throw checked/unchecked</td><td>Declares only checked</td><td>Compile-time check</td><td>Runtime only</td></tr>
-<tr><td><strong>Example</strong></td><td><code class=\"inline-code\">throw new IOException();</code></td><td><code class=\"inline-code\">void read() throws IOException {}</code></td><td><code class=\"inline-code\">IOException</code>, <code class=\"inline-code\">SQLException</code></td><td><code class=\"inline-code\">OutOfMemoryError</code>, <code class=\"inline-code\">StackOverflow</code></td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 final vs finally vs finalize</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th><code class=\"inline-code\">final</code></th><th><code class=\"inline-code\">finally</code></th><th><code class=\"inline-code\">finalize</code></th></tr></thead><tbody>
-<tr><td><strong>Type</strong></td><td>Keyword</td><td>Block</td><td>Method (<code class="inline-code">protected void finalize()</code>)</td></tr>
-<tr><td><strong>Usage</strong></td><td>Const variables, prevent inheritance, prevent override</td><td>Cleanup code after try-catch</td><td>Called by GC before object destruction</td></tr>
-<tr><td><strong>Execution</strong></td><td>Compile-time restriction</td><td>Always executes (except <code class="inline-code">System.exit(0)</code>)</td><td>Not guaranteed (GC dependent, deprecated)</td></tr>
-<tr><td><strong>Example</strong></td><td><code class=\"inline-code\">final int x=10;</code> <br> <code class=\"inline-code\">final class A{}</code></td><td><code class=\"inline-code\">try{} finally{}</code></td><td><code class=\"inline-code\">@Override protected void finalize(){}</code></td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 == vs equals()</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th><code class=\"inline-code\">==</code> (operator)</th><th><code class=\"inline-code\">.equals()</code> (method)</th></tr></thead><tbody>
-<tr><td><strong>Checks</strong></td><td>Reference (memory address)</td><td>Value/content equality (can override)</td></tr>
-<tr><td><strong>Default</strong></td><td>Works for primitives & references</td><td>From <code class="inline-code">Object</code> → same as <code class="inline-code">==</code> unless overridden</td></tr>
-<tr><td><strong>Example</strong></td><td><code class=\"inline-code\">s1 == s2</code> → false (different refs)</td><td><code class=\"inline-code\">s1.equals(s2)</code> → true (same content)</td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 String vs StringBuilder vs StringBuffer</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th><code class=\"inline-code\">String</code></th><th><code class=\"inline-code\">StringBuilder</code></th><th><code class=\"inline-code\">StringBuffer</code></th></tr></thead><tbody>
-<tr><td><strong>Mutability</strong></td><td>Immutable</td><td>Mutable</td><td>Mutable</td></tr>
-<tr><td><strong>Thread Safety</strong></td><td>Immutable = safe</td><td>Not thread-safe</td><td>Thread-safe (synchronized)</td></tr>
-<tr><td><strong>Performance</strong></td><td>Slower for changes</td><td>Fastest for single-thread</td><td>Slower than Builder</td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 Checked vs Unchecked Exception</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th>Checked Exception</th><th>Unchecked Exception</th></tr></thead><tbody>
-<tr><td><strong>Type</strong></td><td>Compile-time</td><td>Runtime</td></tr>
-<tr><td><strong>Examples</strong></td><td><code class="inline-code">IOException</code>, <code class="inline-code">SQLException</code></td><td><code class="inline-code">NullPointerException</code>, <code class="inline-code">ArithmeticException</code></td></tr>
-<tr><td><strong>Handling</strong></td><td>Must declare/handle</td><td>No declaration needed</td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 Overloading vs Overriding</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th>Overloading (Compile-time)</th><th>Overriding (Runtime)</th></tr></thead><tbody>
-<tr><td><strong>Params</strong></td><td>Must differ (type/number/order)</td><td>Must be same</td></tr>
-<tr><td><strong>Return type</strong></td><td>Can differ (covariant allowed)</td><td>Must be same or covariant</td></tr>
-<tr><td><strong>Polymorphism</strong></td><td>Compile-time</td><td>Runtime</td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 Comparable vs Comparator</h3>
-            </div>
-            <div class=\"section-body\">
-                <div class=\"content-table-wrapper\">
-                    <table class=\"content-table\">
-<thead><tr><th>Feature</th><th>Comparable</th><th>Comparator</th></tr></thead><tbody>
-<tr><td><strong>Package</strong></td><td><code class="inline-code">java.lang</code></td><td><code class="inline-code">java.util</code></td></tr>
-<tr><td><strong>Method</strong></td><td><code class="inline-code">compareTo(Object o)</code></td><td><code class="inline-code">compare(Object o1, Object o2)</code></td></tr>
-<tr><td><strong>Sorting</strong></td><td>Natural ordering</td><td>Custom ordering</td></tr>
-</tbody></table>
-                </div>
-            </div>
-        </div>
-        
-
-        <div class="content-section">
-            <div class="section-header">
-                <h3>🔹 this vs super</h3>
+                <h3>Encapsulation vs Abstraction</h3>
             </div>
             <div class="section-body">
                 <div class="content-table-wrapper">
                     <table class="content-table">
-<thead><tr><th>Feature</th><th><code class="inline-code">this</code></th><th><code class="inline-code">super</code></th></tr></thead><tbody>
-<tr><td><strong>Refers to</strong></td><td>Current object</td><td>Parent class object</td></tr>
-<tr><td><strong>Usage</strong></td><td>Call current fields/methods</td><td>Call parent fields/methods/ctor</td></tr>
+<thead><tr><th>Feature</th><th>Encapsulation</th><th>Abstraction</th></tr></thead><tbody>
+<tr><td><strong>Primary Focus</strong></td><td>Hides <strong>data</strong> (variables and internal state)</td><td>Hides <strong>implementation details</strong> (how methods work)</td></tr>
+<tr><td><strong>What it hides</strong></td><td>Data members, internal variables</td><td>Method implementations, complex logic</td></tr>
+<tr><td><strong>How it's achieved</strong></td><td>Access modifiers (<code class="inline-code">private</code>, <code class="inline-code">protected</code>), getters/setters</td><td>Abstract classes, interfaces, method signatures</td></tr>
+<tr><td><strong>Purpose</strong></td><td>Data security, controlled access, data integrity</td><td>Show only essential features, reduce complexity</td></tr>
+<tr><td><strong>Level of control</strong></td><td>Controls <strong>access</strong> to data</td><td>Controls <strong>exposure</strong> of functionality</td></tr>
+<tr><td><strong>Implementation binding</strong></td><td>Tightly bound to data structure</td><td>Loosely bound - focuses on contracts</td></tr>
+<tr><td><strong>Flexibility</strong></td><td>Less flexible - tied to specific data</td><td>More flexible - multiple implementations possible</td></tr>
+<tr><td><strong>Design focus</strong></td><td><strong>Data-centric</strong> - protecting information</td><td><strong>Behavior-centric</strong> - defining contracts</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Medicine capsule hides the drug inside</td><td>Car dashboard hides engine complexity</td></tr>
+<tr><td><strong>Code example</strong></td><td><code class="inline-code">private String name; public getName()</code></td><td><code class="inline-code">abstract void draw(); interface Shape{}</code></td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Inheritance vs Polymorphism</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th>Inheritance</th><th>Polymorphism</th></tr></thead><tbody>
+<tr><td><strong>Primary Focus</strong></td><td><strong>Code reuse</strong> by deriving new classes from existing ones</td><td><strong>Multiple forms</strong> - same interface, different behaviors</td></tr>
+<tr><td><strong>Relationship Type</strong></td><td>Structural relationship (<strong>is-a</strong> relationship)</td><td>Behavioral relationship (<strong>behaves-as</strong> relationship)</td></tr>
+<tr><td><strong>How it's achieved</strong></td><td><code class="inline-code">extends</code> (class) / <code class="inline-code">implements</code> (interface)</td><td>Method Overloading (compile-time) & Method Overriding (runtime)</td></tr>
+<tr><td><strong>Purpose</strong></td><td>Promote reusability, establish hierarchical relationships</td><td>Flexibility, dynamic behavior at runtime</td></tr>
+<tr><td><strong>Code Impact</strong></td><td>Reduces redundancy, improves maintainability</td><td>Increases extensibility, promotes loose coupling</td></tr>
+<tr><td><strong>Binding Time</strong></td><td>Compile-time (static relationship)</td><td>Compile-time (overloading) + Runtime (overriding)</td></tr>
+<tr><td><strong>Dependency</strong></td><td>Child depends on parent structure</td><td>Caller depends on interface, not implementation</td></tr>
+<tr><td><strong>Design Pattern</strong></td><td>Template Method, Strategy (with inheritance)</td><td>Strategy, Factory, Command patterns</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Child inherits traits from parent (eye color, height)</td><td>Person acts as student, employee, customer (same person, different roles)</td></tr>
+<tr><td><strong>Code example</strong></td><td><code class="inline-code">class Dog extends Animal</code></td><td><code class="inline-code">Animal a = new Dog(); a.sound();</code></td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+            <!-- Classes & Interfaces Section -->
+            <div class="category-section" id="classes-interfaces">
+                <div class="category-header">
+                    <h2>🔹 Classes & Interfaces</h2>
+                    <p>Understanding different class types and interface concepts</p>
+                </div>
+            </div>
+            
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Abstract Class vs Interface</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr></thead><tbody>
+<tr><td><strong>Primary Purpose</strong></td><td>Provides <strong>partial abstraction</strong> with shared implementation</td><td>Provides <strong>complete abstraction</strong> and defines contracts</td></tr>
+<tr><td><strong>Declaration Keyword</strong></td><td><code class="inline-code">abstract class ClassName</code></td><td><code class="inline-code">interface InterfaceName</code></td></tr>
+<tr><td><strong>Method Types Allowed</strong></td><td>Abstract, concrete, static, final methods</td><td>Abstract, default (Java 8+), static (Java 8+), private (Java 9+)</td></tr>
+<tr><td><strong>Variable Types</strong></td><td>Instance variables, static variables, constants</td><td>Only <code class="inline-code">public static final</code> constants</td></tr>
+<tr><td><strong>Variable Access Modifiers</strong></td><td>public, protected, private, default</td><td>Implicitly <code class="inline-code">public static final</code></td></tr>
+<tr><td><strong>Method Access Modifiers</strong></td><td>public, protected, private, default</td><td>public (default), private (Java 9+)</td></tr>
+<tr><td><strong>Constructor Support</strong></td><td>Can have constructors (but cannot be instantiated)</td><td>Cannot have constructors</td></tr>
+<tr><td><strong>Inheritance Limitation</strong></td><td>Single inheritance - <code class="inline-code">extends</code> only one abstract class</td><td>Multiple inheritance - <code class="inline-code">implements</code> multiple interfaces</td></tr>
+<tr><td><strong>Instantiation</strong></td><td>Cannot be instantiated directly</td><td>Cannot be instantiated directly</td></tr>
+<tr><td><strong>Implementation Requirement</strong></td><td>Subclass must implement all abstract methods</td><td>Implementing class must implement all abstract methods</td></tr>
+<tr><td><strong>Code Reusability</strong></td><td>High - provides common implementation to subclasses</td><td>Lower - mainly defines contracts (but default methods help)</td></tr>
+<tr><td><strong>Design Flexibility</strong></td><td>Less flexible - tight coupling with subclasses</td><td>More flexible - loose coupling, multiple inheritance</td></tr>
+<tr><td><strong>Performance</strong></td><td>Faster - direct method calls</td><td>Slightly slower - interface method calls</td></tr>
+<tr><td><strong>Use Case</strong></td><td>When classes share common code and need some abstraction</td><td>When you need contracts, multiple inheritance, or 100% abstraction</td></tr>
+<tr><td><strong>Evolution Support</strong></td><td>Adding methods breaks existing subclasses</td><td>Default methods (Java 8+) allow evolution without breaking</td></tr>
+<tr><td><strong>Real-life Analogy</strong></td><td>Vehicle blueprint with some pre-built parts (engine, wheels)</td><td>Driving license requirements - pure rules/contracts</td></tr>
+<tr><td><strong>Example</strong></td><td><code class="inline-code">abstract class Animal { abstract void sound(); void sleep() {...} }</code></td><td><code class="inline-code">interface Drawable { void draw(); default void resize() {...} }</code></td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+            <!-- Keywords & Modifiers Section -->
+            <div class="category-section" id="keywords-modifiers">
+                <div class="category-header">
+                    <h2>🔹 Keywords & Modifiers</h2>
+                    <p>Access control and special keywords in Java</p>
+                </div>
+            </div>
+            
+        <div class="content-section">
+            <div class="section-header">
+                <h3>public vs protected vs default vs private</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th><code class="inline-code">public</code></th><th><code class="inline-code">protected</code></th><th><code class="inline-code">default</code></th><th><code class="inline-code">private</code></th></tr></thead><tbody>
+<tr><td><strong>Visibility Scope</strong></td><td>Everywhere (global access)</td><td>Same package + subclasses</td><td>Same package only</td><td>Same class only</td></tr>
+<tr><td><strong>Access from Same Class</strong></td><td><span class="check-mark">✅</span> Yes</td><td><span class="check-mark">✅</span> Yes</td><td><span class="check-mark">✅</span> Yes</td><td><span class="check-mark">✅</span> Yes</td></tr>
+<tr><td><strong>Access from Same Package</strong></td><td><span class="check-mark">✅</span> Yes</td><td><span class="check-mark">✅</span> Yes</td><td><span class="check-mark">✅</span> Yes</td><td><span class="cross-mark">❌</span> No</td></tr>
+<tr><td><strong>Access from Subclass (Different Package)</strong></td><td><span class="check-mark">✅</span> Yes</td><td><span class="check-mark">✅</span> Yes</td><td><span class="cross-mark">❌</span> No</td><td><span class="cross-mark">❌</span> No</td></tr>
+<tr><td><strong>Access from Other Package</strong></td><td><span class="check-mark">✅</span> Yes</td><td><span class="cross-mark">❌</span> No</td><td><span class="cross-mark">❌</span> No</td><td><span class="cross-mark">❌</span> No</td></tr>
+<tr><td><strong>Inheritance Behavior</strong></td><td>Inherited as public</td><td>Inherited as protected</td><td>Inherited if same package</td><td>Not inherited</td></tr>
+<tr><td><strong>Security Level</strong></td><td>Least secure (open to all)</td><td>Medium (family access)</td><td>Medium (package access)</td><td>Most secure (class only)</td></tr>
+<tr><td><strong>Common Use Cases</strong></td><td>APIs, public interfaces, main methods</td><td>Methods for subclasses, template method pattern</td><td>Package utilities, internal helpers</td><td>Data hiding, internal implementation</td></tr>
+<tr><td><strong>Design Principle</strong></td><td>Open for extension and use</td><td>Family/inheritance-focused</td><td>Package cohesion</td><td>Encapsulation and data hiding</td></tr>
+<tr><td><strong>Real-life Analogy</strong></td><td>Public park - anyone can enter</td><td>Family house - family + invited guests</td><td>Office building - employees only</td><td>Personal diary - owner only</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+            <!-- Exception Handling Section -->
+            <div class="category-section" id="exception-handling">
+                <div class="category-header">
+                    <h2>🔹 Exception Handling</h2>
+                    <p>Exception management and error handling mechanisms</p>
+                </div>
+            </div>
+            
+        <div class="content-section">
+            <div class="section-header">
+                <h3>throw vs throws</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th><code class="inline-code">throw</code> keyword</th><th><code class="inline-code">throws</code> keyword</th></tr></thead><tbody>
+<tr><td><strong>Purpose</strong></td><td><strong>Explicitly throws</strong> an exception instance</td><td><strong>Declares</strong> that a method may throw exceptions</td></tr>
+<tr><td><strong>Usage Location</strong></td><td>Inside method body</td><td>In method signature (after parameters)</td></tr>
+<tr><td><strong>What it handles</strong></td><td>Actual exception object</td><td>Exception class names</td></tr>
+<tr><td><strong>Syntax</strong></td><td><code class="inline-code">throw new ExceptionType("message");</code></td><td><code class="inline-code">void method() throws ExceptionType1, ExceptionType2</code></td></tr>
+<tr><td><strong>Exception types</strong></td><td>Can throw any exception (checked/unchecked)</td><td>Typically declares checked exceptions</td></tr>
+<tr><td><strong>Immediate action</strong></td><td>Immediately terminates current execution</td><td>No immediate action - just declaration</td></tr>
+<tr><td><strong>Number of exceptions</strong></td><td>Throws <strong>one</strong> exception at a time</td><td>Can declare <strong>multiple</strong> exception types</td></tr>
+<tr><td><strong>Compiler requirement</strong></td><td>Must handle or declare checked exceptions</td><td>Callers must handle declared checked exceptions</td></tr>
+<tr><td><strong>Control flow</strong></td><td>Transfers control to exception handler</td><td>Does not affect control flow</td></tr>
+<tr><td><strong>Method contract</strong></td><td>Executes the throwing action</td><td>Defines the method's exception contract</td></tr>
+<tr><td><strong>Common use cases</strong></td><td>Custom validation, re-throwing exceptions</td><td>File I/O, database operations, network calls</td></tr>
+<tr><td><strong>Example</strong></td><td><code class="inline-code">if (age < 0) throw new IllegalArgumentException("Invalid age");</code></td><td><code class="inline-code">public void readFile() throws IOException, FileNotFoundException</code></td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Actually throwing a ball</td><td>Warning sign: "This area may have falling rocks"</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Exception vs Error</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th>Exception</th><th>Error</th></tr></thead><tbody>
+<tr><td><strong>Definition</strong></td><td><strong>Recoverable</strong> conditions that applications should handle</td><td><strong>Serious problems</strong> that applications should not handle</td></tr>
+<tr><td><strong>Inheritance Hierarchy</strong></td><td>Direct subclass of <code class="inline-code">Throwable</code></td><td>Direct subclass of <code class="inline-code">Throwable</code></td></tr>
+<tr><td><strong>Recovery Expectation</strong></td><td>Expected to be caught and handled gracefully</td><td>Not expected to be caught - indicates system issues</td></tr>
+<tr><td><strong>Handling Requirement</strong></td><td>Should be handled with try-catch</td><td>Generally should not be caught</td></tr>
+<tr><td><strong>Occurrence Level</strong></td><td>Application-level issues</td><td>JVM or system-level issues</td></tr>
+<tr><td><strong>Programming Control</strong></td><td>Often preventable with proper coding</td><td>Usually beyond programmer control</td></tr>
+<tr><td><strong>Types</strong></td><td>Checked (IOException) & Unchecked (RuntimeException)</td><td>Unchecked only (all inherit from Error)</td></tr>
+<tr><td><strong>Common Examples</strong></td><td><code class="inline-code">IOException</code>, <code class="inline-code">SQLException</code>, <code class="inline-code">NullPointerException</code></td><td><code class="inline-code">OutOfMemoryError</code>, <code class="inline-code">StackOverflowError</code>, <code class="inline-code">VirtualMachineError</code></td></tr>
+<tr><td><strong>When they occur</strong></td><td>File operations, network issues, invalid input</td><td>Memory exhaustion, stack overflow, JVM internal errors</td></tr>
+<tr><td><strong>Application response</strong></td><td>Handle gracefully, show user-friendly messages</td><td>Log error, possibly restart application</td></tr>
+<tr><td><strong>Prevention</strong></td><td>Input validation, proper error handling</td><td>Proper resource management, system monitoring</td></tr>
+<tr><td><strong>Impact on execution</strong></td><td>Can be handled and execution can continue</td><td>Usually terminates the program</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Traffic jam - inconvenient but manageable</td><td>Bridge collapse - serious infrastructure failure</td></tr>
 </tbody></table>
                 </div>
             </div>
@@ -492,15 +601,225 @@
 
         <div class="content-section">
             <div class="section-header">
-                <h3>🔹 Heap vs Stack Memory</h3>
+                <h3>final vs finally vs finalize</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th><code class="inline-code">final</code></th><th><code class="inline-code">finally</code></th><th><code class="inline-code">finalize</code></th></tr></thead><tbody>
+<tr><td><strong>Type</strong></td><td><strong>Keyword/Modifier</strong></td><td><strong>Code Block</strong></td><td><strong>Method</strong> (<code class="inline-code">protected void finalize()</code>)</td></tr>
+<tr><td><strong>Primary Purpose</strong></td><td>Make entities <strong>unchangeable/unextendable</strong></td><td>Ensure <strong>cleanup code execution</strong></td><td>Perform cleanup <strong>before garbage collection</strong></td></tr>
+<tr><td><strong>Applies to</strong></td><td>Variables, methods, classes</td><td>Exception handling blocks</td><td>Objects (inherited from Object class)</td></tr>
+<tr><td><strong>Execution Time</strong></td><td>Compile-time enforcement</td><td>Runtime (after try-catch)</td><td>Runtime (before GC, if at all)</td></tr>
+<tr><td><strong>Execution Guarantee</strong></td><td>Compile-time restrictions enforced</td><td>Always executes (except <code class="inline-code">System.exit()</code>, infinite loops)</td><td><strong>Not guaranteed</strong> - depends on GC</td></tr>
+<tr><td><strong>Performance Impact</strong></td><td>None - compile-time only</td><td>Minimal - normal block execution</td><td>Negative - delays GC, creates overhead</td></tr>
+<tr><td><strong>Control</strong></td><td>Developer has full control</td><td>Developer controls when to use</td><td>JVM/GC controls when to call</td></tr>
+<tr><td><strong>Modern Usage</strong></td><td>Widely used and recommended</td><td>Widely used for resource cleanup</td><td><strong>Deprecated since Java 9</strong></td></tr>
+<tr><td><strong>Best Practice</strong></td><td>Use for constants, immutable classes</td><td>Use for closing resources, cleanup</td><td>Avoid - use try-with-resources instead</td></tr>
+<tr><td><strong>Alternative</strong></td><td>No alternative for immutability</td><td>try-with-resources for auto-closeable</td><td>try-with-resources, explicit cleanup methods</td></tr>
+<tr><td><strong>Common Errors</strong></td><td>Trying to modify final variables</td><td>Exceptions in finally can suppress original exceptions</td><td>Relying on finalize for cleanup</td></tr>
+<tr><td><strong>Examples</strong></td><td><code class="inline-code">final int MAX = 100;</code><br><code class="inline-code">final class String</code></td><td><code class="inline-code">try {...} catch {...} finally { cleanup(); }</code></td><td><code class="inline-code">@Override protected void finalize() throws Throwable</code></td></tr>
+<tr><td><strong>Real-life Analogy</strong></td><td>Permanent ink - cannot be changed</td><td>Always washing hands after eating</td><td>Unreliable janitor - may or may not show up</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+            <!-- String Operations Section -->
+            <div class="category-section" id="string-operations">
+                <div class="category-header">
+                    <h2>🔹 String Operations</h2>
+                    <p>String handling, comparison, and manipulation</p>
+                </div>
+            </div>
+            
+        <div class="content-section">
+            <div class="section-header">
+                <h3>== vs equals()</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th><code class="inline-code">==</code> (operator)</th><th><code class="inline-code">.equals()</code> (method)</th></tr></thead><tbody>
+<tr><td><strong>What it compares</strong></td><td><strong>Reference equality</strong> (memory address)</td><td><strong>Value/content equality</strong> (logical equality)</td></tr>
+<tr><td><strong>Type of check</strong></td><td>Physical comparison</td><td>Logical comparison (can be overridden)</td></tr>
+<tr><td><strong>Works with</strong></td><td>All data types (primitives & objects)</td><td>Objects only (method call)</td></tr>
+<tr><td><strong>Primitive behavior</strong></td><td>Compares actual values</td><td>Not applicable (primitives don't have methods)</td></tr>
+<tr><td><strong>Object behavior</strong></td><td>Compares memory addresses</td><td>Compares object content (if overridden)</td></tr>
+<tr><td><strong>Default implementation</strong></td><td>Built-in operator</td><td>From <code class="inline-code">Object</code> class → same as <code class="inline-code">==</code></td></tr>
+<tr><td><strong>Overridable</strong></td><td>Cannot be overridden</td><td>Can be overridden in custom classes</td></tr>
+<tr><td><strong>Performance</strong></td><td>Faster (simple reference check)</td><td>Slower (method call + logic)</td></tr>
+<tr><td><strong>Null handling</strong></td><td>Safe with nulls</td><td>Throws <code class="inline-code">NullPointerException</code> if called on null</td></tr>
+<tr><td><strong>Common usage</strong></td><td>Reference comparison, enum comparison</td><td>String comparison, custom object comparison</td></tr>
+<tr><td><strong>Example</strong></td><td><code class="inline-code">s1 == s2</code> → false (different objects)</td><td><code class="inline-code">s1.equals(s2)</code> → true (same content)</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>String vs StringBuilder vs StringBuffer</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th><code class="inline-code">String</code></th><th><code class="inline-code">StringBuilder</code></th><th><code class="inline-code">StringBuffer</code></th></tr></thead><tbody>
+<tr><td><strong>Mutability</strong></td><td><strong>Immutable</strong> - creates new object on change</td><td><strong>Mutable</strong> - modifies existing buffer</td><td><strong>Mutable</strong> - modifies existing buffer</td></tr>
+<tr><td><strong>Thread Safety</strong></td><td>Thread-safe (immutable objects)</td><td><strong>Not thread-safe</strong></td><td><strong>Thread-safe</strong> (synchronized methods)</td></tr>
+<tr><td><strong>Performance (Single-thread)</strong></td><td>Slowest for concatenation</td><td><strong>Fastest</strong> for string operations</td><td>Slower than StringBuilder</td></tr>
+<tr><td><strong>Performance (Multi-thread)</strong></td><td>Slower due to object creation</td><td>Fast but unsafe</td><td><strong>Safe and reasonably fast</strong></td></tr>
+<tr><td><strong>Memory Usage</strong></td><td>High (creates many objects)</td><td>Low (single buffer)</td><td>Low (single buffer)</td></tr>
+<tr><td><strong>When to use</strong></td><td>Few modifications, read-only operations</td><td>Many string operations, single-threaded</td><td>Many string operations, multi-threaded</td></tr>
+<tr><td><strong>Internal storage</strong></td><td>char[] array (final)</td><td>char[] array (resizable)</td><td>char[] array (resizable, synchronized)</td></tr>
+<tr><td><strong>String Pool</strong></td><td>Literals stored in String pool</td><td>Not stored in String pool</td><td>Not stored in String pool</td></tr>
+<tr><td><strong>API methods</strong></td><td>Rich string manipulation methods</td><td><code class="inline-code">append()</code>, <code class="inline-code">insert()</code>, <code class="inline-code">delete()</code></td><td>Same as StringBuilder but synchronized</td></tr>
+<tr><td><strong>Since version</strong></td><td>Java 1.0</td><td>Java 1.5</td><td>Java 1.0</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Stone tablet - permanent, create new for changes</td><td>Whiteboard - easy to modify, single user</td><td>Shared whiteboard with lock - safe for multiple users</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Checked vs Unchecked Exception</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th>Checked Exception</th><th>Unchecked Exception</th></tr></thead><tbody>
+<tr><td><strong>Check Time</strong></td><td><strong>Compile-time</strong> verification required</td><td><strong>Runtime</strong> detection only</td></tr>
+<tr><td><strong>Inheritance</strong></td><td>Extends <code class="inline-code">Exception</code> (not <code class="inline-code">RuntimeException</code>)</td><td>Extends <code class="inline-code">RuntimeException</code></td></tr>
+<tr><td><strong>Handling Requirement</strong></td><td><strong>Must</strong> be caught or declared with <code class="inline-code">throws</code></td><td><strong>Optional</strong> to handle (can propagate)</td></tr>
+<tr><td><strong>Compiler Role</strong></td><td>Forces developer to handle</td><td>No compile-time enforcement</td></tr>
+<tr><td><strong>Recovery Expectation</strong></td><td>Expected to be <strong>recoverable</strong></td><td>Usually indicates <strong>programming errors</strong></td></tr>
+<tr><td><strong>Design Philosophy</strong></td><td>Anticipated problems (external factors)</td><td>Programming bugs (internal logic)</td></tr>
+<tr><td><strong>Performance Impact</strong></td><td>Slight overhead due to stack tracking</td><td>Same overhead when thrown</td></tr>
+<tr><td><strong>Common Examples</strong></td><td><code class="inline-code">IOException</code>, <code class="inline-code">SQLException</code>, <code class="inline-code">ClassNotFoundException</code></td><td><code class="inline-code">NullPointerException</code>, <code class="inline-code">ArithmeticException</code>, <code class="inline-code">ArrayIndexOutOfBoundsException</code></td></tr>
+<tr><td><strong>When they occur</strong></td><td>File operations, network calls, database access</td><td>Null access, division by zero, array bounds</td></tr>
+<tr><td><strong>Best Practice</strong></td><td>Handle gracefully with try-catch or propagate</td><td>Fix the root cause in code</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Weather forecast - plan for expected rain</td><td>Forgetting keys - programming mistake</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Overloading vs Overriding</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th>Method Overloading</th><th>Method Overriding</th></tr></thead><tbody>
+<tr><td><strong>Definition</strong></td><td><strong>Same method name</strong> with different parameters in same class</td><td><strong>Same method signature</strong> in parent and child class</td></tr>
+<tr><td><strong>Polymorphism Type</strong></td><td><strong>Compile-time</strong> polymorphism (Static binding)</td><td><strong>Runtime</strong> polymorphism (Dynamic binding)</td></tr>
+<tr><td><strong>Parameter Requirements</strong></td><td><strong>Must differ</strong> in type, number, or order</td><td><strong>Must be identical</strong> (same signature)</td></tr>
+<tr><td><strong>Return Type</strong></td><td>Can be different (covariant return allowed)</td><td>Must be same or covariant (subtype)</td></tr>
+<tr><td><strong>Access Modifier</strong></td><td>Can be different</td><td>Cannot be more restrictive than parent</td></tr>
+<tr><td><strong>Class Relationship</strong></td><td>Same class (or inheritance)</td><td>Requires inheritance (parent-child)</td></tr>
+<tr><td><strong>Resolution Time</strong></td><td>Method resolved at <strong>compile time</strong></td><td>Method resolved at <strong>runtime</strong></td></tr>
+<tr><td><strong>Performance</strong></td><td>Faster (static binding)</td><td>Slightly slower (dynamic lookup)</td></tr>
+<tr><td><strong>Purpose</strong></td><td>Provide multiple ways to call same functionality</td><td>Customize parent behavior in child class</td></tr>
+<tr><td><strong>Example</strong></td><td><code class="inline-code">print(int x), print(String s)</code></td><td>Parent: <code class="inline-code">draw()</code>, Child: <code class="inline-code">draw()</code> with different implementation</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Swiss Army knife - same tool, different functions</td><td>Child improving parent's recipe with own style</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+            <!-- Collections Comparison Section -->
+            <div class="category-section" id="collections-comparison">
+                <div class="category-header">
+                    <h2>🔹 Collections Framework</h2>
+                    <p>Collection interfaces and utility comparisons</p>
+                </div>
+            </div>
+            
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Comparable vs Comparator</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th>Comparable Interface</th><th>Comparator Interface</th></tr></thead><tbody>
+<tr><td><strong>Package Location</strong></td><td><code class="inline-code">java.lang</code> (core package)</td><td><code class="inline-code">java.util</code> (utility package)</td></tr>
+<tr><td><strong>Method Signature</strong></td><td><code class="inline-code">int compareTo(T o)</code></td><td><code class="inline-code">int compare(T o1, T o2)</code></td></tr>
+<tr><td><strong>Implementation</strong></td><td>Implemented <strong>by the class itself</strong></td><td>Implemented <strong>by separate class</strong></td></tr>
+<tr><td><strong>Sorting Type</strong></td><td><strong>Natural ordering</strong> (default sorting)</td><td><strong>Custom ordering</strong> (flexible sorting)</td></tr>
+<tr><td><strong>Modification Requirement</strong></td><td>Requires modifying the original class</td><td>No modification to original class needed</td></tr>
+<tr><td><strong>Number of comparisons</strong></td><td>Only <strong>one</strong> way to compare</td><td><strong>Multiple</strong> comparison strategies possible</td></tr>
+<tr><td><strong>Usage with Collections</strong></td><td><code class="inline-code">Collections.sort(list)</code></td><td><code class="inline-code">Collections.sort(list, comparator)</code></td></tr>
+<tr><td><strong>Lambda Support (Java 8+)</strong></td><td>Not applicable</td><td>Functional interface - supports lambda expressions</td></tr>
+<tr><td><strong>External Control</strong></td><td>Cannot change sorting without modifying class</td><td>Complete external control over sorting</td></tr>
+<tr><td><strong>Use Case</strong></td><td>When objects have one <strong>obvious natural order</strong></td><td>When you need <strong>multiple sorting criteria</strong></td></tr>
+<tr><td><strong>Example</strong></td><td><code class="inline-code">String.compareTo()</code>, <code class="inline-code">Integer.compareTo()</code></td><td><code class="inline-code">Comparator.comparing(Student::getName)</code></td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>People naturally sorted by age</td><td>Sort people by name, salary, height as needed</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>this vs super</h3>
+            </div>
+            <div class="section-body">
+                <div class="content-table-wrapper">
+                    <table class="content-table">
+<thead><tr><th>Feature</th><th><code class="inline-code">this</code> keyword</th><th><code class="inline-code">super</code> keyword</th></tr></thead><tbody>
+<tr><td><strong>Refers to</strong></td><td><strong>Current object instance</strong></td><td><strong>Parent class instance</strong></td></tr>
+<tr><td><strong>Scope</strong></td><td>Current class members</td><td>Parent class members</td></tr>
+<tr><td><strong>Field access</strong></td><td><code class="inline-code">this.fieldName</code> - current class field</td><td><code class="inline-code">super.fieldName</code> - parent class field</td></tr>
+<tr><td><strong>Method call</strong></td><td><code class="inline-code">this.methodName()</code> - current class method</td><td><code class="inline-code">super.methodName()</code> - parent class method</td></tr>
+<tr><td><strong>Constructor call</strong></td><td><code class="inline-code">this()</code> - calls another constructor in same class</td><td><code class="inline-code">super()</code> - calls parent class constructor</td></tr>
+<tr><td><strong>Constructor position</strong></td><td>Must be <strong>first statement</strong> in constructor</td><td>Must be <strong>first statement</strong> in constructor</td></tr>
+<tr><td><strong>Primary usage</strong></td><td>Resolve naming conflicts, constructor chaining</td><td>Access overridden methods, parent constructor</td></tr>
+<tr><td><strong>Inheritance requirement</strong></td><td>Available in any class</td><td>Only meaningful with inheritance</td></tr>
+<tr><td><strong>Static context</strong></td><td>Cannot use in static methods</td><td>Cannot use in static methods</td></tr>
+<tr><td><strong>Common use case</strong></td><td>Parameter name same as field name</td><td>Call parent version of overridden method</td></tr>
+<tr><td><strong>Example</strong></td><td><code class="inline-code">this.name = name;</code> (parameter vs field)</td><td><code class="inline-code">super.display();</code> (parent's display method)</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Pointing to yourself ("I will do this")</td><td>Referring to your parent ("My parent taught me this")</td></tr>
+</tbody></table>
+                </div>
+            </div>
+        </div>
+        
+
+            <!-- Memory Management Section -->
+            <div class="category-section" id="memory-management">
+                <div class="category-header">
+                    <h2>🔹 Memory Management</h2>
+                    <p>Memory allocation, garbage collection, and references</p>
+                </div>
+            </div>
+            
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Heap vs Stack Memory</h3>
             </div>
             <div class="section-body">
                 <div class="content-table-wrapper">
                     <table class="content-table">
 <thead><tr><th>Feature</th><th>Stack Memory</th><th>Heap Memory</th></tr></thead><tbody>
-<tr><td><strong>Stores</strong></td><td>Method calls, local vars</td><td>Objects, instance vars</td></tr>
-<tr><td><strong>Access</strong></td><td>LIFO, very fast</td><td>Slower, managed by GC</td></tr>
-<tr><td><strong>Life</strong></td><td>Until method ends</td><td>Until GC collects</td></tr>
+<tr><td><strong>Purpose</strong></td><td>Stores <strong>method execution data</strong></td><td>Stores <strong>objects and their instance data</strong></td></tr>
+<tr><td><strong>What it stores</strong></td><td>Method calls, local variables, primitive values, object references</td><td>Objects, instance variables, arrays, class metadata</td></tr>
+<tr><td><strong>Memory Structure</strong></td><td>LIFO (Last In, First Out) stack structure</td><td>Tree-based structure with generations (Young, Old, Permanent)</td></tr>
+<tr><td><strong>Access Speed</strong></td><td>Very fast - direct pointer manipulation</td><td>Slower - requires object lookup and GC management</td></tr>
+<tr><td><strong>Thread Safety</strong></td><td>Each thread has its <strong>own stack</strong></td><td><strong>Shared</strong> among all threads</td></tr>
+<tr><td><strong>Memory Management</strong></td><td>Automatic - freed when method exits</td><td>Garbage Collector manages memory</td></tr>
+<tr><td><strong>Lifecycle</strong></td><td>Until method execution completes</td><td>Until object becomes unreachable and GC collects</td></tr>
+<tr><td><strong>Size Limits</strong></td><td>Smaller, can cause <code class="inline-code">StackOverflowError</code></td><td>Larger, can cause <code class="inline-code">OutOfMemoryError</code></td></tr>
+<tr><td><strong>Allocation</strong></td><td>Compile-time size determination</td><td>Runtime dynamic allocation</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Stack of plates - add/remove from top only</td><td>Warehouse storage - items placed anywhere, cleaned periodically</td></tr>
 </tbody></table>
                 </div>
             </div>
@@ -509,32 +828,58 @@
 
         <div class="content-section">
             <div class="section-header">
-                <h3>🔹 String Pool vs Heap String</h3>
+                <h3>String Pool vs Heap String</h3>
             </div>
             <div class="section-body">
                 <div class="content-table-wrapper">
                     <table class="content-table">
-<thead><tr><th>Feature</th><th>String Pool (interned)</th><th>Heap String</th></tr></thead><tbody>
-<tr><td><strong>Creation</strong></td><td><code class="inline-code">"abc"</code></td><td><code class="inline-code">new String("abc")</code></td></tr>
-<tr><td><strong>Memory</strong></td><td>Shared in SCP</td><td>New object in Heap</td></tr>
-<tr><td><strong>Equality</strong></td><td>Same ref for same value</td><td>Always new reference</td></tr>
+<thead><tr><th>Feature</th><th>String Pool (String Literal)</th><th>Heap String (new String())</th></tr></thead><tbody>
+<tr><td><strong>Creation Method</strong></td><td><code class="inline-code">String s = "abc";</code></td><td><code class="inline-code">String s = new String("abc");</code></td></tr>
+<tr><td><strong>Memory Location</strong></td><td><strong>String Constant Pool</strong> (special heap area)</td><td><strong>Heap memory</strong> (regular object area)</td></tr>
+<tr><td><strong>Object Creation</strong></td><td>Reuses existing object if same value exists</td><td>Always creates new object</td></tr>
+<tr><td><strong>Reference Equality (==)</strong></td><td>Same reference for identical values</td><td>Different references even for same content</td></tr>
+<tr><td><strong>Memory Efficiency</strong></td><td>More efficient - avoids duplicates</td><td>Less efficient - creates duplicates</td></tr>
+<tr><td><strong>Performance</strong></td><td>Faster creation (reuse existing)</td><td>Slower creation (always new object)</td></tr>
+<tr><td><strong>Garbage Collection</strong></td><td>Harder to collect (referenced by pool)</td><td>Normal GC eligibility</td></tr>
+<tr><td><strong>Interning</strong></td><td>Automatically interned</td><td>Can be interned using <code class="inline-code">.intern()</code></td></tr>
+<tr><td><strong>Use Case</strong></td><td>Compile-time known strings, constants</td><td>Runtime dynamic string creation</td></tr>
+<tr><td><strong>JVM Optimization</strong></td><td>JVM optimizes storage automatically</td><td>No special JVM optimization</td></tr>
+<tr><td><strong>Example Behavior</strong></td><td><code class="inline-code">"hello" == "hello"</code> → true</td><td><code class="inline-code">new String("hello") == new String("hello")</code> → false</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Library book - shared, multiple readers</td><td>Personal copy - owned individually</td></tr>
 </tbody></table>
                 </div>
             </div>
         </div>
         
 
+            <!-- Concurrency Section -->
+            <div class="category-section" id="concurrency">
+                <div class="category-header">
+                    <h2>🔹 Concurrency & Threading</h2>
+                    <p>Multi-threading, synchronization, and concurrent programming</p>
+                </div>
+            </div>
+            
         <div class="content-section">
             <div class="section-header">
-                <h3>🔹 Process vs Thread</h3>
+                <h3>Process vs Thread</h3>
             </div>
             <div class="section-body">
                 <div class="content-table-wrapper">
                     <table class="content-table">
 <thead><tr><th>Feature</th><th>Process</th><th>Thread</th></tr></thead><tbody>
-<tr><td><strong>Definition</strong></td><td>Independent program in execution</td><td>Lightweight unit inside process</td></tr>
-<tr><td><strong>Memory</strong></td><td>Own memory space</td><td>Shared memory with process</td></tr>
-<tr><td><strong>Switching</strong></td><td>Expensive (context switch)</td><td>Cheaper switching</td></tr>
+<tr><td><strong>Definition</strong></td><td><strong>Independent program</strong> in execution</td><td><strong>Lightweight execution unit</strong> within a process</td></tr>
+<tr><td><strong>Memory Space</strong></td><td>Separate, isolated memory space</td><td>Shared memory space with other threads</td></tr>
+<tr><td><strong>Creation Cost</strong></td><td>Expensive - OS allocates resources</td><td>Cheaper - shares process resources</td></tr>
+<tr><td><strong>Context Switching</strong></td><td>Expensive - full memory context change</td><td>Cheaper - minimal context change</td></tr>
+<tr><td><strong>Communication</strong></td><td>IPC (Inter-Process Communication)</td><td>Direct memory sharing</td></tr>
+<tr><td><strong>Independence</strong></td><td>Fully independent - crash doesn't affect others</td><td>Dependent - crash can affect entire process</td></tr>
+<tr><td><strong>Resource sharing</strong></td><td>No resource sharing between processes</td><td>Share code, data, heap, files</td></tr>
+<tr><td><strong>Synchronization</strong></td><td>Complex synchronization mechanisms</td><td>Simpler synchronization (locks, semaphores)</td></tr>
+<tr><td><strong>Scalability</strong></td><td>Limited by system resources</td><td>Better scalability within process limits</td></tr>
+<tr><td><strong>Security</strong></td><td>Higher security - isolated memory</td><td>Lower security - shared memory</td></tr>
+<tr><td><strong>Java Example</strong></td><td>Multiple JVM instances</td><td><code class="inline-code">Thread</code>, <code class="inline-code">Runnable</code></td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Separate houses - completely independent</td><td>Rooms in same house - shared utilities</td></tr>
 </tbody></table>
                 </div>
             </div>
@@ -543,15 +888,24 @@
 
         <div class="content-section">
             <div class="section-header">
-                <h3>🔹 Synchronized Method vs Synchronized Block</h3>
+                <h3>Synchronized Method vs Synchronized Block</h3>
             </div>
             <div class="section-body">
                 <div class="content-table-wrapper">
                     <table class="content-table">
 <thead><tr><th>Feature</th><th>Synchronized Method</th><th>Synchronized Block</th></tr></thead><tbody>
-<tr><td><strong>Scope</strong></td><td>Locks entire method</td><td>Locks only specific block/object</td></tr>
-<tr><td><strong>Performance</strong></td><td>Less efficient</td><td>More efficient</td></tr>
-<tr><td><strong>Granularity</strong></td><td>Coarse-grained</td><td>Fine-grained</td></tr>
+<tr><td><strong>Syntax</strong></td><td><code class="inline-code">synchronized void method() {...}</code></td><td><code class="inline-code">synchronized(object) {...}</code></td></tr>
+<tr><td><strong>Lock Scope</strong></td><td><strong>Entire method</strong> is locked</td><td><strong>Only specific code block</strong> is locked</td></tr>
+<tr><td><strong>Lock Object</strong></td><td>Automatically uses <code class="inline-code">this</code> (instance) or <code class="inline-code">Class</code> (static)</td><td>Can specify any object as lock</td></tr>
+<tr><td><strong>Granularity</strong></td><td>Coarse-grained locking</td><td>Fine-grained locking</td></tr>
+<tr><td><strong>Performance</strong></td><td>Less efficient - locks more than needed</td><td>More efficient - locks only critical section</td></tr>
+<tr><td><strong>Flexibility</strong></td><td>Less flexible - cannot choose lock object</td><td>More flexible - can choose specific lock object</td></tr>
+<tr><td><strong>Multiple locks</strong></td><td>Cannot use multiple locks in same method</td><td>Can use different locks for different sections</td></tr>
+<tr><td><strong>Readability</strong></td><td>Cleaner, more readable</td><td>Explicit but can be complex</td></tr>
+<tr><td><strong>Lock acquisition</strong></td><td>Acquired when method starts</td><td>Acquired when entering block</td></tr>
+<tr><td><strong>Use case</strong></td><td>When entire method needs synchronization</td><td>When only part of method needs synchronization</td></tr>
+<tr><td><strong>Example</strong></td><td><code class="inline-code">public synchronized void increment() { count++; }</code></td><td><code class="inline-code">synchronized(lock) { count++; }</code></td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Locking entire room for one activity</td><td>Locking only the safe while room remains accessible</td></tr>
 </tbody></table>
                 </div>
             </div>
@@ -560,15 +914,24 @@
 
         <div class="content-section">
             <div class="section-header">
-                <h3>🔹 Enumeration vs Iterator vs ListIterator</h3>
+                <h3>Enumeration vs Iterator vs ListIterator</h3>
             </div>
             <div class="section-body">
                 <div class="content-table-wrapper">
                     <table class="content-table">
 <thead><tr><th>Feature</th><th>Enumeration (Legacy)</th><th>Iterator</th><th>ListIterator</th></tr></thead><tbody>
-<tr><td><strong>Direction</strong></td><td>Forward only</td><td>Forward only</td><td>Forward + Backward</td></tr>
-<tr><td><strong>Modification</strong></td><td>Cannot remove</td><td>Can remove</td><td>Can add/remove/update</td></tr>
-<tr><td><strong>Use-case</strong></td><td>Legacy collections</td><td>All collections</td><td>Lists only</td></tr>
+<tr><td><strong>Introduction</strong></td><td>Java 1.0 (legacy)</td><td>Java 1.2 (Collections Framework)</td><td>Java 1.2 (List-specific)</td></tr>
+<tr><td><strong>Traversal Direction</strong></td><td><strong>Forward only</strong></td><td><strong>Forward only</strong></td><td><strong>Bidirectional</strong> (forward & backward)</td></tr>
+<tr><td><strong>Modification Support</strong></td><td>Read-only (no modification)</td><td>Can remove elements</td><td>Can add, remove, and modify elements</td></tr>
+<tr><td><strong>Methods Available</strong></td><td><code class="inline-code">hasMoreElements()</code>, <code class="inline-code">nextElement()</code></td><td><code class="inline-code">hasNext()</code>, <code class="inline-code">next()</code>, <code class="inline-code">remove()</code></td><td>All Iterator methods + <code class="inline-code">hasPrevious()</code>, <code class="inline-code">previous()</code>, <code class="inline-code">add()</code>, <code class="inline-code">set()</code></td></tr>
+<tr><td><strong>Collection Support</strong></td><td>Legacy collections (Vector, Hashtable)</td><td>All Collection framework classes</td><td><strong>List implementations only</strong></td></tr>
+<tr><td><strong>Fail-fast behavior</strong></td><td>Not fail-fast</td><td>Fail-fast (throws ConcurrentModificationException)</td><td>Fail-fast</td></tr>
+<tr><td><strong>Thread Safety</strong></td><td>Depends on underlying collection</td><td>Not inherently thread-safe</td><td>Not inherently thread-safe</td></tr>
+<tr><td><strong>Performance</strong></td><td>Basic traversal</td><td>Efficient traversal with safety</td><td>Efficient bidirectional traversal</td></tr>
+<tr><td><strong>Modern Usage</strong></td><td>Deprecated in favor of Iterator</td><td>Standard for most collections</td><td>Best for List operations</td></tr>
+<tr><td><strong>Index support</strong></td><td>No index information</td><td>No index information</td><td>Provides index via <code class="inline-code">nextIndex()</code>, <code class="inline-code">previousIndex()</code></td></tr>
+<tr><td><strong>Use Case</strong></td><td>Legacy code compatibility</td><td>General collection traversal</td><td>List navigation with modification needs</td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Old-style book reading - page by page forward</td><td>Modern e-reader - forward with bookmark removal</td><td>Advanced editor - navigate both ways, edit content</td></tr>
 </tbody></table>
                 </div>
             </div>
@@ -577,14 +940,24 @@
 
         <div class="content-section">
             <div class="section-header">
-                <h3>🔹 WeakReference vs SoftReference vs StrongReference</h3>
+                <h3>WeakReference vs SoftReference vs StrongReference</h3>
             </div>
             <div class="section-body">
                 <div class="content-table-wrapper">
                     <table class="content-table">
 <thead><tr><th>Feature</th><th>Strong Reference</th><th>Soft Reference</th><th>Weak Reference</th></tr></thead><tbody>
-<tr><td><strong>GC Behavior</strong></td><td>Never collected until unreachable</td><td>Collected if memory needed</td><td>Collected at next GC cycle</td></tr>
-<tr><td><strong>Use-case</strong></td><td>Normal objects</td><td>Caching</td><td>WeakHashMap, listeners</td></tr>
+<tr><td><strong>Default Type</strong></td><td><strong>Default</strong> reference type in Java</td><td>Special reference via <code class="inline-code">SoftReference</code></td><td>Special reference via <code class="inline-code">WeakReference</code></td></tr>
+<tr><td><strong>GC Behavior</strong></td><td>Never collected while reachable</td><td>Collected only when <strong>memory pressure</strong> exists</td><td>Collected at <strong>next GC cycle</strong> if no strong refs</td></tr>
+<tr><td><strong>Memory Priority</strong></td><td>Highest priority - never released</td><td>Medium priority - released when memory low</td><td>Lowest priority - first to be released</td></tr>
+<tr><td><strong>Lifecycle</strong></td><td>Lives until explicitly dereferenced</td><td>Lives until memory pressure forces collection</td><td>Lives until next garbage collection</td></tr>
+<tr><td><strong>Access Method</strong></td><td>Direct object access</td><td><code class="inline-code">softRef.get()</code> - may return null</td><td><code class="inline-code">weakRef.get()</code> - may return null</td></tr>
+<tr><td><strong>Null Check Required</strong></td><td>No (unless explicitly set to null)</td><td>Yes - <code class="inline-code">get()</code> may return null</td><td>Yes - <code class="inline-code">get()</code> may return null</td></tr>
+<tr><td><strong>Performance Impact</strong></td><td>No overhead</td><td>Slight overhead for reference management</td><td>Slight overhead for reference management</td></tr>
+<tr><td><strong>Memory Leaks</strong></td><td>Can cause memory leaks if not managed</td><td>Helps prevent OutOfMemoryError</td><td>Helps prevent memory leaks</td></tr>
+<tr><td><strong>Common Use Cases</strong></td><td>Normal object references</td><td>Image caching, expensive computations</td><td>WeakHashMap, event listeners, observer pattern</td></tr>
+<tr><td><strong>JVM Memory Threshold</strong></td><td>Not applicable</td><td>Released before OutOfMemoryError</td><td>Released regardless of memory state</td></tr>
+<tr><td><strong>Example Creation</strong></td><td><code class="inline-code">Object obj = new Object();</code></td><td><code class="inline-code">SoftReference<Object> soft = new SoftReference<>(obj);</code></td><td><code class="inline-code">WeakReference<Object> weak = new WeakReference<>(obj);</code></td></tr>
+<tr><td><strong>Real-life analogy</strong></td><td>Important documents in safe - never discarded</td><td>Magazines - kept until space needed</td><td>Sticky notes - removed at next cleanup</td></tr>
 </tbody></table>
                 </div>
             </div>
