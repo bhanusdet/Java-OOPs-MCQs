@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐧 Linux Commands - Essential Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: #2c3e50;
+        }
+
+        /* Views */
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Essential Commands Grid */
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .command-category {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .command-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .command-item {
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        .command {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .command:hover {
+            background: #34495e;
+        }
+
+        .command::before {
+            content: '$ ';
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .description {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Index Grid */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .index-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 5px solid #3498db;
+        }
+
+        .index-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .index-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .index-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Detailed Section */
+        .detailed-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .detailed-section.active {
+            display: block;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .subsection {
+            margin-bottom: 30px;
+        }
+
+        .subsection-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 15px 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '$ ';
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .explanation {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .explanation p {
+            margin-bottom: 10px;
+        }
+
+        .explanation ul {
+            margin-left: 20px;
+        }
+
+        .explanation li {
+            margin-bottom: 5px;
+        }
+
+        .explanation code {
+            background: #d5dbdb;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e74c3c;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .commands-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .nav-toggle {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .command-category {
+                padding: 20px;
+            }
+        }
+
+        /* Copy notification */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mac-alternative {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .mac-alternative strong {
+            color: #2c5282;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .mac-alternative .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            border: 1px solid #4a5568;
+            margin: 8px 0;
+        }
+
+        .mac-alternative p {
+            color: #4a5568;
+            font-style: italic;
+            margin: 5px 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🐧 Linux Commands Reference</h1>
+            <p>Essential commands for system administration and daily use</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-toggle">
+            <button class="nav-btn active" onclick="showView('home')">📋 Essential Commands</button>
+            <button class="nav-btn" onclick="showView('index')">📚 Detailed Guide</button>
+        </div>
+
+        <!-- HOME VIEW - Essential Commands -->
+        <div id="home" class="view active">
+            <div class="commands-grid">
+                <div class="command-category">
+                    <div class="category-title">📁 File Operations</div>
+                    <div class="command-item">
+                        <div class="command">ls -la</div>
+                        <div class="description">List all files with detailed permissions, sizes, dates, and show hidden files starting with dot (.)</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">cd /path/to/directory</div>
+                        <div class="description">Navigate to specified directory. Use 'cd ~' for home, 'cd ..' for parent, 'cd -' for previous</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">cp file1 file2</div>
+                        <div class="description">Copy files or directories. Use 'cp -r source/ dest/' for recursive directory copying</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">mv oldname newname</div>
+                        <div class="description">Move files/directories to new location or rename them. Works across different filesystems</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">rm -rf directory</div>
+                        <div class="description">Remove files and directories recursively. ⚠️ DANGEROUS - no undo! Use 'rm -i' for confirmation</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">mkdir -p path/to/dir</div>
+                        <div class="description">Create directory and all parent directories in path if they don't exist</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">🌐 Network & System</div>
+                    <div class="command-item">
+                        <div class="command">ping -c 4 google.com</div>
+                        <div class="description">Test network connectivity</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">curl -I https://api.domain.com</div>
+                        <div class="description">Check HTTP headers/API status</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">wget -O file.tar.gz url</div>
+                        <div class="description">Download with custom filename</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">ss -tulpn | grep :80</div>
+                        <div class="description">Check specific port usage</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">nmap -p 22,80,443 server</div>
+                        <div class="description">Scan common ports</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">dig @8.8.8.8 domain.com</div>
+                        <div class="description">DNS lookup with specific server</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">💾 System Monitoring</div>
+                    <div class="command-item">
+                        <div class="command">df -h</div>
+                        <div class="description">Check disk space usage</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">free -h</div>
+                        <div class="description">Memory usage with buffers/cache</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">iostat -x 1</div>
+                        <div class="description">Disk I/O statistics</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">vmstat 2</div>
+                        <div class="description">Virtual memory statistics</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">lscpu</div>
+                        <div class="description">CPU architecture details</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">systemctl status service</div>
+                        <div class="description">Check service status</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">🔐 Permissions</div>
+                    <div class="command-item">
+                        <div class="command">chmod 755 file</div>
+                        <div class="description">Change file permissions. 755 = owner can read/write/execute, group and others can read/execute</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">chown user:group file</div>
+                        <div class="description">Change file owner and group. Use recursively with -R for directories and their contents</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">sudo command</div>
+                        <div class="description">Execute command with administrator privileges. Asks for your password, not root password</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">su - username</div>
+                        <div class="description">Switch to another user account with their environment. Use 'su -' to become root</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">umask 022</div>
+                        <div class="description">Set default permissions for new files and directories. 022 gives files 644, directories 755</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">⚙️ Process Management</div>
+                    <div class="command-item">
+                        <div class="command">ps aux</div>
+                        <div class="description">List all running processes with user, CPU usage, memory usage, and command details</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">top</div>
+                        <div class="description">Real-time process monitor showing CPU, memory usage. Press q to quit, k to kill processes</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">kill -9 PID</div>
+                        <div class="description">Force terminate process by ID. -9 is SIGKILL (cannot be ignored). Use -15 for graceful termination</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">killall process_name</div>
+                        <div class="description">Kill all processes with specified name. More convenient than finding PIDs manually</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">nohup command &</div>
+                        <div class="description">Run command in background that survives logout. Output saved to nohup.out file</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">🌐 Network & System</div>
+                    <div class="command-item">
+                        <div class="command">ping google.com</div>
+                        <div class="description">Test network connectivity and measure response time. Use -c 4 to send only 4 packets</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">curl -O url</div>
+                        <div class="description">Download files from web, supports HTTP, HTTPS, FTP. -O saves with original filename</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">wget url</div>
+                        <div class="description">Download files from internet. Can resume interrupted downloads and handle authentication</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">netstat -tulpn</div>
+                        <div class="description">Show all listening ports and network connections with process IDs. Essential for network debugging</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">ss -tulpn</div>
+                        <div class="description">Modern replacement for netstat. Faster and provides more detailed socket information</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">💾 System Info</div>
+                    <div class="command-item">
+                        <div class="command">df -h</div>
+                        <div class="description">Check disk space usage in human-readable format (GB, MB). Shows available space per filesystem</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">free -h</div>
+                        <div class="description">Display RAM and swap memory usage in human-readable format. Shows used, free, and available memory</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">uname -a</div>
+                        <div class="description">Show complete system information: kernel version, hostname, architecture, and compile date</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">uptime</div>
+                        <div class="description">Show system uptime, number of users, and load average (1, 5, 15 minute averages)</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">whoami</div>
+                        <div class="description">Display current logged-in username. Useful in scripts and when switching between users</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">🔧 Text Processing</div>
+                    <div class="command-item">
+                        <div class="command">grep -E "(ERROR|WARN)" log</div>
+                        <div class="description">Search errors/warnings in logs</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">awk '{sum+=$3} END {print sum}' file</div>
+                        <div class="description">Sum values in column 3</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">sed -i 's/old/new/g' config.conf</div>
+                        <div class="description">Replace text in-place</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">sort -k2 -n file.csv</div>
+                        <div class="description">Sort by column 2 numerically</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">jq '.status' response.json</div>
+                        <div class="description">Parse JSON data</div>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <div class="category-title">📦 Package & Services</div>
+                    <div class="command-item">
+                        <div class="command">systemctl restart nginx</div>
+                        <div class="description">Restart service</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">journalctl -u apache2 -f</div>
+                        <div class="description">Follow service logs</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">apt update && apt upgrade</div>
+                        <div class="description">Update system packages</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">docker ps -a</div>
+                        <div class="description">List all containers</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">crontab -l</div>
+                        <div class="description">List scheduled cron jobs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INDEX VIEW -->
+        <div id="index" class="view">
+            <div class="index-grid">
+                <div class="index-card" onclick="showDetailed('file-operations')">
+                    <div class="index-title">📁 Advanced File Operations</div>
+                    <div class="index-description">Master file management, find command, text processing, archiving, and file comparisons with practical examples.</div>
+                </div>
+
+                <div class="index-card" onclick="showDetailed('permissions')">
+                    <div class="index-title">🔐 Permissions & Security</div>
+                    <div class="index-description">Understanding chmod, chown, ACLs, special permissions, SSH keys, and user management.</div>
+                </div>
+
+                <div class="index-card" onclick="showDetailed('processes')">
+                    <div class="index-title">⚙️ Process Management</div>
+                    <div class="index-description">Advanced process control, monitoring, scheduling, cron jobs, and system performance tuning.</div>
+                </div>
+
+                <div class="index-card" onclick="showDetailed('networking')">
+                    <div class="index-title">🌐 Networking & Firewall</div>
+                    <div class="index-description">Network configuration, troubleshooting, iptables, ufw, load balancing, and connectivity testing.</div>
+                </div>
+
+                <div class="index-card" onclick="showDetailed('system-admin')">
+                    <div class="index-title">🛠️ System Administration</div>
+                    <div class="index-description">User management, service control, systemd, logging, package management, and system maintenance.</div>
+                </div>
+
+                <div class="index-card" onclick="showDetailed('storage')">
+                    <div class="index-title">💾 Storage & Filesystems</div>
+                    <div class="index-description">Disk management, partitioning, mounting, LVM, RAID, filesystem operations, and backup strategies.</div>
+                </div>
+
+                <div class="index-card" onclick="showDetailed('monitoring')">
+                    <div class="index-title">📊 System Monitoring</div>
+                    <div class="index-description">Performance monitoring, resource usage, log analysis, alerting, and capacity planning.</div>
+                </div>
+
+                <div class="index-card" onclick="showDetailed('troubleshooting')">
+                    <div class="index-title">🔍 Troubleshooting & Debugging</div>
+                    <div class="index-description">Log analysis, debugging techniques, performance issues, network problems, and incident response.</div>
+                </div>
+
+                </div>
+            </div>
+
+        <!-- DETAILED SECTIONS -->
+        <div id="file-operations" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">📁 Advanced File Operations</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">🔍 Find Command Mastery - Your File Detective Tool</div>
+                
+                <div class="explanation">
+                    <p><strong>💡 Think of 'find' as your personal detective that searches the entire file system based on clues you provide.</strong></p>
+                    
+                    <h4>🎯 Find by Name Pattern</h4>
+                    <div class="code-block">find /home -name "*.log"</div>
+                    <p><strong>What this does:</strong> Searches in /home directory and all subdirectories for files ending with .log</p>
+                    <p><strong>Real example output:</strong><br>
+                    /home/john/app.log<br>
+                    /home/john/projects/server.log<br>
+                    /home/mary/debug.log</p>
+                    
+                    <div class="code-block">find . -iname "*README*"</div>
+                    <p><strong>Case-insensitive search:</strong> Finds README, readme, ReadMe, etc. The -i flag ignores case</p>
+                    
+                    <h4>🗂️ Find by File Type</h4>
+                    <div class="code-block">find /var -type f</div>
+                    <p><strong>File types explained:</strong><br>
+                    • <strong>f</strong> = regular files (documents, images, programs)<br>
+                    • <strong>d</strong> = directories (folders)<br>
+                    • <strong>l</strong> = symbolic links (shortcuts)<br>
+                    • <strong>b</strong> = block devices (hard drives)<br>
+                    • <strong>c</strong> = character devices (keyboard, mouse)</p>
+                    
+                    <div class="code-block">find /etc -type d -name "*conf*"</div>
+                    <p><strong>Practical example:</strong> Find all directories in /etc that contain "conf" in their name</p>
+                    
+                    <h4>📏 Find by Size - Clean Up Space Hogs</h4>
+                    <div class="code-block">find /home -size +100M</div>
+                    <p><strong>Size operators:</strong><br>
+                    • <strong>+100M</strong> = larger than 100MB<br>
+                    • <strong>-1M</strong> = smaller than 1MB<br>
+                    • <strong>50M</strong> = exactly 50MB<br>
+                    • <strong>+1G</strong> = larger than 1GB</p>
+                    
+                    <div class="code-block">find /var/log -size +50M -ls</div>
+                    <p><strong>Space cleanup scenario:</strong> Find large log files and show detailed info with -ls</p>
+                    
+                    <h4>⏰ Find by Time - Track Changes</h4>
+                    <div class="code-block">find /var/log -mtime -7</div>
+                    <p><strong>Time types:</strong><br>
+                    • <strong>-mtime</strong> = modification time (when content changed)<br>
+                    • <strong>-atime</strong> = access time (when file was read)<br>
+                    • <strong>-ctime</strong> = change time (when permissions/ownership changed)</p>
+                    
+                    <p><strong>Time values:</strong><br>
+                    • <strong>-7</strong> = within last 7 days<br>
+                    • <strong>+30</strong> = older than 30 days<br>
+                    • <strong>7</strong> = exactly 7 days ago</p>
+                    
+                    <div class="code-block">find /home -mtime -1 -type f</div>
+                    <p><strong>Real scenario:</strong> "What files were modified in the last 24 hours?"</p>
+                    
+                    <h4>🔧 Execute Commands on Results - Batch Processing</h4>
+                    <div class="code-block">find /tmp -name "*.tmp" -delete</div>
+                    <p><strong>⚠️ DANGEROUS but useful:</strong> Finds and immediately deletes all .tmp files. BE CAREFUL!</p>
+                    
+                    <div class="code-block">find /home -name "*.jpg" -exec cp {} /backup/ \;</div>
+                    <p><strong>How -exec works:</strong><br>
+                    • <strong>{}</strong> = placeholder for each found file<br>
+                    • <strong>\;</strong> = end of command (backslash escapes the semicolon)<br>
+                    • This copies every .jpg file to /backup/</p>
+                    
+                    <div class="code-block">find /var/log -name "*.log" -exec gzip {} \;</div>
+                    <p><strong>Log management:</strong> Compress all log files to save space</p>
+                    
+                    <div class="code-block">find . -name "*.c" -exec grep -l "main" {} \;</div>
+                    <p><strong>Code search:</strong> Find all C files that contain the word "main"</p>
+                    
+                    <h4>🎯 Combining Conditions - Power User Mode</h4>
+                    <div class="code-block">find /home -name "*.log" -size +10M -mtime +30</div>
+                    <p><strong>Complex search:</strong> Find log files larger than 10MB that are older than 30 days</p>
+                    
+                    <div class="code-block">find /var -type f \( -name "*.log" -o -name "*.tmp" \) -delete</div>
+                    <p><strong>Logical OR:</strong> Find files that are EITHER .log OR .tmp and delete them</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">📝 Text Processing Tools - Data Manipulation Masters</div>
+                
+                <div class="explanation">
+                    <h4>🔍 GREP - The Text Hunter</h4>
+                    <p><strong>💡 Think of grep as Ctrl+F for the entire file system</strong></p>
+                    
+                    <div class="code-block">grep -r "error" /var/log/</div>
+                    <p><strong>Recursive search explanation:</strong><br>
+                    • <strong>-r</strong> = search in all files in all subdirectories<br>
+                    • Searches every file under /var/log/ for the word "error"<br>
+                    • Shows filename and line containing the match</p>
+                    
+                    <div class="code-block">grep -n "pattern" file.txt</div>
+                    <p><strong>Line numbers:</strong> Shows which line number contains the match</p>
+                    
+                    <div class="code-block">grep -i "ERROR" /var/log/syslog</div>
+                    <p><strong>Case-insensitive:</strong> Finds "error", "ERROR", "Error", etc.</p>
+                    
+                    <div class="code-block">grep -v "debug" app.log | head -20</div>
+                    <p><strong>Exclude matches:</strong> Show lines that DON'T contain "debug", first 20 lines</p>
+                    
+                    <div class="code-block">grep -c "failed" /var/log/auth.log</div>
+                    <p><strong>Count matches:</strong> Just shows how many lines contain "failed"</p>
+                    
+                    <h4>🎨 AWK - The Column Processor</h4>
+                    <p><strong>💡 AWK treats every line as columns separated by spaces/tabs</strong></p>
+                    
+                    <div class="code-block">awk '{print $1, $3}' file.txt</div>
+                    <p><strong>Column selection:</strong><br>
+                    • <strong>$1</strong> = first column, <strong>$2</strong> = second column, etc.<br>
+                    • <strong>$0</strong> = entire line<br>
+                    • <strong>NF</strong> = number of fields (columns)<br>
+                    • <strong>$NF</strong> = last column</p>
+                    
+                    <div class="code-block">ps aux | awk '{print $1, $2, $11}' | head -10</div>
+                    <p><strong>Real example:</strong> Show username, PID, and command from process list</p>
+                    
+                    <div class="code-block">awk '{sum+=$2} END {print "Total:", sum}' numbers.txt</div>
+                    <p><strong>Calculate totals:</strong><br>
+                    • Adds up all values in column 2<br>
+                    • <strong>END</strong> section runs after processing all lines<br>
+                    • Perfect for calculating sums, averages</p>
+                    
+                    <div class="code-block">awk '$3 > 100 {print $1, $3}' data.txt</div>
+                    <p><strong>Conditional processing:</strong> Only print lines where column 3 is greater than 100</p>
+                    
+                    <div class="code-block">awk -F',' '{print $1, $3}' data.csv</div>
+                    <p><strong>CSV processing:</strong> -F',' sets comma as field separator for CSV files</p>
+                    
+                    <h4>✏️ SED - The Text Editor</h4>
+                    <p><strong>💡 SED is like find-and-replace for the command line</strong></p>
+                    
+                    <div class="code-block">sed 's/old/new/g' file.txt</div>
+                    <p><strong>Replacement anatomy:</strong><br>
+                    • <strong>s</strong> = substitute command<br>
+                    • <strong>/old/new/</strong> = replace "old" with "new"<br>
+                    • <strong>g</strong> = global (all occurrences on each line)<br>
+                    • Without 'g', only first occurrence per line is replaced</p>
+                    
+                    <div class="code-block">sed -i 's/localhost/server.com/g' config.txt</div>
+                    <p><strong>Edit in-place:</strong> -i modifies the file directly instead of showing output</p>
+                    
+                    <div class="code-block">sed -n '10,20p' file.txt</div>
+                    <p><strong>Extract lines:</strong> Print only lines 10 through 20</p>
+                    
+                    <div class="code-block">sed '/^#/d' config.conf</div>
+                    <p><strong>Remove comments:</strong> Delete all lines starting with # (configuration files)</p>
+                    
+                    <div class="code-block">sed 's/^[ \t]*//' file.txt</div>
+                    <p><strong>Remove leading spaces:</strong> Clean up indentation</p>
+                    
+                    <h4>🔗 Combining Tools - Pipeline Power</h4>
+                    <div class="code-block">grep "error" /var/log/*.log | awk '{print $1, $4}' | sort | uniq -c</div>
+                    <p><strong>Complex pipeline:</strong><br>
+                    1. Find all lines with "error" in log files<br>
+                    2. Extract timestamp and error type<br>
+                    3. Sort the results<br>
+                    4. Count unique occurrences</p>
+                    
+                    <div class="code-block">ps aux | awk '$3 > 5.0 {print $1, $2, $3, $11}' | sort -k3 -nr</div>
+                    <p><strong>System monitoring:</strong> Find processes using more than 5% CPU, sort by CPU usage</p>
+                    
+                    <div class="code-block">sed -i 's/old/new/g' *.txt</div>
+                    <p>Replace in-place in all .txt files</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="permissions" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">🔐 Permissions & Security - Understanding Who Can Do What</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">🎭 Understanding Linux Permissions - The Three-Act Play</div>
+                
+                <div class="explanation">
+                    <p><strong>💡 Think of permissions like a theater:</strong></p>
+                    <ul>
+                        <li><strong>Owner</strong> = Director (full control)</li>
+                        <li><strong>Group</strong> = Cast members (shared access)</li>
+                        <li><strong>Others</strong> = Audience (limited access)</li>
+                    </ul>
+                    
+                    <h4>📊 Reading Permission Strings</h4>
+                    <div class="code-block">-rwxr-xr--  1 john staff  1024 Jan 10 10:30 script.sh</div>
+                    <p><strong>Breaking down: -rwxr-xr--</strong></p>
+                    <table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+                        <tr style="background: #f1f3f4;">
+                            <th style="border: 1px solid #ddd; padding: 8px;">Position</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Character</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Meaning</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>-</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">File type (- = file, d = directory, l = link)</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">2-4</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>rwx</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Owner permissions (read, write, execute)</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">5-7</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>r-x</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Group permissions (read, no write, execute)</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">8-10</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><strong>r--</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Others permissions (read only)</td>
+                        </tr>
+                    </table>
+                    
+                    <h4>🔢 Number System (The Permission Calculator)</h4>
+                    <p><strong>Each permission has a number value:</strong></p>
+                    <ul>
+                        <li><strong>Read (r)</strong> = 4</li>
+                        <li><strong>Write (w)</strong> = 2</li>
+                        <li><strong>Execute (x)</strong> = 1</li>
+                    </ul>
+                    
+                    <p><strong>Common permission combinations:</strong></p>
+                    <div class="code-block">
+7 = 4+2+1 = rwx (read, write, execute) - Full access
+6 = 4+2   = rw- (read, write) - Can modify but not run
+5 = 4+1   = r-x (read, execute) - Can read and run but not modify
+4 = 4     = r-- (read only) - Can only view
+0 = 0     = --- (no access) - Cannot access at all
+                    </div>
+                    
+                    <h4>🎯 Real-world Permission Examples</h4>
+                    <div class="code-block">chmod 755 script.sh</div>
+                    <p><strong>755 breakdown:</strong><br>
+                    • Owner: 7 (rwx) - can read, modify, and run the script<br>
+                    • Group: 5 (r-x) - can read and run, but not modify<br>
+                    • Others: 5 (r-x) - can read and run, but not modify<br>
+                    <strong>Perfect for:</strong> Executable scripts that everyone can run</p>
+                    
+                    <div class="code-block">chmod 644 document.txt</div>
+                    <p><strong>644 breakdown:</strong><br>
+                    • Owner: 6 (rw-) - can read and edit<br>
+                    • Group: 4 (r--) - can only read<br>
+                    • Others: 4 (r--) - can only read<br>
+                    <strong>Perfect for:</strong> Documents that you edit but others just read</p>
+                    
+                    <div class="code-block">chmod 600 private.key</div>
+                    <p><strong>600 breakdown:</strong><br>
+                    • Owner: 6 (rw-) - can read and edit<br>
+                    • Group: 0 (---) - no access<br>
+                    • Others: 0 (---) - no access<br>
+                    <strong>Perfect for:</strong> Private files like SSH keys, passwords</p>
+                    
+                    <div class="code-block">chmod 777 /tmp/shared/</div>
+                    <p><strong>⚠️ 777 - DANGEROUS but sometimes needed:</strong><br>
+                    • Everyone has full access (read, write, execute)<br>
+                    • Use only for temporary directories<br>
+                    • Never use on important files!</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">👥 User and Group Management - Building Your Team</div>
+                
+                <div class="explanation">
+                    <h4>🏠 Understanding Ownership</h4>
+                    <div class="code-block">chown john:developers project.txt</div>
+                    <p><strong>Ownership format: user:group</strong><br>
+                    • <strong>john</strong> = the owner (user)<br>
+                    • <strong>developers</strong> = the group<br>
+                    • Now john owns it, and anyone in developers group has group permissions</p>
+                    
+                    <div class="code-block">chown john project.txt</div>
+                    <p><strong>Change owner only:</strong> Keep existing group unchanged</p>
+                    
+                    <div class="code-block">chown :admin project.txt</div>
+                    <p><strong>Change group only:</strong> Keep existing owner, change group to admin</p>
+                    
+                    <div class="code-block">chown -R john:users /home/john/projects/</div>
+                    <p><strong>Recursive ownership:</strong> Change owner and group for directory and ALL contents</p>
+                    
+                    <h4>🎫 Sudo - Temporary Admin Powers</h4>
+                    <div class="code-block">sudo apt install software</div>
+                    <p><strong>How sudo works:</strong><br>
+                    1. Asks for YOUR password (not root's)<br>
+                    2. Checks if you're allowed to run admin commands<br>
+                    3. Runs the command as root<br>
+                    4. Goes back to normal user after command finishes</p>
+                    
+                    <div class="code-block">sudo -u john cp file.txt /home/john/</div>
+                    <p><strong>Run as different user:</strong> Execute command as 'john' instead of root</p>
+                    
+                    <div class="code-block">sudo -i</div>
+                    <p><strong>Become root permanently:</strong> Switch to root shell (be careful!)</p>
+                    
+                    <div class="code-block">sudo !!!</div>
+                    <p><strong>Repeat last command with sudo:</strong> If you forgot sudo, this reruns last command as root</p>
+                    
+                    <h4>🔄 User Switching</h4>
+                    <div class="code-block">su - john</div>
+                    <p><strong>Switch user completely:</strong><br>
+                    • <strong>-</strong> loads john's environment (home directory, PATH, etc.)<br>
+                    • Asks for john's password<br>
+                    • Type 'exit' to return to original user</p>
+                    
+                    <div class="code-block">su john</div>
+                    <p><strong>Switch user but keep environment:</strong> Become john but stay in current directory</p>
+                    
+                    <h4>🛡️ Advanced Permission Features</h4>
+                    <div class="code-block">chmod u+s /usr/bin/passwd</div>
+                    <p><strong>SUID (Set User ID):</strong><br>
+                    • When anyone runs this file, it runs with owner's permissions<br>
+                    • Example: passwd command runs as root so users can change passwords<br>
+                    • Shows as 's' in owner execute position: rwsr-xr-x</p>
+                    
+                    <div class="code-block">chmod g+s /shared/projects/</div>
+                    <p><strong>SGID on directory:</strong><br>
+                    • Files created in this directory inherit the directory's group<br>
+                    • Great for shared project folders<br>
+                    • Shows as 's' in group execute position: rwxrwsr-x</p>
+                    
+                    <div class="code-block">chmod +t /tmp/</div>
+                    <p><strong>Sticky bit on directory:</strong><br>
+                    • Users can only delete their own files<br>
+                    • Even if they have write permission to directory<br>
+                    • Shows as 't' in others execute position: rwxrwxrwt<br>
+                    • Perfect for /tmp directory</p>
+                    
+                    <h4>🔍 Permission Troubleshooting</h4>
+                    <div class="code-block">ls -la problematic_file</div>
+                    <p><strong>Check current permissions:</strong> See who can do what</p>
+                    
+                    <div class="code-block">groups john</div>
+                    <p><strong>Check user's groups:</strong> See what groups user belongs to</p>
+                    
+                    <div class="code-block">id</div>
+                    <p><strong>Check your identity:</strong> See your user ID, group ID, and all groups</p>
+                    
+                    <div class="code-block">umask</div>
+                    <p><strong>Check default permissions:</strong> See what permissions new files get</p>
+                    
+                    <div class="code-block">umask 022</div>
+                    <p><strong>Set default permissions:</strong><br>
+                    • 022 means new files get 644 (rw-r--r--)<br>
+                    • 022 means new directories get 755 (rwxr-xr-x)<br>
+                    • Lower umask = more permissive defaults</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Understanding Permissions</div>
+                
+                <div class="explanation">
+                    <p><strong>Permission format: rwxrwxrwx</strong></p>
+                    <ul>
+                        <li>First rwx = owner permissions</li>
+                        <li>Second rwx = group permissions</li>
+                        <li>Third rwx = other permissions</li>
+                        <li>r=read(4), w=write(2), x=execute(1)</li>
+                    </ul>
+                    
+                    <p><strong>Common permission combinations:</strong></p>
+                    <div class="code-block">chmod 755 script.sh</div>
+                    <p>rwxr-xr-x (owner: read+write+execute, group/others: read+execute)</p>
+                    
+                    <div class="code-block">chmod 644 document.txt</div>
+                    <p>rw-r--r-- (owner: read+write, group/others: read only)</p>
+                    
+                    <div class="code-block">chmod 600 private.key</div>
+                    <p>rw------- (owner: read+write, group/others: no access)</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Advanced Permission Management</div>
+                
+                <div class="explanation">
+                    <p><strong>Recursive permissions:</strong></p>
+                    <div class="code-block">chmod -R 755 /var/www/</div>
+                    <p>Apply permissions to directory and all contents</p>
+                    
+                    <p><strong>Special permissions:</strong></p>
+                    <div class="code-block">chmod u+s /usr/bin/passwd</div>
+                    <p>Set SUID bit (runs with owner's privileges)</p>
+                    
+                    <div class="code-block">chmod g+s /shared/directory</div>
+                    <p>Set SGID bit (new files inherit group)</p>
+                    
+                    <div class="code-block">chmod +t /tmp</div>
+                    <p>Set sticky bit (only owner can delete files)</p>
+                    
+                    <p><strong>Default permissions:</strong></p>
+                    <div class="code-block">umask 022</div>
+                    <p>Set default permissions (files: 644, directories: 755)</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="processes" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">⚙️ Process Management - Controlling Your System's Heartbeat</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">🏥 System Monitoring - Health Check Your Computer</div>
+                
+                <div class="explanation">
+                    <p><strong>💡 Think of processes as all the different tasks your computer is doing right now</strong></p>
+                    
+                    <h4>👁️ Viewing Processes - Who's Running What?</h4>
+                    <div class="code-block">ps aux</div>
+                    <p><strong>Understanding the output columns:</strong></p>
+                    <div style="font-family: monospace; background: #f1f3f4; padding: 10px; margin: 10px 0;">
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND<br>
+john      1234  2.5  3.2  45676  8192 pts/0    R+   10:30   0:05 python3 script.py<br>
+root      5678  0.1  1.5  12345  4096 ?        S    09:15   0:15 nginx: worker
+                    </div>
+                    
+                    <p><strong>Column explanations:</strong></p>
+                    <ul>
+                        <li><strong>USER</strong>: Who owns this process</li>
+                        <li><strong>PID</strong>: Process ID number (unique identifier)</li>
+                        <li><strong>%CPU</strong>: Percentage of CPU being used right now</li>
+                        <li><strong>%MEM</strong>: Percentage of RAM being used</li>
+                        <li><strong>VSZ</strong>: Virtual memory size (total memory allocated)</li>
+                        <li><strong>RSS</strong>: Resident set size (actual RAM being used)</li>
+                        <li><strong>TTY</strong>: Terminal where process was started (? = background)</li>
+                        <li><strong>STAT</strong>: Process state (R=running, S=sleeping, Z=zombie)</li>
+                        <li><strong>START</strong>: When the process started</li>
+                        <li><strong>TIME</strong>: Total CPU time used</li>
+                        <li><strong>COMMAND</strong>: The actual command/program running</li>
+                    </ul>
+                    
+                    <div class="code-block">ps aux --sort=-%cpu | head -10</div>
+                    <p><strong>Find CPU hogs:</strong> Show top 10 processes using most CPU</p>
+                    
+                    <div class="code-block">ps aux --sort=-%mem | head -10</div>
+                    <p><strong>Find memory hogs:</strong> Show top 10 processes using most RAM</p>
+                    
+                    <div class="code-block">pgrep -f "python"</div>
+                    <p><strong>Find process by name:</strong> Get PID of all processes containing "python"</p>
+                    
+                    <h4>📊 Real-time Monitoring with TOP</h4>
+                    <div class="code-block">top</div>
+                    <p><strong>Interactive system monitor:</strong></p>
+                    <div style="font-family: monospace; background: #f1f3f4; padding: 10px; margin: 10px 0;">
+top - 10:30:45 up 2 days,  4:15,  3 users,  load average: 0.25, 0.18, 0.15<br>
+Tasks: 156 total,   2 running, 154 sleeping,   0 stopped,   0 zombie<br>
+%Cpu(s):  5.2 us,  1.8 sy,  0.0 ni, 92.8 id,  0.2 wa,  0.0 hi,  0.0 si<br>
+MiB Mem :   7982.4 total,   2134.5 free,   3245.8 used,   2602.1 buff/cache
+                    </div>
+                    
+                    <p><strong>Understanding the header:</strong></p>
+                    <ul>
+                        <li><strong>load average</strong>: 1min, 5min, 15min averages (should be < CPU cores)</li>
+                        <li><strong>us</strong>: User processes CPU time</li>
+                        <li><strong>sy</strong>: System processes CPU time</li>
+                        <li><strong>id</strong>: Idle CPU time (higher is better)</li>
+                        <li><strong>wa</strong>: Waiting for I/O (disk/network)</li>
+                    </ul>
+                    
+                    <p><strong>TOP navigation keys:</strong></p>
+                    <ul>
+                        <li><strong>q</strong>: Quit</li>
+                        <li><strong>k</strong>: Kill a process (asks for PID)</li>
+                        <li><strong>M</strong>: Sort by memory usage</li>
+                        <li><strong>P</strong>: Sort by CPU usage</li>
+                        <li><strong>u</strong>: Show processes for specific user</li>
+                        <li><strong>1</strong>: Show individual CPU cores</li>
+                    </ul>
+                    
+                    <div class="code-block">htop</div>
+                    <p><strong>Better alternative to top:</strong><br>
+                    • Colorful interface<br>
+                    • Mouse support<br>
+                    • Tree view of processes<br>
+                    • Easy process killing<br>
+                    Install: <code>sudo apt install htop</code></p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">⚡ Process Control - Starting, Stopping, and Managing</div>
+                
+                <div class="explanation">
+                    <h4>🔄 Background vs Foreground Jobs</h4>
+                    <div class="code-block">python long_script.py</div>
+                    <p><strong>Foreground process:</strong> Runs in terminal, blocks your input until finished</p>
+                    
+                    <div class="code-block">python long_script.py &</div>
+                    <p><strong>Background process:</strong> Runs in background, you can continue using terminal</p>
+                    
+                    <div class="code-block">nohup python long_script.py > output.log 2>&1 &</div>
+                    <p><strong>Persistent background process:</strong><br>
+                    • <strong>nohup</strong>: Keeps running even if you log out<br>
+                    • <strong>> output.log</strong>: Save normal output to file<br>
+                    • <strong>2>&1</strong>: Save error messages to same file<br>
+                    • <strong>&</strong>: Run in background<br>
+                    <strong>Perfect for:</strong> Long-running scripts, servers, data processing</p>
+                    
+                    <h4>⏸️ Process Control Signals</h4>
+                    <p><strong>Signals are like different ways to tap someone on the shoulder:</strong></p>
+                    
+                    <div class="code-block">kill -15 1234</div>
+                    <p><strong>SIGTERM (15) - Polite request:</strong><br>
+                    • "Please close yourself properly"<br>
+                    • Allows process to clean up, save data<br>
+                    • Most processes will obey this<br>
+                    • <strong>Default kill signal if none specified</strong></p>
+                    
+                    <div class="code-block">kill -9 1234</div>
+                    <p><strong>SIGKILL (9) - Immediate termination:</strong><br>
+                    • "Die right now, no questions asked"<br>
+                    • Cannot be ignored or blocked<br>
+                    • Process cannot clean up<br>
+                    • <strong>Use only when SIGTERM doesn't work</strong></p>
+                    
+                    <div class="code-block">kill -1 1234</div>
+                    <p><strong>SIGHUP (1) - Reload configuration:</strong><br>
+                    • "Reload your config files"<br>
+                    • Many server processes restart when receiving this<br>
+                    • Web servers often reload config without stopping</p>
+                    
+                    <div class="code-block">kill -STOP 1234</div>
+                    <p><strong>SIGSTOP - Pause process:</strong><br>
+                    • Freezes process in place<br>
+                    • Use <code>kill -CONT 1234</code> to resume</p>
+                    
+                    <h4>🎯 Killing Processes by Name</h4>
+                    <div class="code-block">killall firefox</div>
+                    <p><strong>Kill all Firefox processes:</strong> Convenient when you know the program name</p>
+                    
+                    <div class="code-block">pkill -f "python script.py"</div>
+                    <p><strong>Kill by command line:</strong> Kill processes whose command line contains the pattern</p>
+                    
+                    <div class="code-block">killall -u john</div>
+                    <p><strong>Kill all processes by user:</strong> Terminate all of john's processes</p>
+                    
+                    <h4>🔍 Process Investigation</h4>
+                    <div class="code-block">ps -ef | grep python</div>
+                    <p><strong>Find specific processes:</strong> Show all Python processes with full details</p>
+                    
+                    <div class="code-block">lsof -p 1234</div>
+                    <p><strong>What files is process using?</strong> Show all open files for process ID 1234</p>
+                    
+                    <div class="code-block">lsof -i :8080</div>
+                    <p><strong>What's using port 8080?</strong> Find process listening on specific port</p>
+                    
+                    <div class="code-block">strace -p 1234</div>
+                    <p><strong>Debug running process:</strong> See what system calls process is making (advanced)</p>
+                    
+                    <h4>⏰ Job Control in Terminal</h4>
+                    <div class="code-block">python script.py</div>
+                    <p><strong>If running process is stuck:</strong></p>
+                    <ul>
+                        <li><strong>Ctrl+C</strong>: Send SIGTERM (try to stop nicely)</li>
+                        <li><strong>Ctrl+Z</strong>: Suspend process (pause it)</li>
+                        <li><strong>Ctrl+\</strong>: Send SIGQUIT (force quit with core dump)</li>
+                    </ul>
+                    
+                    <div class="code-block">jobs</div>
+                    <p><strong>See suspended jobs:</strong> List background and suspended processes</p>
+                    
+                    <div class="code-block">fg %1</div>
+                    <p><strong>Bring job to foreground:</strong> Resume job #1 in foreground</p>
+                    
+                    <div class="code-block">bg %1</div>
+                    <p><strong>Send job to background:</strong> Resume job #1 in background</p>
+                    
+                    <h4>🚨 Emergency Process Management</h4>
+                    <div class="code-block">sudo killall -9 chrome</div>
+                    <p><strong>When browser freezes:</strong> Force kill all Chrome processes</p>
+                    
+                    <div class="code-block">ps aux | grep -v grep | grep hung_process | awk '{print $2}' | xargs kill -9</div>
+                    <p><strong>Advanced kill pipeline:</strong><br>
+                    1. Find processes by name<br>
+                    2. Extract PIDs<br>
+                    3. Kill them all with SIGKILL</p>
+                    
+                    <div class="code-block">sudo pkill -f "runaway_script"</div>
+                    <p><strong>Kill runaway scripts:</strong> When a script is consuming too many resources</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Process Monitoring</div>
+                
+                <div class="explanation">
+                    <p><strong>View processes:</strong></p>
+                    <div class="code-block">ps aux</div>
+                    <p>Show all running processes with details</p>
+                    
+                    <div class="code-block">ps aux --sort=-%cpu | head -10</div>
+                    <p>Top 10 CPU consuming processes</p>
+                    
+                    <div class="code-block">pgrep -f "apache"</div>
+                    <p>Find process IDs by name</p>
+                    
+                    <p><strong>Real-time monitoring:</strong></p>
+                    <div class="code-block">top</div>
+                    <p>Interactive process monitor (press q to quit)</p>
+                    
+                    <div class="code-block">htop</div>
+                    <p>Enhanced interactive process monitor</p>
+                    
+                    <div class="code-block">watch -n 1 'ps aux | grep apache'</div>
+                    <p>Monitor apache processes every second</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Process Control</div>
+                
+                <div class="explanation">
+                    <p><strong>Kill processes:</strong></p>
+                    <div class="code-block">kill -15 PID</div>
+                    <p>Graceful termination (SIGTERM)</p>
+                    
+                    <div class="code-block">kill -9 PID</div>
+                    <p>Force kill (SIGKILL)</p>
+                    
+                    <div class="code-block">killall firefox</div>
+                    <p>Kill all firefox processes</p>
+                    
+                    <p><strong>Background processes:</strong></p>
+                    <div class="code-block">nohup long_command > output.log 2>&1 &</div>
+                    <p>Run command in background, redirect output to log</p>
+                    
+                    <div class="code-block">jobs</div>
+                    <p>List background jobs</p>
+                    
+                    <div class="code-block">fg %1</div>
+                    <p>Bring job 1 to foreground</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="networking" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">🌐 Networking</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Network Configuration</div>
+                
+                <div class="explanation">
+                    <p><strong>View network interfaces:</strong></p>
+                    <div class="code-block">ip addr show</div>
+                    <p>Display all network interfaces and their IP addresses</p>
+                    
+                    <div class="code-block">ifconfig</div>
+                    <p>Legacy command to view network interfaces</p>
+                    
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative:</strong>
+                        <div class="code-block">ifconfig</div>
+                        <p>View network interfaces (works on Mac)</p>
+                        <div class="code-block">networksetup -listallhardwareports</div>
+                        <p>List all network hardware ports on Mac</p>
+                    </div>
+                    
+                    <p><strong>Routing information:</strong></p>
+                    <div class="code-block">ip route show</div>
+                    <p>Display routing table</p>
+                    
+                    <div class="code-block">route -n</div>
+                    <p>Legacy routing table display</p>
+                    
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative:</strong>
+                        <div class="code-block">netstat -rn</div>
+                        <p>Display routing table on Mac</p>
+                        <div class="code-block">route -n get default</div>
+                        <p>Show default route information</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Network Troubleshooting</div>
+                
+                <div class="explanation">
+                    <p><strong>Connectivity testing:</strong></p>
+                    <div class="code-block">ping -c 4 google.com</div>
+                    <p>Send 4 ping packets to test connectivity</p>
+                    
+                    <div class="code-block">traceroute google.com</div>
+                    <p>Trace network path to destination</p>
+                    
+                    <p><strong>Port and service checking:</strong></p>
+                    <div class="code-block">netstat -tulpn</div>
+                    <p>Show listening ports and services</p>
+                    
+                    <div class="code-block">ss -tulpn</div>
+                    <p>Modern alternative to netstat</p>
+                    
+                    <div class="code-block">nmap -p 80,443 example.com</div>
+                    <p>Scan specific ports on remote host</p>
+                    
+                    <p><strong>DNS resolution:</strong></p>
+                    <div class="code-block">nslookup google.com</div>
+                    <p>DNS lookup for domain</p>
+                    
+                    <div class="code-block">dig google.com</div>
+                    <p>Advanced DNS lookup tool</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="system-admin" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">🛠️ System Administration</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">User Management</div>
+                
+                <div class="explanation">
+                    <p><strong>User operations:</strong></p>
+                    <div class="code-block">useradd -m -s /bin/bash newuser</div>
+                    <p>Create user with home directory and bash shell</p>
+                    
+                    <div class="code-block">usermod -aG sudo newuser</div>
+                    <p>Add user to sudo group</p>
+                    
+                    <div class="code-block">passwd newuser</div>
+                    <p>Set/change user password</p>
+                    
+                    <div class="code-block">userdel -r olduser</div>
+                    <p>Delete user and home directory</p>
+                    
+                    <p><strong>Group management:</strong></p>
+                    <div class="code-block">groupadd developers</div>
+                    <p>Create new group</p>
+                    
+                    <div class="code-block">groups username</div>
+                    <p>Show user's groups</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Service Management</div>
+                
+                <div class="explanation">
+                    <p><strong>systemd services:</strong></p>
+                    <div class="code-block">systemctl status apache2</div>
+                    <p>Check service status and recent logs</p>
+                    
+                    <div class="code-block">systemctl restart apache2</div>
+                    <p>Restart service (stop then start)</p>
+                    
+                    <div class="code-block">systemctl reload apache2</div>
+                    <p>Reload configuration without stopping</p>
+                    
+                    <div class="code-block">systemctl enable --now apache2</div>
+                    <p>Enable at boot and start immediately</p>
+                    
+                    <div class="code-block">systemctl list-units --failed</div>
+                    <p>List failed services</p>
+                    
+                    <div class="code-block">systemctl daemon-reload</div>
+                    <p>Reload systemd configuration files</p>
+                    
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative - launchctl:</strong>
+                        <div class="code-block">launchctl list | grep com.apple.apache</div>
+                        <p>Check if service is loaded and running</p>
+                        
+                        <div class="code-block">sudo launchctl kickstart -k system/com.apple.apache</div>
+                        <p>Restart system service (stop then start)</p>
+                        
+                        <div class="code-block">sudo launchctl reload system/com.apple.apache</div>
+                        <p>Reload service configuration</p>
+                        
+                        <div class="code-block">sudo launchctl enable system/com.apple.apache</div>
+                        <p>Enable service to start at boot</p>
+                        
+                        <div class="code-block">launchctl list | grep -v "^-"</div>
+                        <p>List all loaded services</p>
+                        
+                        <div class="code-block">sudo launchctl load /System/Library/LaunchDaemons/service.plist</div>
+                        <p>Load service configuration from plist file</p>
+                    </div>
+                    
+                    <p><strong>Service dependencies:</strong></p>
+                    <div class="code-block">systemctl list-dependencies apache2</div>
+                    <p>Show service dependencies</p>
+                    
+                    <div class="code-block">systemctl show apache2 --property=ActiveState</div>
+                    <p>Get specific property of service</p>
+                    
+                    <p><strong>Advanced logging:</strong></p>
+                    <div class="code-block">journalctl -u apache2 --since "1 hour ago"</div>
+                    <p>View service logs from last hour</p>
+                    
+                    <div class="code-block">journalctl -u apache2 -p err</div>
+                    <p>View only error-level logs</p>
+                    
+                    <div class="code-block">journalctl --disk-usage</div>
+                    <p>Check journal disk usage</p>
+                    
+                    <div class="code-block">journalctl --vacuum-size=100M</div>
+                    <p>Clean old logs, keep only 100MB</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Package Management</div>
+                
+                <div class="explanation">
+                    <p><strong>APT (Debian/Ubuntu):</strong></p>
+                    <div class="code-block">apt update && apt upgrade -y</div>
+                    <p>Update package list and upgrade system</p>
+                    
+                    <div class="code-block">apt install nginx mysql-server -y</div>
+                    <p>Install multiple packages without prompts</p>
+                    
+                    <div class="code-block">apt search nginx</div>
+                    <p>Search for packages</p>
+                    
+                    <div class="code-block">apt show nginx</div>
+                    <p>Show package information</p>
+                    
+                    <div class="code-block">apt list --installed | grep nginx</div>
+                    <p>List installed packages matching pattern</p>
+                    
+                    <div class="code-block">apt autoremove</div>
+                    <p>Remove unused dependencies</p>
+                    
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative - Homebrew:</strong>
+                        <div class="code-block">brew update && brew upgrade</div>
+                        <p>Update Homebrew and upgrade installed packages</p>
+                        
+                        <div class="code-block">brew install nginx mysql</div>
+                        <p>Install packages using Homebrew</p>
+                        
+                        <div class="code-block">brew search nginx</div>
+                        <p>Search for packages in Homebrew</p>
+                        
+                        <div class="code-block">brew info nginx</div>
+                        <p>Show package information</p>
+                        
+                        <div class="code-block">brew list | grep nginx</div>
+                        <p>List installed packages matching pattern</p>
+                        
+                        <div class="code-block">brew autoremove</div>
+                        <p>Remove unused dependencies</p>
+                    </div>
+                    
+                    <p><strong>YUM/DNF (RHEL/CentOS/Fedora):</strong></p>
+                    <div class="code-block">yum update -y</div>
+                    <p>Update all packages</p>
+                    
+                    <div class="code-block">yum install epel-release</div>
+                    <p>Install EPEL repository</p>
+                    
+                    <div class="code-block">yum groupinstall "Development Tools"</div>
+                    <p>Install package groups</p>
+                    
+                    <div class="code-block">yum history</div>
+                    <p>View package installation history</p>
+                    
+                    <p><strong>Package repositories:</strong></p>
+                    <div class="code-block">add-apt-repository ppa:nginx/stable</div>
+                    <p>Add PPA repository (Ubuntu)</p>
+                    
+                    <div class="code-block">rpm --import https://packages.microsoft.com/keys/microsoft.asc</div>
+                    <p>Import GPG key for repository</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">System Configuration</div>
+                
+                <div class="explanation">
+                    <p><strong>Environment variables:</strong></p>
+                    <div class="code-block">export PATH=$PATH:/opt/app/bin</div>
+                    <p>Add directory to PATH</p>
+                    
+                    <div class="code-block">echo 'export JAVA_HOME=/usr/lib/jvm/java-11' >> ~/.bashrc</div>
+                    <p>Add permanent environment variable</p>
+                    
+                    <div class="code-block">source ~/.bashrc</div>
+                    <p>Reload bash configuration</p>
+                    
+                    <p><strong>System configuration files:</strong></p>
+                    <div class="code-block">cat /etc/os-release</div>
+                    <p>Operating system information</p>
+                    
+                    <div class="code-block">hostnamectl set-hostname newserver.domain.com</div>
+                    <p>Change system hostname</p>
+                    
+                    <div class="code-block">timedatectl set-timezone America/New_York</div>
+                    <p>Set system timezone</p>
+                    
+                    <div class="code-block">localectl set-locale LANG=en_US.UTF-8</div>
+                    <p>Set system locale</p>
+                    
+                    <p><strong>Network configuration:</strong></p>
+                    <div class="code-block">nmcli con show</div>
+                    <p>Show NetworkManager connections</p>
+                    
+                    <div class="code-block">nmcli con up "Wired connection 1"</div>
+                    <p>Activate network connection</p>
+                    
+                    <div class="code-block">systemctl restart networking</div>
+                    <p>Restart network service</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="storage" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">💾 Storage & Filesystems</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Disk Management</div>
+                
+                <div class="explanation">
+                    <p><strong>View disk information:</strong></p>
+                    <div class="code-block">df -h</div>
+                    <p>Show disk space usage in human-readable format</p>
+                    
+                    <div class="code-block">du -sh /path/to/directory</div>
+                    <p>Show directory size</p>
+                    
+                    <div class="code-block">lsblk</div>
+                    <p>List block devices in tree format</p>
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative:</strong>
+                        <div class="code-block">diskutil list</div>
+                        <p>List all disks and partitions on macOS</p>
+                    </div>
+                    
+                    <div class="code-block">fdisk -l</div>
+                    <p>List disk partitions</p>
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative:</strong>
+                        <div class="code-block">diskutil list</div>
+                        <p>List all disks and partitions on macOS</p>
+                        <div class="code-block">gpt -r show /dev/disk0</div>
+                        <p>Show partition table (requires elevated privileges)</p>
+                    </div>
+                    
+                    <p><strong>Mounting filesystems:</strong></p>
+                    <div class="code-block">mount /dev/sdb1 /mnt/usb</div>
+                    <p>Mount USB drive</p>
+                    
+                    <div class="code-block">umount /mnt/usb</div>
+                    <p>Unmount filesystem</p>
+                    
+                    <div class="code-block">mount -o remount,ro /</div>
+                    <p>Remount root filesystem as read-only</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">File System Operations</div>
+                
+                <div class="explanation">
+                    <p><strong>Create filesystems:</strong></p>
+                    <div class="code-block">mkfs.ext4 /dev/sdb1</div>
+                    <p>Create ext4 filesystem</p>
+                    
+                    <div class="code-block">mkfs.xfs /dev/sdb1</div>
+                    <p>Create XFS filesystem</p>
+                    
+                    <p><strong>Check and repair:</strong></p>
+                    <div class="code-block">fsck /dev/sdb1</div>
+                    <p>Check filesystem for errors</p>
+                    
+                    <div class="code-block">fsck -y /dev/sdb1</div>
+                    <p>Auto-repair filesystem errors</p>
+                    
+                    <p><strong>Archive and compression:</strong></p>
+                    <div class="code-block">tar -czf backup.tar.gz /home/user/</div>
+                    <p>Create compressed tar archive</p>
+                    
+                    <div class="code-block">tar -xzf backup.tar.gz</div>
+                    <p>Extract compressed tar archive</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="scripting" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">📜 Shell Scripting</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Basic Script Structure</div>
+                
+                <div class="explanation">
+                    <p><strong>Script header:</strong></p>
+                    <div class="code-block">#!/bin/bash</div>
+                    <p>Shebang line to specify interpreter</p>
+                    
+                    <p><strong>Variables:</strong></p>
+                    <div class="code-block">name="John"
+echo "Hello, $name"</div>
+                    <p>Declare and use variables</p>
+                    
+                    <div class="code-block">read -p "Enter your name: " username</div>
+                    <p>Get user input</p>
+                    
+                    <p><strong>Command substitution:</strong></p>
+                    <div class="code-block">current_date=$(date)
+echo "Today is $current_date"</div>
+                    <p>Capture command output in variable</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Control Structures</div>
+                
+                <div class="explanation">
+                    <p><strong>If statements:</strong></p>
+                    <div class="code-block">if [ -f "file.txt" ]; then
+    echo "File exists"
+else
+    echo "File not found"
+fi</div>
+                    <p>Conditional execution</p>
+                    
+                    <p><strong>Loops:</strong></p>
+                    <div class="code-block">for file in *.txt; do
+    echo "Processing $file"
+done</div>
+                    <p>For loop example</p>
+                    
+                    <div class="code-block">while [ $counter -lt 10 ]; do
+    echo $counter
+    counter=$((counter + 1))
+done</div>
+                    <p>While loop example</p>
+                    
+                    <p><strong>Functions:</strong></p>
+                    <div class="code-block">backup_files() {
+    tar -czf "backup-$(date +%Y%m%d).tar.gz" "$1"
+    echo "Backup completed"
+}
+
+backup_files /home/user/documents</div>
+                    <p>Function definition and usage</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="troubleshooting" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">🔍 Troubleshooting</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Log Analysis</div>
+                
+                <div class="explanation">
+                    <p><strong>System logs:</strong></p>
+                    <div class="code-block">tail -f /var/log/syslog</div>
+                    <p>Follow system log in real-time</p>
+                    
+                    <div class="code-block">grep -i error /var/log/syslog</div>
+                    <p>Search for errors in system log</p>
+                    
+                    <div class="code-block">journalctl --since "1 hour ago"</div>
+                    <p>View logs from last hour</p>
+                    
+                    <div class="code-block">journalctl -p err</div>
+                    <p>Show only error messages</p>
+                    
+                    <p><strong>Application logs:</strong></p>
+                    <div class="code-block">tail -n 100 /var/log/apache2/error.log</div>
+                    <p>View last 100 lines of Apache error log</p>
+                    
+                    <div class="code-block">zcat /var/log/syslog.1.gz | grep "pattern"</div>
+                    <p>Search in compressed log files</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Performance Monitoring</div>
+                
+                <div class="explanation">
+                    <p><strong>System resources:</strong></p>
+                    <div class="code-block">free -h</div>
+                    <p>Memory usage</p>
+                    
+                    <div class="code-block">iostat -x 1</div>
+                    <p>I/O statistics every second</p>
+                    
+                    <div class="code-block">vmstat 1</div>
+                    <p>Virtual memory statistics</p>
+                    
+                    <div class="code-block">sar -u 1 10</div>
+                    <p>CPU usage for 10 seconds</p>
+                    
+                    <p><strong>Network monitoring:</strong></p>
+                    <div class="code-block">iftop</div>
+                    <p>Real-time network traffic</p>
+                    
+                    <div class="code-block">nethogs</div>
+                    <p>Network usage by process</p>
+                    
+                    <p><strong>Disk I/O:</strong></p>
+                    <div class="code-block">iotop</div>
+                    <p>Real-time disk I/O by process</p>
+                    
+                    <div class="code-block">lsof +D /path</div>
+                    <p>Show processes using specific directory</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="monitoring" class="detailed-section">
+            <button class="back-btn" onclick="showView('index')">← Back to Index</button>
+            <div class="section-title">📊 System Monitoring</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Resource Monitoring</div>
+                
+                <div class="explanation">
+                    <p><strong>CPU monitoring:</strong></p>
+                    <div class="code-block">top -o %CPU</div>
+                    <p>Sort processes by CPU usage</p>
+                    
+                    <div class="code-block">htop</div>
+                    <p>Enhanced interactive process monitor</p>
+                    
+                    <div class="code-block">sar -u 1 5</div>
+                    <p>CPU usage statistics every second for 5 times</p>
+                    
+                    <div class="code-block">vmstat 2</div>
+                    <p>Virtual memory statistics every 2 seconds</p>
+                    
+                    <p><strong>Memory monitoring:</strong></p>
+                    <div class="code-block">free -h</div>
+                    <p>Memory usage in human-readable format</p>
+                    
+                    <div class="code-block">cat /proc/meminfo</div>
+                    <p>Detailed memory information</p>
+                    
+                    <div class="code-block">smem -t</div>
+                    <p>Memory usage by process (install: apt install smem)</p>
+                    
+                    <p><strong>Disk I/O monitoring:</strong></p>
+                    <div class="code-block">iostat -x 1</div>
+                    <p>Extended I/O statistics</p>
+                    
+                    <div class="code-block">iotop</div>
+                    <p>I/O usage by process</p>
+                    
+                    <div class="code-block">dstat -cdngy</div>
+                    <p>Combined system resource statistics</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Network Monitoring</div>
+                
+                <div class="explanation">
+                    <p><strong>Network traffic:</strong></p>
+                    <div class="code-block">iftop -i eth0</div>
+                    <p>Network bandwidth usage by connection</p>
+                    
+                    <div class="code-block">nethogs eth0</div>
+                    <p>Network usage by process</p>
+                    
+                    <div class="code-block">ss -tuln</div>
+                    <p>Network socket statistics</p>
+                    
+                    <div class="code-block">netstat -i</div>
+                    <p>Network interface statistics</p>
+                    
+                    <p><strong>Connection monitoring:</strong></p>
+                    <div class="code-block">watch -n 1 'ss -tuln | wc -l'</div>
+                    <p>Monitor connection count</p>
+                    
+                    <div class="code-block">tcpdump -i eth0 port 80</div>
+                    <p>Capture HTTP traffic</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">System Health Checks</div>
+                
+                <div class="explanation">
+                    <p><strong>Load average:</strong></p>
+                    <div class="code-block">uptime</div>
+                    <p>System uptime and load average</p>
+                    
+                    <div class="code-block">cat /proc/loadavg</div>
+                    <p>Raw load average data</p>
+                    
+                    <p><strong>System information:</strong></p>
+                    <div class="code-block">lscpu</div>
+                    <p>CPU architecture information</p>
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative:</strong>
+                        <div class="code-block">sysctl -n machdep.cpu.brand_string</div>
+                        <p>Get CPU model information</p>
+                        <div class="code-block">system_profiler SPHardwareDataType</div>
+                        <p>Detailed hardware information including CPU</p>
+                    </div>
+                    
+                    <div class="code-block">lsblk -f</div>
+                    <p>Block devices with filesystem info</p>
+                    <div class="mac-alternative">
+                        <strong>📱 Mac Alternative:</strong>
+                        <div class="code-block">diskutil info /dev/disk1</div>
+                        <p>Detailed disk information on macOS</p>
+                        <div class="code-block">system_profiler SPStorageDataType</div>
+                        <p>Storage information with filesystem details</p>
+                    </div>
+                    
+                    <div class="code-block">df -h</div>
+                    <p>Filesystem disk space usage</p>
+                    
+                    <div class="code-block">du -sh /var/log/*</div>
+                    <p>Directory space usage</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <div class="copy-notification" id="copyNotification">
+        Command copied to clipboard!
+    </div>
+
+    <script>
+        function showView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.querySelectorAll('.detailed-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected view
+            document.getElementById(viewName).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showDetailed(sectionName) {
+            // Hide index view
+            document.getElementById('index').classList.remove('active');
+            
+            // Show detailed section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Copy command to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showCopyNotification();
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyNotification();
+            });
+        }
+
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
+        // Add click handlers for command copying
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.command, .code-block').forEach(element => {
+                element.addEventListener('click', function() {
+                    const text = this.textContent.replace(/^\$ /, '');
+                    copyToClipboard(text);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
