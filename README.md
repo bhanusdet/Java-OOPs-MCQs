@@ -77,6 +77,17 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
 - HashMap vs TreeMap vs LinkedHashMap
 - And many more core Java comparisons
 
+### 8. **[Linux-Complete-Guide.html](Linux-Complete-Guide.html)** - Linux Commands Reference
+🔹 **Comprehensive Linux commands guide** covering:
+- Essential file operations (ls, cp, mv, rm, find)
+- System information and monitoring (ps, top, htop, df)
+- Text processing and manipulation (grep, sed, awk)
+- Network commands and troubleshooting
+- System administration and user management
+- Package management across different distributions
+- Process management and system control
+- Advanced shell scripting and automation
+
 ## 🚀 How to Use
 
 ### Option 1: Online Viewing (Recommended)
@@ -99,6 +110,7 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
    - `Java-Collections-Framework-Guide.html` - Complete collections guide
    - `Java-Design-Patterns-Guide.html` - Design patterns with examples
    - `Java-Core-Comparisons.html` - Side-by-side concept comparisons
+   - `Linux-Complete-Guide.html` - Comprehensive Linux commands reference
 
 ## 💡 Features
 
@@ -147,6 +159,8 @@ This repository contains **comprehensive collections of tricky Java MCQs, guides
 - **Teaching & Training**: Educators can use these comprehensive resources for assessments
 - **Mobile Learning**: Study anywhere with mobile-optimized interface
 - **Self-Assessment**: Track progress across different Java topics
+- **Linux System Administration**: Master essential Linux commands for DevOps and system management
+- **Server Management**: Learn commands needed for server administration and troubleshooting
 
 ## 🤝 Contributing
 
@@ -196,9 +210,10 @@ This project is open source and available under the [MIT License](LICENSE).
 - **Total MCQs**: 128+ interactive questions across all major Java topics
 - **Programming Problems**: 40 essential SDET problems (20 Array + 20 String) with **navigation-based interface**
 - **Solution Approaches**: 80+ different implementation methods across all programming problems
-- **Comprehensive Guides**: 3 complete guides (Collections, Design Patterns, Core Comparisons)
+- **Comprehensive Guides**: 4 complete guides (Collections, Design Patterns, Core Comparisons, Linux Commands)
 - **Comparison Tables**: 17+ detailed side-by-side comparisons
-- **Topics Covered**: OOP, Exception Handling, Array Programming, String Programming, Collections, Design Patterns, Core Java
+- **Linux Commands**: 100+ essential commands with examples and explanations
+- **Topics Covered**: OOP, Exception Handling, Array Programming, String Programming, Collections, Design Patterns, Core Java, Linux System Administration
 - **Manual Implementation Focus**: No built-in functions - pure algorithmic thinking
 - **Interface Types**: Both accordion (MCQs/Guides) and navigation-based (Programming Problems)
 - **Mobile Optimized**: 100% responsive design for all devices
