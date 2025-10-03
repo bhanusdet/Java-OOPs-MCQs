@@ -1,4 +1,4 @@
-# Java Interview Prep - Complete Collection
+# SDET Interview Prep - Complete Collection
 
 This repository contains **comprehensive collections of tricky Java MCQs, guides, and comparisons** with detailed answers and explanations covering all major Java topics.
 
